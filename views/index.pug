@@ -1,14 +1,22 @@
 h2 Hey
-a(href="/users/signup") Signup
-span &nbsp;/&nbsp;
-a(href="/users/login") Login
-span &nbsp;/&nbsp;
-a(href="/users/logout") Logout
+if !current_user
+    a(href="/users/signup") Signup
+    span &nbsp;/&nbsp;
 
-hr
+    a(href="/users/login") Login
 
 if current_user
     span=current_user.login
+    span &nbsp;/&nbsp;
+    a(href="/users/logout") Logout
+
+hr
+
+if current_user && current_user.admin
+    ul
+        li
+            a(href="/admin") Admin
+        
 
 hr
 table(style="border:1px solid black")
@@ -19,3 +27,5 @@ table(style="border:1px solid black")
             td=user.password
             td
                 a(href=`/users/${user.id}/delete`) x
+            td
+                a(href=`/users/${user.id}/admin`) admin

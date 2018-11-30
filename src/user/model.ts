@@ -9,7 +9,7 @@ export type UserModel = Document & {
     login: string,
     email: string,
     password: string,
-    lastLogin: Date,
+    admin: boolean,
 
     validPassword: (
         candidate: string,
@@ -35,7 +35,8 @@ export type UserModel = Document & {
 const userSchema = new Schema({
     login: { type: String },
     email: { type: String, unique: true },
-    password: String
+    password: String,
+    admin: { type: Boolean, default: false }
 });
 
 /**

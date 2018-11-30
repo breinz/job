@@ -7,6 +7,7 @@ import * as session from "express-session"
 //let flash = require("express-flash")
 //import api from "./api"
 import userController from "./user/controller";
+import adminController from "./admin/controller";
 import * as mongoose from "mongoose";
 import config from "./config";
 import User, { UserModel } from "./user/model";
@@ -56,7 +57,8 @@ app.use(async (req, res, next) => {
 });
 
 // Sub routes
-app.use("/users", userController)
+app.use("/users", userController);
+app.use("/admin", adminController)
 
 /** Index */
 app.get("/", async (req, res) => {

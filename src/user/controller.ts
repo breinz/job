@@ -82,4 +82,11 @@ router.get("/:id/delete", async (req, res) => {
     res.redirect("/")
 });
 
+router.get("/:id/admin", async (req, res) => {
+    let user = await User.findById(req.params.id) as UserModel;
+    user.admin = true;
+    await user.save();
+    res.redirect("/");
+})
+
 export default router;

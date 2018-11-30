@@ -1,0 +1,11 @@
+h1 Users
+table
+    tr
+        th Login
+        th Email
+    for user in users
+        tr
+            td
+                a(href=`/admin/users/${user.id}`)=user.login
+            td
+                a(href=`/admin/users/${user.id}`)=user.email

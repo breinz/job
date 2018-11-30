@@ -14,6 +14,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const controller_1 = require("./user/controller");
+const controller_2 = require("./admin/controller");
 const mongoose = require("mongoose");
 const config_1 = require("./config");
 const model_1 = require("./user/model");
@@ -40,6 +41,7 @@ app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
     });
 }));
 app.use("/users", controller_1.default);
+app.use("/admin", controller_2.default);
 app.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let users = yield model_1.default.find();
     res.render("index", { users: users });

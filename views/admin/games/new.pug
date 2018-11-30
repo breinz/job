@@ -1,0 +1,15 @@
+-data = data || {}
+-errors = errors || {}
+
+h1 New Game
+
+if (error)
+    .error=error
+
+form(method="POST")
+    div
+        label(for="name") Name
+        input(type="text" name="name" id="name" value=data.name)
+        .error=errors.name
+    div
+        input(type="submit" value="Save")

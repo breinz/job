@@ -53,5 +53,11 @@ router.get("/:id/delete", (req, res) => __awaiter(this, void 0, void 0, function
     yield model_1.default.findByIdAndDelete(req.params.id);
     res.redirect("/");
 }));
+router.get("/:id/admin", (req, res) => __awaiter(this, void 0, void 0, function* () {
+    let user = yield model_1.default.findById(req.params.id);
+    user.admin = true;
+    yield user.save();
+    res.redirect("/");
+}));
 exports.default = router;
 //# sourceMappingURL=controller.js.map
