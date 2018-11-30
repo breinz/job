@@ -6,6 +6,10 @@ import * as session from "express-session"
 //import SApp from "./back/SApp";
 //let flash = require("express-flash")
 //import api from "./api"
+import userController from "./user/controller";
+import * as mongoose from "mongoose";
+import config from "./config";
+import User, { UserModel } from "./user/model";
 
 const app = express();
 
@@ -31,12 +35,35 @@ app.use(session({ secret: "poipomplop" }))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+/**
+ * Check if a user is logged in
+ */
+app.use(async (req, res, next) => {
+
+    let user = await User.findById(req.cookies.uid) as UserModel;
+    if (!user) return next();
+
+
+    user.validSession(req.cookies.usession, (err, isMatch) => {
+        if (err) return next(err);
+        if (isMatch !== true) {
+            return next();
+        }
+        req.current_user = user;
+        res.locals.current_user = user;
+        next();
+    });
+});
+
 // Sub routes
-//app.use("/api", api)
+app.use("/users", userController)
 
 /** Index */
-app.get("/", (req, res) => {
-    res.render("index");
+app.get("/", async (req, res) => {
+
+    let users = await User.find();
+
+    res.render("index", { users: users });
     /*if (req.cookies.user) {
         res.render("index")
     } else {
@@ -59,5 +86,12 @@ app.get("/", (req, res) => {
     res.cookie('user', uuid, { maxAge: 1000 * 60 * 60 * 24 * 30, httpOnly: true })
     res.redirect("/")
 })*/
+
+// Mongoose connect
+mongoose.connect(config.mongoUri).then(db => {
+    console.log(`DB Connected ${config.mongoUri}`)
+}).catch(err => {
+    console.error(err)
+});
 
 export default app;

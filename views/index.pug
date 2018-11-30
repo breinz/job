@@ -1,1 +1,21 @@
 h2 Hey
+a(href="/users/signup") Signup
+span &nbsp;/&nbsp;
+a(href="/users/login") Login
+span &nbsp;/&nbsp;
+a(href="/users/logout") Logout
+
+hr
+
+if current_user
+    span=current_user.login
+
+hr
+table(style="border:1px solid black")
+    for user in users
+        tr
+            td=user.login
+            td=user.email
+            td=user.password
+            td
+                a(href=`/users/${user.id}/delete`) x
