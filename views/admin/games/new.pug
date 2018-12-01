@@ -1,7 +1,10 @@
-h1 New Game
+extends ../../layout/_layout
 
-if (error)
-    .error=error
+block content
+    h1 New Game
 
-include _form
+    if (error)
+        .error=error
+
+    include _form
 

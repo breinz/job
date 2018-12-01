@@ -1,11 +1,14 @@
-h1 Users
-table
-    tr
-        th Login
-        th Email
-    for user in users
+extends ../../layout/_layout
+
+block content
+    h1 Users
+    table
         tr
-            td
-                a(href=`/admin/users/${user.id}`)=user.login
-            td
-                a(href=`/admin/users/${user.id}`)=user.email
+            th Login
+            th Email
+        for user in users
+            tr
+                td
+                    a(href=`/admin/users/${user.id}`)=user.login
+                td
+                    a(href=`/admin/users/${user.id}`)=user.email

@@ -1,10 +1,13 @@
-h1 Games
-a(href="/admin/games/new") New
+extends ../../layout/_layout
 
-table
-    for game in games
-        tr
-            td
-                a(href=`/admin/games/${game.id}`)=game.name
-            td
-                a(href=`/admin/games/${game.id}/delete`) x
+block content
+    h1 Games
+    a(href="/admin/games/new") New
+
+    table
+        for game in games
+            tr
+                td
+                    a(href=`/admin/games/${game.id}`)=game.name
+                td
+                    a(href=`/admin/games/${game.id}/delete`) x
