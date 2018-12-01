@@ -26,6 +26,9 @@ validator.new = (req, res, next) => __awaiter(this, void 0, void 0, function* ()
     catch (err) {
         return next(err);
     }
+    if (data.js.length === 0) {
+        errors.js = "Js is required";
+    }
     if (Object.keys(errors).length > 0) {
         return res.render("admin/games/new", {
             data: data,
@@ -49,6 +52,9 @@ validator.edit = (req, res, next) => __awaiter(this, void 0, void 0, function* (
     }
     catch (err) {
         return next(err);
+    }
+    if (data.js.length === 0) {
+        errors.js = "Js is required";
     }
     if (Object.keys(errors).length > 0) {
         let game;

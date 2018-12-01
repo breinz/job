@@ -1,11 +1,13 @@
 header
+    a(href="/") Home
+    span &nbsp;/&nbsp;
+
     if !current_user
         a(href="/users/signup") Signup
         span &nbsp;/&nbsp;
-
         a(href="/users/login") Login
 
-    if current_user
+    else
         span=current_user.login
         span &nbsp;/&nbsp;
         a(href="/users/logout") Logout

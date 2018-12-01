@@ -7,7 +7,8 @@ import { Document, Schema, model, Model } from "mongoose";
 export type GameModel = Document & {
     name: string,
     width: number,
-    height: number
+    height: number,
+    js: string
 };
 
 // --------------------------------------------------
@@ -17,7 +18,8 @@ export type GameModel = Document & {
 const gameSchema = new Schema({
     name: { type: String, unique: true },
     width: { type: Number, default: 800 },
-    height: { type: Number, default: 600 }
+    height: { type: Number, default: 600 },
+    js: String
 });
 
 export const Game = model("Game", gameSchema) as Model<Document> & GameModel;

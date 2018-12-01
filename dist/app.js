@@ -22,9 +22,13 @@ const model_1 = require("./user/model");
 const model_2 = require("./games/model");
 const app = express();
 app.set('view engine', 'pug');
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, "../public")));
 app.use(cookieParser());
-app.use(session({ secret: "poipomplop" }));
+app.use(session({
+    secret: "poipomplop",
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
@@ -53,7 +57,7 @@ app.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
         games: games
     });
 }));
-mongoose.connect(config_1.default.mongoUri).then(db => {
+mongoose.connect(config_1.default.mongoUri, { useNewUrlParser: true }).then(db => {
     console.log(`DB Connected ${config_1.default.mongoUri}`);
 }).catch(err => {
     console.error(err);

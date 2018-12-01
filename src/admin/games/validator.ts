@@ -26,6 +26,11 @@ validator.new = async (req, res, next) => {
         return next(err);
     }
 
+    // Js required
+    if (data.js.length === 0) {
+        errors.js = "Js is required";
+    }
+
     if (Object.keys(errors).length > 0) {
         return res.render("admin/games/new", {
             data: data,
@@ -57,6 +62,11 @@ validator.edit = async (req, res, next) => {
         }
     } catch (err) {
         return next(err);
+    }
+
+    // Js required
+    if (data.js.length === 0) {
+        errors.js = "Js is required";
     }
 
     // If has errors, re-render the form with errors

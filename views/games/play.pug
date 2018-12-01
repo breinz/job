@@ -2,3 +2,11 @@ extends ../layout/_layout
 
 block content
     h1=game.name
+    #game
+
+    script.
+        let game_params = {
+            width: #{game.width},
+            height: #{game.height},
+        }
+    script(src=`/js/games/${game.js}.js`)

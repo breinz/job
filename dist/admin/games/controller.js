@@ -23,6 +23,9 @@ router.post("/new", validator_1.default.new, (req, res) => __awaiter(this, void 
     const data = req.body;
     let game = new model_1.Game();
     game.name = data.name;
+    game.js = data.js;
+    game.width = data.width;
+    game.height = data.height;
     try {
         yield game.save();
     }
@@ -55,6 +58,7 @@ router.post("/:id", validator_1.default.edit, (req, res) => __awaiter(this, void
         return res.redirect("/");
     const data = req.body;
     game.name = data.name;
+    game.js = data.js;
     game.width = data.width;
     game.height = data.height;
     try {

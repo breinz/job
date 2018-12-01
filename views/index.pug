@@ -3,19 +3,6 @@ extends layout/_layout
 block content
     h2 Hey
 
-    table(style="border:1px solid black")
-        for user in users
-            tr
-                td=user.login
-                td=user.email
-                td=user.password
-                td
-                    a(href=`/users/${user.id}/delete`) x
-                td
-                    a(href=`/users/${user.id}/admin`) admin
-
-    hr
-
     ul
         for game in games
             li

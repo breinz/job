@@ -23,13 +23,17 @@ const app = express();
 app.set('view engine', 'pug');
 
 // Static content
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, "../public")));
 
 // Cookie parser
 app.use(cookieParser());
 
 // Session
-app.use(session({ secret: "poipomplop" }))
+app.use(session({
+    secret: "poipomplop",
+    resave: true,
+    saveUninitialized: true
+}));
 
 // Flash messages
 //app.use(flash());
@@ -93,7 +97,7 @@ app.get("/", async (req, res) => {
 })*/
 
 // Mongoose connect
-mongoose.connect(config.mongoUri).then(db => {
+mongoose.connect(config.mongoUri, { useNewUrlParser: true }).then(db => {
     console.log(`DB Connected ${config.mongoUri}`)
 }).catch(err => {
     console.error(err)

@@ -29,6 +29,9 @@ router.post("/new", validator.new, async (req, res) => {
     let game = new Game() as GameModel;
 
     game.name = data.name;
+    game.js = data.js;
+    game.width = data.width;
+    game.height = data.height;
 
     try {
         await game.save();
@@ -70,6 +73,7 @@ router.post("/:id", validator.edit, async (req, res) => {
     const data: EditData = req.body;
 
     game.name = data.name;
+    game.js = data.js;
     game.width = data.width;
     game.height = data.height;
 

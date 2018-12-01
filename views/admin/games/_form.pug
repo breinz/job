@@ -7,6 +7,10 @@ form(method="POST")
         input(type="text" name="name" id="name" value=data.name autofocus)
         .error=errors.name
     div
+        label(for="js") Js
+        input(type="text" name="js" id="js" value=data.js)
+        .error=errors.js
+    div
         label(for="width") Width
         input(type="text" name="width" id="width" value=data.width)
         .error=errors.width
