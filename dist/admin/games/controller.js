@@ -19,7 +19,7 @@ router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
 router.get("/new", (req, res) => {
     res.render("admin/games/new");
 });
-router.post("/new", validator_1.validator.new, (req, res) => __awaiter(this, void 0, void 0, function* () {
+router.post("/new", validator_1.default.new, (req, res) => __awaiter(this, void 0, void 0, function* () {
     const data = req.body;
     let game = new model_1.Game();
     game.name = data.name;
@@ -28,6 +28,40 @@ router.post("/new", validator_1.validator.new, (req, res) => __awaiter(this, voi
     }
     catch (err) {
         return res.render('admin/games/new', { data: data, error: err });
+    }
+    res.redirect("/admin/games");
+}));
+router.get("/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
+    let game;
+    try {
+        game = (yield model_1.Game.findById(req.params.id));
+    }
+    catch (err) {
+        return res.redirect("/");
+    }
+    if (!game)
+        return res.redirect("/");
+    res.render("admin/games/edit", { game: game, data: game });
+}));
+router.post("/:id", validator_1.default.edit, (req, res) => __awaiter(this, void 0, void 0, function* () {
+    let game;
+    try {
+        game = (yield model_1.Game.findById(req.params.id));
+    }
+    catch (err) {
+        return res.redirect("/");
+    }
+    if (!game)
+        return res.redirect("/");
+    const data = req.body;
+    game.name = data.name;
+    game.width = data.width;
+    game.height = data.height;
+    try {
+        yield game.save();
+    }
+    catch (err) {
+        return res.redirect("/");
     }
     res.redirect("/admin/games");
 }));

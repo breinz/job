@@ -17,7 +17,7 @@ router.get("/signup", validator.notLoggedIn, (req, res) => {
  * POST /users/signup
  * Signup
  */
-router.post("/signup", validator.login, async (req, res) => {
+router.post("/signup", validator.signup, async (req, res) => {
     let user = new User() as UserModel;
 
     const data: Signup.Data = req.body;
@@ -53,7 +53,7 @@ router.post("/login", async (req, res, next) => {
     user.validPassword(data.password, (err, match, session) => {
         if (err) return next(err);
         if (match !== true) {
-            res.render("user/login", { error: true });
+            return res.render("user/login", { error: true });
         }
 
         res.cookie("uid", user.id, { maxAge: 1000 * 60 * 60, httpOnly: true });

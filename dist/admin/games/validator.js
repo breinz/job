@@ -8,20 +8,63 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validator = {
-    new: (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-        let errors = {};
-        const data = req.body;
-        if (data.name.length === 0) {
-            errors.name = "Name is required";
+const model_1 = require("../../games/model");
+let validator = {};
+validator.new = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    let errors = {};
+    const data = req.body;
+    if (data.name.length === 0) {
+        errors.name = "Name is required";
+    }
+    let game;
+    try {
+        game = (yield model_1.default.findOne({ name: data.name }));
+        if (game) {
+            errors.name = "Name has to be unique";
         }
-        if (Object.keys(errors).length > 0) {
-            return res.render("admin/games/new", {
-                data: data,
-                errors: errors
-            });
+    }
+    catch (err) {
+        return next(err);
+    }
+    if (Object.keys(errors).length > 0) {
+        return res.render("admin/games/new", {
+            data: data,
+            errors: errors
+        });
+    }
+    next();
+});
+validator.edit = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    let errors = {};
+    const data = req.body;
+    if (data.name.length === 0) {
+        errors.name = "Name is required";
+    }
+    let game;
+    try {
+        game = (yield model_1.default.findOne({ name: data.name }));
+        if (game && game.id !== req.params.id) {
+            errors.name = "Name has to be unique";
         }
-        next();
-    })
-};
+    }
+    catch (err) {
+        return next(err);
+    }
+    if (Object.keys(errors).length > 0) {
+        let game;
+        try {
+            game = (yield model_1.default.findById(req.params.id));
+        }
+        catch (err) {
+            res.redirect("/");
+        }
+        return res.render("admin/games/edit", {
+            game: game,
+            data: data,
+            errors: errors
+        });
+    }
+    next();
+});
+exports.default = validator;
 //# sourceMappingURL=validator.js.map

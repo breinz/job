@@ -4,7 +4,7 @@ import User, { UserModel } from "../../user/model";
 let router = express.Router();
 
 /**
- * Users
+ * Index
  */
 router.get("/", async (req, res) => {
     let users = await User.find().setOptions({ sort: { login: 1 } }) as UserModel[];

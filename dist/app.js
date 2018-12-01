@@ -14,10 +14,12 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const controller_1 = require("./user/controller");
-const controller_2 = require("./admin/controller");
+const controller_2 = require("./games/controller");
+const controller_3 = require("./admin/controller");
 const mongoose = require("mongoose");
 const config_1 = require("./config");
 const model_1 = require("./user/model");
+const model_2 = require("./games/model");
 const app = express();
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, "/public")));
@@ -41,10 +43,15 @@ app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
     });
 }));
 app.use("/users", controller_1.default);
-app.use("/admin", controller_2.default);
+app.use("/admin", controller_3.default);
+app.use("/games", controller_2.default);
 app.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let users = yield model_1.default.find();
-    res.render("index", { users: users });
+    const games = yield model_2.default.find().setOptions({ sort: { name: 1 } });
+    res.render("index", {
+        users: users,
+        games: games
+    });
 }));
 mongoose.connect(config_1.default.mongoUri).then(db => {
     console.log(`DB Connected ${config_1.default.mongoUri}`);

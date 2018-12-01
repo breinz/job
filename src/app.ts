@@ -7,10 +7,12 @@ import * as session from "express-session"
 //let flash = require("express-flash")
 //import api from "./api"
 import userController from "./user/controller";
+import gamesController from "./games/controller";
 import adminController from "./admin/controller";
 import * as mongoose from "mongoose";
 import config from "./config";
 import User, { UserModel } from "./user/model";
+import Game from "./games/model";
 
 const app = express();
 
@@ -58,19 +60,20 @@ app.use(async (req, res, next) => {
 
 // Sub routes
 app.use("/users", userController);
-app.use("/admin", adminController)
+app.use("/admin", adminController);
+app.use("/games", gamesController);
 
 /** Index */
 app.get("/", async (req, res) => {
 
     let users = await User.find();
 
-    res.render("index", { users: users });
-    /*if (req.cookies.user) {
-        res.render("index")
-    } else {
-        res.render("join")
-    }*/
+    const games = await Game.find().setOptions({ sort: { name: 1 } });
+
+    res.render("index", {
+        users: users,
+        games: games
+    });
 });
 
 /**

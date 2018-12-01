@@ -1,0 +1,18 @@
+-data = data || { width: 800, height: 600 }
+-errors = errors || {}
+
+form(method="POST")
+    div
+        label(for="name") Name
+        input(type="text" name="name" id="name" value=data.name autofocus)
+        .error=errors.name
+    div
+        label(for="width") Width
+        input(type="text" name="width" id="width" value=data.width)
+        .error=errors.width
+    div
+        label(for="height") Height
+        input(type="text" name="height" id="height" value=data.height)
+        .error=errors.height
+    div
+        input(type="submit" value="Save")

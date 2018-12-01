@@ -1,7 +1,7 @@
 import express = require("express");
 import { Game, GameModel } from "../../games/model";
-import { NewData } from ".";
-import { validator } from "./validator";
+import { NewData, EditData } from ".";
+import validator from "./validator";
 
 let router = express.Router();
 
@@ -37,6 +37,50 @@ router.post("/new", validator.new, async (req, res) => {
     }
 
     res.redirect("/admin/games");
+});
+
+/**
+ * Edit form
+ */
+router.get("/:id", async (req, res) => {
+    let game: GameModel;
+    try {
+        game = await Game.findById(req.params.id) as GameModel;
+    } catch (err) {
+        return res.redirect("/")
+    }
+    if (!game) return res.redirect("/");
+
+    res.render("admin/games/edit", { game: game, data: game });
+});
+
+/**
+ * Edit logic
+ */
+router.post("/:id", validator.edit, async (req, res) => {
+
+    let game: GameModel;
+    try {
+        game = await Game.findById(req.params.id) as GameModel;
+    } catch (err) {
+        return res.redirect("/")
+    }
+    if (!game) return res.redirect("/");
+
+    const data: EditData = req.body;
+
+    game.name = data.name;
+    game.width = data.width;
+    game.height = data.height;
+
+    try {
+        await game.save();
+    } catch (err) {
+        return res.redirect("/");
+    }
+
+    res.redirect("/admin/games");
+
 });
 
 /**

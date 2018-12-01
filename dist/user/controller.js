@@ -15,7 +15,7 @@ let router = express.Router();
 router.get("/signup", validator_1.default.notLoggedIn, (req, res) => {
     res.render("user/signup");
 });
-router.post("/signup", validator_1.default.login, (req, res) => __awaiter(this, void 0, void 0, function* () {
+router.post("/signup", validator_1.default.signup, (req, res) => __awaiter(this, void 0, void 0, function* () {
     let user = new model_1.default();
     const data = req.body;
     user.login = data.login;
@@ -37,7 +37,7 @@ router.post("/login", (req, res, next) => __awaiter(this, void 0, void 0, functi
         if (err)
             return next(err);
         if (match !== true) {
-            res.render("user/login", { error: true });
+            return res.render("user/login", { error: true });
         }
         res.cookie("uid", user.id, { maxAge: 1000 * 60 * 60, httpOnly: true });
         res.cookie("usession", session, { maxAge: 1000 * 60 * 60, httpOnly: true });

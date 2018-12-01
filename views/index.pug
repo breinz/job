@@ -29,3 +29,10 @@ table(style="border:1px solid black")
                 a(href=`/users/${user.id}/delete`) x
             td
                 a(href=`/users/${user.id}/admin`) admin
+
+hr
+
+ul
+    for game in games
+        li
+            a(href=`/games/${game.id}`)=game.name
