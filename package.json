@@ -9,6 +9,7 @@
     "watch-node": "nodemon",
     "mongo": "cd ~/Developer; mongod --dbpath=mongodb",
     "pack": "watchify dist/games/pack/index.js -o public/js/games/pack.js -v",
+    "amaze": "watchify dist/games/amaze/index.js -o public/js/games/amaze.js -v",
     "w": "concurrently -k -p '[{name}]' -n 'TypScript,Node' -c 'yellow.bold,cyan.bold' 'npm run watch-ts' 'npm run watch-node'",
     "watch-save": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node,Sass,Browser,Admin\" -c \"yellow.bold,cyan.bold,blue.bold,green.bold,red.bold\" \"npm run watch-ts\" \"npm run watch-node\" \"npm run watch-sass\" \"npm run watch-browser\" \"npm run watch-admin\""
   },

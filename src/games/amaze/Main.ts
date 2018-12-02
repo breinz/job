@@ -10,16 +10,24 @@ export default class Main {
      */
     public app: PIXI.Application;
 
+    public gameWidth: number;
+    public gameHeight: number;
+
     constructor() {
+        this.gameWidth = game_params.width;
+        this.gameHeight = game_params.height;
+    }
+
+    public start() {
         PIXI.utils.skipHello();
         this.app = new PIXI.Application({
-            width: game_params.width,
-            height: game_params.height,
+            width: this.gameWidth,
+            height: this.gameHeight + 40,
             transparent: true,
             antialias: true
         });
         document.getElementById("game").appendChild(this.app.view);
 
-        new Game(this.app);
+        this.app.stage.addChild(new Game(this));
     }
 }
