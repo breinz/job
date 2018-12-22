@@ -1,6 +1,7 @@
 import * as PIXI from "pixi.js";
 import { GameParams } from "../custom";
 import Game from "./Game";
+import ScoreBar from "../ScoreBar";
 
 declare let game_params: GameParams;
 
@@ -10,8 +11,15 @@ export default class Main {
      */
     public app: PIXI.Application;
 
+    public scoreBar: ScoreBar;
+
     public gameWidth: number;
     public gameHeight: number;
+
+    /**
+     * The game
+     */
+    public game: Game;
 
     constructor() {
         this.gameWidth = game_params.width;
@@ -28,6 +36,14 @@ export default class Main {
         });
         document.getElementById("game").appendChild(this.app.view);
 
-        this.app.stage.addChild(new Game(this));
+        this.app.stage.interactive = true;
+
+        this.game = new Game(this);
+        this.app.stage.addChild(this.game);
+        this.game.startLevel();
+
+        this.scoreBar = new ScoreBar(this.gameWidth);
+        this.scoreBar.y = this.gameHeight;
+        this.app.stage.addChild(this.scoreBar);
     }
 }

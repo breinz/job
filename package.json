@@ -16,10 +16,12 @@
   "author": "Julien Breiner",
   "license": "ISC",
   "dependencies": {
+    "@types/gsap": "^1.20.0",
     "bcrypt-nodejs": "0.0.3",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "gsap": "^2.0.2",
     "mongoose": "^5.3.14",
     "pixi.js": "^4.8.2",
     "pug": "^2.0.3"
