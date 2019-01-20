@@ -1,0 +1,11 @@
+extends /layout/_layout
+
+block content
+    h1 Bazaar
+    div Welcome into my brain
+
+    .grid-container.full
+        .grid-x
+            for item in items
+                .cell.medium-4
+                    a(href=`/bazaar/${item.url}`)=item.title

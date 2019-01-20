@@ -12,11 +12,19 @@ const express = require("express");
 const model_1 = require("../../games/model");
 const validator_1 = require("./validator");
 let router = express.Router();
+router.use((req, res, next) => {
+    res.locals.menu = "game";
+    res.locals.bc.push(["Games", "/admin/games"]);
+    next();
+});
 router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
+    res.locals.bc.pop();
+    res.locals.bc.push(["Games"]);
     const games = yield model_1.Game.find().setOptions({ sort: { name: 1 } });
     res.render("admin/games/index", { games: games });
 }));
 router.get("/new", (req, res) => {
+    res.locals.bc.push(["New"]);
     res.render("admin/games/new");
 });
 router.post("/new", validator_1.default.new, (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -30,7 +38,9 @@ router.post("/new", validator_1.default.new, (req, res) => __awaiter(this, void 
         yield game.save();
     }
     catch (err) {
-        return res.render('admin/games/new', { data: data, error: err });
+        res.locals.bc.push(["New"]);
+        res.render('admin/games/new', { data: data, error: err });
+        return;
     }
     res.redirect("/admin/games");
 }));
@@ -44,6 +54,7 @@ router.get("/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
     }
     if (!game)
         return res.redirect("/");
+    res.locals.bc.push([game.name]);
     res.render("admin/games/edit", { game: game, data: game });
 }));
 router.post("/:id", validator_1.default.edit, (req, res) => __awaiter(this, void 0, void 0, function* () {

@@ -15,12 +15,17 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const controller_1 = require("./user/controller");
 const controller_2 = require("./games/controller");
-const controller_3 = require("./admin/controller");
+const controller_3 = require("./travels/controller");
+const controller_4 = require("./bazaar/controller");
+const controller_5 = require("./admin/controller");
 const mongoose = require("mongoose");
 const config_1 = require("./config");
 const model_1 = require("./user/model");
 const model_2 = require("./games/model");
+const fileUpload = require("express-fileupload");
+const utils_1 = require("./utils");
 const app = express();
+app.locals.basedir = path.join(__dirname, '../views');
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(cookieParser());
@@ -31,6 +36,11 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
+app.use((req, res, next) => {
+    res.locals.getImg = utils_1.getPic;
+    next();
+});
 app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
     let user = yield model_1.default.findById(req.cookies.uid);
     if (!user)
@@ -46,9 +56,19 @@ app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
         next();
     });
 }));
+app.use((req, res, next) => {
+    res.locals.menu = "home";
+    res.locals.bc = [[]];
+    next();
+});
 app.use("/users", controller_1.default);
-app.use("/admin", controller_3.default);
+app.use("/admin", controller_5.default);
 app.use("/games", controller_2.default);
+app.use("/travels", controller_3.default);
+app.use("/bazaar", controller_4.default);
+app.get("/test", (req, res) => {
+    res.json("/img/travels/5c3b52a02278b8563122d9d9/e8c3c2fd-4dca-4add-8ef3-eecb2c61e220.JPG");
+});
 app.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let users = yield model_1.default.find();
     const games = yield model_2.default.find().setOptions({ sort: { name: 1 } });

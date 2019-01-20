@@ -8,13 +8,23 @@ html
     //meta(name='csrf-token', content=_csrf)
     //title #{__(title)} - Game
     //link(rel='shortcut icon', href='/images/favicon.png')
-  body
-    .grid-container
-      //include flash_message
-      include _header
-      //include _flash
-    
-      block content
+    link(rel='stylesheet', href='/css/main.css')
+  body(class=menu)
+    //include flash_message
+    include _header
+    //include _flash
+    .content
+      .content-content
+        include _breadcrumb 
 
-      //link(rel='stylesheet', href='/css/main.css')
+
+              
+        .grid-container
+          .grid-x
+              .cell
+                block content
+      
+    include _footer
+
+      
       //script(src="/js/main.js")

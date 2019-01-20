@@ -1,0 +1,23 @@
+.user-menu
+    .grid-container
+        .cell         
+            nav.user
+                ul
+                    if !current_user
+                        li
+                            a(href="/users/signup") Signup
+                        li
+                            a(href="/users/login") Login
+
+                    else
+                        li
+                            a#user-link(href="/")=current_user.login
+                        li
+                            a(href="/users/logout") Logout
+
+                    if current_user && current_user.admin
+                        li
+                            if bc && bc[0][0] == "Admin"
+                                a(href="/") Site
+                            else
+                                a(href="/admin") Admin

@@ -12,7 +12,7 @@ validator.new = async (req, res, next) => {
 
     // Name required
     if (data.name.length === 0) {
-        errors.name = "Name is required";
+        errors.name = " is required";
     }
 
     // Name unique
@@ -28,10 +28,11 @@ validator.new = async (req, res, next) => {
 
     // Js required
     if (data.js.length === 0) {
-        errors.js = "Js is required";
+        errors.js = " is required";
     }
 
     if (Object.keys(errors).length > 0) {
+        res.locals.bc.push(["New"]);
         return res.render("admin/games/new", {
             data: data,
             errors: errors
@@ -50,7 +51,7 @@ validator.edit = async (req, res, next) => {
 
     // Name required
     if (data.name.length === 0) {
-        errors.name = "Name is required";
+        errors.name = " is required";
     }
 
     // Name unique
@@ -58,7 +59,7 @@ validator.edit = async (req, res, next) => {
     try {
         game = await Game.findOne({ name: data.name }) as GameModel;
         if (game && game.id !== req.params.id) {
-            errors.name = "Name has to be unique";
+            errors.name = " has to be unique";
         }
     } catch (err) {
         return next(err);
@@ -78,6 +79,8 @@ validator.edit = async (req, res, next) => {
         } catch (err) {
             res.redirect("/");
         }
+
+        res.locals.bc.push([game.name]);
         return res.render("admin/games/edit", {
             game: game,
             data: data,

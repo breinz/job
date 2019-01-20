@@ -14,7 +14,7 @@ validator.new = (req, res, next) => __awaiter(this, void 0, void 0, function* ()
     let errors = {};
     const data = req.body;
     if (data.name.length === 0) {
-        errors.name = "Name is required";
+        errors.name = " is required";
     }
     let game;
     try {
@@ -27,9 +27,10 @@ validator.new = (req, res, next) => __awaiter(this, void 0, void 0, function* ()
         return next(err);
     }
     if (data.js.length === 0) {
-        errors.js = "Js is required";
+        errors.js = " is required";
     }
     if (Object.keys(errors).length > 0) {
+        res.locals.bc.push(["New"]);
         return res.render("admin/games/new", {
             data: data,
             errors: errors
@@ -41,13 +42,13 @@ validator.edit = (req, res, next) => __awaiter(this, void 0, void 0, function* (
     let errors = {};
     const data = req.body;
     if (data.name.length === 0) {
-        errors.name = "Name is required";
+        errors.name = " is required";
     }
     let game;
     try {
         game = (yield model_1.default.findOne({ name: data.name }));
         if (game && game.id !== req.params.id) {
-            errors.name = "Name has to be unique";
+            errors.name = " has to be unique";
         }
     }
     catch (err) {
@@ -64,6 +65,7 @@ validator.edit = (req, res, next) => __awaiter(this, void 0, void 0, function* (
         catch (err) {
             res.redirect("/");
         }
+        res.locals.bc.push([game.name]);
         return res.render("admin/games/edit", {
             game: game,
             data: data,

@@ -1,17 +1,20 @@
 header
-    a(href="/") Home
-    span &nbsp;/&nbsp;
+    include _site_title
 
-    if !current_user
-        a(href="/users/signup") Signup
-        span &nbsp;/&nbsp;
-        a(href="/users/login") Login
+    .main-menu
+        .grid-container
+            .cell
+                nav.main
+                    ul
+                        li(class=menu=='home'?'active':'')
+                            a(href="/") Home
+                        li(class=menu=='game'?'active':'')
+                            a(href="/games") Games
+                        li(class=menu=='travel'?'active':'')
+                            a(href="/travels") Travels
+                        li(class=menu=='bazaar'?'active':'')
+                            a(href="/bazaar") Bazaar
 
-    else
-        span=current_user.login
-        span &nbsp;/&nbsp;
-        a(href="/users/logout") Logout
+    include _user_menu
 
-    if current_user && current_user.admin
-        span &nbsp;/&nbsp;
-        a(href="/admin") Admin
+                                    

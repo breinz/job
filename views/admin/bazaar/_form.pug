@@ -1,0 +1,46 @@
+-data = data || {}
+-errors = errors || {}
+
+mixin line(value, index)
+    option(value=`${value.id}` selected=item && item.parent==value.id)
+        -var i=0
+            while i<index
+                span &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                -i++
+        span=value.title
+
+    if (value.children)
+        for child in value.children
+            +line(child, index+1)
+
+form(method="POST")
+    .grid-container
+        .grid-x.grid-padding-x
+            .cel.medium-6.small-12
+                div
+                    label(for="title") 
+                        span Title
+                        span.error=errors.title
+                    input(type="text" name="title" id="title" value=data.title autofocus)
+
+            .cell.medium-6.small-12
+                div
+                    label(for="parent") 
+                        span Parent
+                        span.error=errors.parent
+                    select(name="parent")
+                        option(value="") 
+                        for parent in parents
+                            +line(parent, 0)
+                    //select(name="parent")
+                    //    option(value="") 
+                    //    for parent in parents
+                    //        +line(parent, 0)
+
+    div
+        label(for="description") 
+            span Description
+        textarea(name="description" rows="10")=data.description
+
+    div
+        input.button(type="submit" value="Save")

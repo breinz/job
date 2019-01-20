@@ -1,0 +1,18 @@
+header.admin
+    include _site_title
+
+    .main-menu
+        .grid-container
+            .cell
+                nav.main
+                    ul
+                        li(class=menu=='user'?'active':'')
+                            a(href="/admin/users") Users
+                        li(class=menu=='game'?'active':'')
+                            a(href="/admin/games") Games
+                        li(class=menu=='travel'?'active':'')
+                            a(href="/admin/travels") Travels
+                        li(class=menu=='bazaar'?'active':'')
+                            a(href="/admin/bazaar") Bazaar
+
+    include _user_menu

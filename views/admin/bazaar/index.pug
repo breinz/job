@@ -1,0 +1,40 @@
+extends ../../layout/_admin
+
+mixin line(item, index)
+    tr
+        td
+            //a(href=`/admin/bazaar/${item.id}`)
+            //    div=item.title
+            if index >0
+                -var i=index
+                while i--
+                    span &nbsp;&nbsp;&nbsp;&nbsp;
+                span &boxur;&nbsp;
+            a(href=`/admin/bazaar/${item.id}`)
+                if (item.pic)
+                    //img(src=travel.pic.url+travel.pic.file width=20 height=20)
+                    img(src=getImg(item.pic, "nano"))
+                    span &nbsp;
+                span=item.title
+        td.text-right
+            +delete(href=`/admin/bazaar/${item.id}/delete`)
+    if item.children
+        for child in item.children
+            +line(child, index+1)
+
+block content
+    .grid-container.full
+        .grid-x
+            .cell.medium-6
+                h1 Bazaar
+            .cell.medium-6
+                .admin-right-btn
+                    a.button.success(href="/admin/bazaar/new") New item
+
+    table.hover
+        for item in items
+            +line(item, 0)
+        else
+            tr
+                td
+                    div.text-center No item yet

@@ -7,10 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch-ts": "tsc -w",
     "watch-node": "nodemon",
+    "watch-sass": "node-sass src/scss/main.scss public/css/main.css -w src/scss --include-path node_modules/foundation-sites/scss/",
     "mongo": "cd ~/Developer; mongod --dbpath=mongodb",
     "pack": "watchify dist/games/pack/index.js -o public/js/games/pack.js -v",
     "amaze": "watchify dist/games/amaze/index.js -o public/js/games/amaze.js -v",
-    "w": "concurrently -k -p '[{name}]' -n 'TypScript,Node' -c 'yellow.bold,cyan.bold' 'npm run watch-ts' 'npm run watch-node'",
+    "w": "concurrently -k -p '[{name}]' -n 'TypScript,Node,Sass' -c 'yellow.bold,cyan.bold,blue.bold' 'npm run watch-ts' 'npm run watch-node' 'npm run watch-sass'",
     "watch-save": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node,Sass,Browser,Admin\" -c \"yellow.bold,cyan.bold,blue.bold,green.bold,red.bold\" \"npm run watch-ts\" \"npm run watch-node\" \"npm run watch-sass\" \"npm run watch-browser\" \"npm run watch-admin\""
   },
   "author": "Julien Breiner",
@@ -18,20 +19,28 @@
   "dependencies": {
     "@types/gsap": "^1.20.0",
     "bcrypt-nodejs": "0.0.3",
+    "change-case": "^3.1.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
+    "express-fileupload": "^1.1.1-alpha.1",
     "express-session": "^1.15.6",
+    "foundation-sites": "^6.5.1",
     "gsap": "^2.0.2",
     "mongoose": "^5.3.14",
     "pixi.js": "^4.8.2",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "sharp": "^0.21.2",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@types/bcrypt-nodejs": "0.0.30",
+    "@types/change-case": "^2.3.1",
     "@types/cookie-parser": "^1.4.1",
     "@types/express": "^4.16.0",
+    "@types/express-fileupload": "^0.4.0",
     "@types/express-session": "^1.15.11",
     "@types/mongoose": "^5.3.1",
-    "@types/pixi.js": "^4.8.4"
+    "@types/pixi.js": "^4.8.4",
+    "@types/sharp": "^0.21.0"
   }
 }

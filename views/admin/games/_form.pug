@@ -3,20 +3,24 @@
 
 form(method="POST")
     div
-        label(for="name") Name
+        label(for="name") 
+            span Name
+            span.error=errors.name
         input(type="text" name="name" id="name" value=data.name autofocus)
-        .error=errors.name
     div
-        label(for="js") Js
+        label(for="js") 
+            span Js
+            span.error=errors.js
         input(type="text" name="js" id="js" value=data.js)
-        .error=errors.js
     div
-        label(for="width") Width
+        label(for="width") 
+            span Width
+            span.error=errors.width
         input(type="text" name="width" id="width" value=data.width)
-        .error=errors.width
     div
-        label(for="height") Height
+        label(for="height") 
+            span Height
+            span.error=errors.height
         input(type="text" name="height" id="height" value=data.height)
-        .error=errors.height
     div
-        input(type="submit" value="Save")
+        input.button(type="submit" value="Save")

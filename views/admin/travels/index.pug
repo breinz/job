@@ -1,0 +1,42 @@
+extends ../../layout/_admin
+
+mixin line(travel, index)
+    tr
+        td
+            if index >0
+                -var i=index
+                while i--
+                    span &nbsp;&nbsp;&nbsp;&nbsp;
+                span &boxur;&nbsp;
+            a(href=`/admin/travels/${travel.id}`)
+                if (travel.pic)
+                    //img(src=travel.pic.url+travel.pic.file width=20 height=20)
+                    img(src=getImg(travel.pic, "nano"))
+                    span &nbsp;
+                span=travel.name
+            //span=travel.pic
+        td.text-right
+            if travel.children && travel.children.length==0
+                +delete(href=`/admin/travels/${travel.id}/delete`)
+            else
+                span.delete-link.disabled &times;
+    if travel.children
+        for child in travel.children
+            +line(child, index+1)
+
+block content
+    .grid-container.full
+        .grid-x
+            .cell.medium-6
+                h1 Travels
+            .cell.medium-6
+                .admin-right-btn
+                    a.button.success(href="/admin/travels/new") New travel
+
+    table.hover
+        for travel in travels
+            +line(travel, 0)
+        else
+            tr
+                td
+                    div.text-center No travel yet

@@ -8,17 +8,24 @@ import * as session from "express-session"
 //import api from "./api"
 import userController from "./user/controller";
 import gamesController from "./games/controller";
+import travelsController from "./travels/controller";
+import bazaarController from "./bazaar/controller";
 import adminController from "./admin/controller";
 import * as mongoose from "mongoose";
 import config from "./config";
 import User, { UserModel } from "./user/model";
 import Game from "./games/model";
+import * as fileUpload from "express-fileupload"
+import { getPic } from "./utils";
+import { resolve } from "url";
 
 const app = express();
 
 // The game
 //export const gameServer = new SApp();
 
+// Base dir for views
+app.locals.basedir = path.join(__dirname, '../views');
 // View engine
 app.set('view engine', 'pug');
 
@@ -42,6 +49,13 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// express-fileupload
+app.use(fileUpload());
+app.use((req, res, next) => {
+    res.locals.getImg = getPic;
+    next();
+})
+
 /**
  * Check if a user is logged in
  */
@@ -62,10 +76,26 @@ app.use(async (req, res, next) => {
     });
 });
 
+/**
+ * Menu item
+ * Breadcrumb
+ */
+app.use((req, res, next) => {
+    res.locals.menu = "home";
+    res.locals.bc = [[]];
+    next();
+})
+
 // Sub routes
 app.use("/users", userController);
 app.use("/admin", adminController);
 app.use("/games", gamesController);
+app.use("/travels", travelsController);
+app.use("/bazaar", bazaarController);
+
+app.get("/test", (req, res) => {
+    res.json("/img/travels/5c3b52a02278b8563122d9d9/e8c3c2fd-4dca-4add-8ef3-eecb2c61e220.JPG");
+})
 
 /** Index */
 app.get("/", async (req, res) => {

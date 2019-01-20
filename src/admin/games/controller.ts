@@ -6,9 +6,22 @@ import validator from "./validator";
 let router = express.Router();
 
 /**
+ * Menu item
+ * Breadcrumb
+ */
+router.use((req, res, next) => {
+    res.locals.menu = "game";
+    res.locals.bc.push(["Games", "/admin/games"]);
+    next();
+});
+
+/**
  * Index
  */
 router.get("/", async (req, res) => {
+    res.locals.bc.pop();
+    res.locals.bc.push(["Games"]);
+
     const games = await Game.find().setOptions({ sort: { name: 1 } }) as GameModel[];
     res.render("admin/games/index", { games: games });
 });
@@ -17,6 +30,7 @@ router.get("/", async (req, res) => {
  * New form
  */
 router.get("/new", (req, res) => {
+    res.locals.bc.push(["New"]);
     res.render("admin/games/new")
 });
 
@@ -36,7 +50,9 @@ router.post("/new", validator.new, async (req, res) => {
     try {
         await game.save();
     } catch (err) {
-        return res.render('admin/games/new', { data: data, error: err });
+        res.locals.bc.push(["New"]);
+        res.render('admin/games/new', { data: data, error: err });
+        return;
     }
 
     res.redirect("/admin/games");
@@ -46,6 +62,7 @@ router.post("/new", validator.new, async (req, res) => {
  * Edit form
  */
 router.get("/:id", async (req, res) => {
+
     let game: GameModel;
     try {
         game = await Game.findById(req.params.id) as GameModel;
@@ -53,6 +70,8 @@ router.get("/:id", async (req, res) => {
         return res.redirect("/")
     }
     if (!game) return res.redirect("/");
+
+    res.locals.bc.push([game.name]);
 
     res.render("admin/games/edit", { game: game, data: game });
 });

@@ -2,6 +2,8 @@ import express = require("express");
 import User, { UserModel } from "../user/model";
 import gamesController from "./games/controller"
 import usersController from "./users/controller"
+import travelsController from "./travels/controller"
+import bazaarController from "./bazaar/controller"
 
 
 let router = express.Router();
@@ -20,8 +22,18 @@ router.use((req, res, next) => {
     next();
 });
 
+/**
+ * Breadcrumb
+ */
+router.use((req, res, next) => {
+    res.locals.bc = [["Admin", "/admin"]];
+    next();
+});
+
 router.use("/games", gamesController);
 router.use("/users", usersController);
+router.use("/travels", travelsController);
+router.use("/bazaar", bazaarController);
 
 /**
  * Index

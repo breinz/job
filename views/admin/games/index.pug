@@ -1,13 +1,19 @@
-extends ../../layout/_layout
+extends ../../layout/_admin
 
 block content
-    h1 Games
-    a(href="/admin/games/new") New
+    .grid-container.full
+        .grid-x
+            .cell.medium-6
+                h1 Games
+            .cell.medium-6
+                .admin-right-btn
+                    a.button.success(href="/admin/games/new") New game
 
-    table
+
+    table.hover
         for game in games
             tr
                 td
                     a(href=`/admin/games/${game.id}`)=game.name
-                td
-                    a(href=`/admin/games/${game.id}/delete`) x
+                td.text-right
+                    +delete(href=`/admin/games/${game.id}/delete`)  

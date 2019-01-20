@@ -1,0 +1,15 @@
+extends /layout/_layout
+
+block content
+    h1 Travels
+
+    .grid-container.full
+        .grid-x.grid-margin-x
+            for travel in travels
+                .cell.medium-4.small-6
+                    .home-item
+                        a(href=`/travels/${travel.url}`)
+                            if travel.pic
+                                img(src=getImg(travel.pic, "home"), alt="")
+                            .title=travel.name
+                            .sub=travel.title

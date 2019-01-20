@@ -1,0 +1,295 @@
+@import "_settings";
+@import "foundation";
+
+@include foundation-global-styles;
+@include foundation-xy-grid-classes;
+////@include foundation-grid;
+////@include foundation-flex-grid;
+//@include foundation-flex-classes;
+@include foundation-typography;
+@include foundation-forms;
+@include foundation-button;
+//@include foundation-accordion;
+//@include foundation-accordion-menu;
+@include foundation-badge;
+//@include foundation-breadcrumbs;
+//@include foundation-button-group;
+@include foundation-callout;
+//@include foundation-card;
+//@include foundation-close-button;
+//@include foundation-menu;
+//@include foundation-menu-icon;
+//@include foundation-drilldown-menu;
+//@include foundation-dropdown;
+//@include foundation-dropdown-menu;
+//@include foundation-responsive-embed;
+@include foundation-label;
+//@include foundation-media-object;
+//@include foundation-off-canvas;
+//@include foundation-orbit;
+//@include foundation-pagination;
+//@include foundation-progress-bar;
+//@include foundation-slider;
+//@include foundation-sticky;
+//@include foundation-reveal;
+//@include foundation-switch;
+@include foundation-table;
+//@include foundation-tabs;
+//@include foundation-thumbnail;
+//@include foundation-title-bar;
+//@include foundation-tooltip;
+//@include foundation-top-bar;
+//@include foundation-visibility-classes;
+@include foundation-float-classes;
+
+$home-color: #8d8d8d;
+$travel-color: #818f7f;//#618C6D;
+$bazaar-color: #877f8f;
+
+body {
+    margin: 0;
+    background-color: $home-color;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+.error {
+    color:$alert-color;
+}
+
+.delete-link {
+    font-weight: bold;
+    font-size: 1.5rem;
+    line-height: 1rem;
+    color: $alert-color;
+
+    &.disabled {
+        color: lighten($alert-color, 40%)
+    }
+}
+
+.site-title {
+    h1 {
+        margin:0;
+        padding-top: 1rem;
+        font-weight: bold;
+    }
+
+    div{
+        color: #999;
+        padding-bottom: 1rem;
+    }
+}
+
+.user-menu {
+
+    #user-link {
+        font-weight: bold;
+    }
+    
+}
+
+header {
+
+    .header-title {
+        background-color: #fff;
+    }
+    .header-title-content {
+        background-color: rgba($home-color, .1);
+    }
+
+    .main-menu {
+        background-color: $home-color;//rgba(102, 83, 47, 0.719);
+        border-bottom: 4px solid rgba(#FFF, .7);
+        //border-bottom: 1px solid #000;
+        padding: 0;
+        margin: 0;
+    }
+
+    &.admin .main-menu {
+        background-color: rgb(194, 0, 0);
+    }
+
+    nav.main {
+        color: #FFF;
+        font-weight: bold;
+        //padding: 1rem;
+
+        li {
+
+            a {
+                display: block;
+                line-height: 3rem;
+                color:#FFF;
+                text-decoration: none;
+                &:visited {
+                    color: #FFF;
+                }
+            }
+
+            &.active {
+                a {
+                    color: #CCC;
+                }
+            }
+
+            a:hover{
+                color:#000;
+            }
+
+        }
+    }
+
+    nav.user {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        a {
+            color: $body-font-color;
+            text-decoration: none;
+
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+
+    nav.main, nav.user {
+        ul, li {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        ul {
+            li {
+                display: inline-block;
+                margin-right: 1rem;
+            }
+        }
+    }
+}
+
+.content {
+    background-color: #fff;
+}
+
+footer {
+
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: $home-color;
+    border-top: 3px solid rgba(#FFF, .7);
+}
+
+.travel {
+    background-color: $travel-color;
+    header {
+        .header-title-content {
+            background-color: rgba($travel-color, .3);
+        }
+        .main-menu {
+            background-color: $travel-color;
+        }
+    }
+    .content-content {
+        background-color: rgba($travel-color, .1);
+    }
+    footer {
+        background-color: $travel-color;
+    }
+}
+
+.bazaar {
+    background-color: $bazaar-color;
+    header {
+        .header-title-content {
+            background-color: rgba($bazaar-color, .3);
+        }
+        .main-menu {
+            background-color: $bazaar-color;
+        }
+    }
+    .content-content {
+        background-color: rgba($bazaar-color, .1);
+    }
+    footer {
+        background-color: $bazaar-color;
+    }
+}
+
+.home-item {
+    display: inline-block;
+    margin-bottom: 1rem;
+    
+    a {
+        display: inline-block;
+        padding: 5px;
+        border-radius: 8px;
+        
+        transition: background-color 500ms, box-shadow 500ms;
+        
+        &:hover {
+            box-shadow: 0px 0px 10px #999;
+            background-color: #fff;
+        }
+    }
+    .title {
+        color: $black;
+        font-weight: bold;
+        font-size: 1.5rem;
+        padding-top: 0.5rem;
+    }
+
+    .sub {
+        color: #999;
+    }
+}
+
+.admin-right-btn {
+    padding-top: 1rem;
+    float: right !important;
+}
+
+#breadcrumb {
+    padding-bottom: 5px;
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 0.9rem;
+            &::after {
+                content: "\00a0>\00a0"
+            }
+
+            &:last-child{
+                &::after{
+                    content: "";
+                }
+            }
+
+            a {
+                color:rgb(194, 0, 0);
+
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+.travel a, .travel #breadcrumb a {
+    color:$travel-color;
+}
+
+.bazaar a, .bazaar #breadcrumb a {
+    color:$bazaar-color;
+}
