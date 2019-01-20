@@ -4,9 +4,6 @@ import app from './app';
 
 let server = require("http").createServer(app);
 
-//socket.init(server);
-
-
 server.listen(config.port, () => {
     console.log(`Listening on ${config.port}`)
 });
