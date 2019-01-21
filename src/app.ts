@@ -128,7 +128,7 @@ app.get("/", async (req, res) => {
 
 // Mongoose connect
 mongoose.connect(config.mongoUri, { useNewUrlParser: true }).then(db => {
-    console.log(`DB Connected ${config.mongoUri}`)
+    //console.log(`DB Connected ${config.mongoUri}`)
 }).catch(err => {
     console.error(err)
 });

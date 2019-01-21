@@ -78,7 +78,6 @@ app.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     });
 }));
 mongoose.connect(config_1.default.mongoUri, { useNewUrlParser: true }).then(db => {
-    console.log(`DB Connected ${config_1.default.mongoUri}`);
 }).catch(err => {
     console.error(err);
 });
