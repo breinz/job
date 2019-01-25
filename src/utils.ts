@@ -2,7 +2,7 @@ import * as fs from "fs"
 import * as path from "path"
 import { UploadedFile } from "express-fileupload";
 import Image, { ImageModel } from "./images/model";
-//const sharp = require("sharp")
+const sharp = require("sharp")
 const uuid = require("uuid/v4");
 
 /**
@@ -117,9 +117,9 @@ export function getPic(file: any, size?: string): string {
             if (err.code !== "EEXIST") throw err;
         }
 
-        /*sharp(path.join(__dirname, "../public/", file.url, file.file))
+        sharp(path.join(__dirname, "../public/", file.url, file.file))
             .resize(resize_data)
-            .toFile(path.join(__dirname, "../public/", file.url, size, file.file));*/
+            .toFile(path.join(__dirname, "../public/", file.url, size, file.file));
 
         return url;
     }

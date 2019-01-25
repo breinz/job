@@ -19,7 +19,7 @@ router.use((req, res, next) => {
 router.get("/", async (req, res) => {
     res.locals.bc = [["Bazaar"]];
 
-    let items = await Bazaar.find({ parent: null }).collation({ locale: "en" }).sort({ title: 1 }) as [BazaarModel];
+    let items = await Bazaar.find({ parent: null }).sort({ title: 1 }) as [BazaarModel];
 
     res.render("bazaar/index", { items: items });
 });
@@ -56,7 +56,7 @@ router.get("*", async (req, res) => {
     res.locals.bc.push([item.title]);
 
     // Find the children
-    let children = await Bazaar.find({ parent: item.id }).collation({ locale: "en" }).sort({ name: 1 }) as [BazaarModel];
+    let children = await Bazaar.find({ parent: item.id }).sort({ name: 1 }) as [BazaarModel];
 
     res.render("bazaar/item", { item: item, children: children, path: "/bazaar" + req.path });
 });

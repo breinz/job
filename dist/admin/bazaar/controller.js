@@ -36,7 +36,7 @@ router.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
 router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     res.locals.bc.pop();
     res.locals.bc.push(["Bazaar"]);
-    const items = yield model_1.default.find({ parent: null }).collation({ locale: "en" }).sort({ title: 1 });
+    const items = yield model_1.default.find({ parent: null }).sort({ title: 1 });
     for (let i = 0; i < items.length; i++) {
         yield populateChildren(items[i]);
     }

@@ -11,6 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
 const path = require("path");
 const model_1 = require("./images/model");
+const sharp = require("sharp");
 const uuid = require("uuid/v4");
 exports.D2R = Math.PI / 180;
 exports.R2D = 180 / Math.PI;
@@ -90,6 +91,9 @@ function getPic(file, size) {
             if (err.code !== "EEXIST")
                 throw err;
         }
+        sharp(path.join(__dirname, "../public/", file.url, file.file))
+            .resize(resize_data)
+            .toFile(path.join(__dirname, "../public/", file.url, size, file.file));
         return url;
     }
 }

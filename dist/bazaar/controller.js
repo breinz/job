@@ -18,7 +18,7 @@ router.use((req, res, next) => {
 });
 router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     res.locals.bc = [["Bazaar"]];
-    let items = yield model_1.default.find({ parent: null }).collation({ locale: "en" }).sort({ title: 1 });
+    let items = yield model_1.default.find({ parent: null }).sort({ title: 1 });
     res.render("bazaar/index", { items: items });
 }));
 router.get("*", (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -42,7 +42,7 @@ router.get("*", (req, res) => __awaiter(this, void 0, void 0, function* () {
         }
     }
     res.locals.bc.push([item.title]);
-    let children = yield model_1.default.find({ parent: item.id }).collation({ locale: "en" }).sort({ name: 1 });
+    let children = yield model_1.default.find({ parent: item.id }).sort({ name: 1 });
     res.render("bazaar/item", { item: item, children: children, path: "/bazaar" + req.path });
 }));
 const findParents = (item, tree = null) => {

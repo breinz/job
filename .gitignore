@@ -1,4 +1,4 @@
 node_modules
-#dist
-public/img/**
 dist/config.js
+public/img/**
+npm-debug.log

@@ -64,7 +64,7 @@ router.get("/", async (req, res) => {
     res.locals.bc.pop();
     res.locals.bc.push(["Bazaar"]);
 
-    const items = await Bazaar.find({ parent: null }).collation({ locale: "en" }).sort({ title: 1 }) as [BazaarModel];
+    const items = await Bazaar.find({ parent: null }).sort({ title: 1 }) as [BazaarModel];
 
     for (let i = 0; i < items.length; i++) {
         await populateChildren(items[i]);
