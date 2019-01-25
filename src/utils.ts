@@ -127,9 +127,9 @@ export function getPic(file: any, size?: string): string {
 
 export function formatText(txt: string): string {
     // bold
-    txt = txt.replace(/\*\*([^*.]+)\*\*/g, "<b>$1</b>");
+    txt = txt.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
     // italic
-    txt = txt.replace(/__([^*.]+)__/g, "<i>$1</i>");
+    txt = txt.replace(/__([^_]+)__/g, "<i>$1</i>");
     // new paragraph
     txt = txt.replace(/\n/g, "</p><p>");
     // link
