@@ -16,7 +16,7 @@ import config from "./config";
 import User, { UserModel } from "./user/model";
 import Game from "./games/model";
 import * as fileUpload from "express-fileupload"
-import { getPic } from "./utils";
+import { getPic, formatText } from "./utils";
 import { resolve } from "url";
 import Citation, { CitationModel } from "./citations/model";
 
@@ -106,6 +106,14 @@ app.use(async (req, res, next) => {
 
     res.locals.citation = citation ? citation : { content: "" };
 
+    next();
+});
+
+/**
+ * Text format
+ */
+app.use((req, res, next) => {
+    res.locals.format = formatText;
     next();
 })
 

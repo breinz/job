@@ -40,7 +40,8 @@ form(method="POST" encType="multipart/form-data")
     div
         label(for="description") 
             span Description
-        textarea(name="description" rows="10")=data.description
+        +textarea("description")=data.description
+        //textarea(name="description" rows="10")=data.description
     
     div
         label(for="pic")

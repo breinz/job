@@ -73,6 +73,21 @@ h1 {
     }
 }
 
+.justify {
+    text-align: justify;
+}
+
+textarea.with-tools {
+    margin-bottom: .25rem;
+}
+
+.textarea-tools {
+    text-align: right;
+    font-size: .8rem;
+    color:#666;
+    margin-bottom: 1rem;
+}
+
 .error {
     color:$alert-color;
 }

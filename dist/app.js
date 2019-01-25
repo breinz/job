@@ -74,6 +74,10 @@ app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
     res.locals.citation = citation ? citation : { content: "" };
     next();
 }));
+app.use((req, res, next) => {
+    res.locals.format = utils_1.formatText;
+    next();
+});
 app.use("/users", controller_1.default);
 app.use("/admin", controller_5.default);
 app.use("/games", controller_2.default);

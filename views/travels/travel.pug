@@ -7,7 +7,8 @@ block content
     if travel.pic
         img(src=getImg(travel.pic, "banner"))
     
-    p=travel.description
+    .justify
+        p!=format(travel.description)
 
 
     .grid-container.full
