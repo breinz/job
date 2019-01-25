@@ -133,7 +133,7 @@ export function formatText(txt: string): string {
     // new paragraph
     txt = txt.replace(/\n/g, "</p><p>");
     // link
-    txt = txt.replace(/\[([^:.]+):(.+)\]/g, "<a href='$2'>$1</a>");
+    txt = txt.replace(/\[([^\].]+):([^\].]+)\]/g, "<a href='$2'>$1</a>");
 
     return txt;
 }
