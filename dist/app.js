@@ -24,6 +24,7 @@ const model_1 = require("./user/model");
 const model_2 = require("./games/model");
 const fileUpload = require("express-fileupload");
 const utils_1 = require("./utils");
+const model_3 = require("./citations/model");
 const app = express();
 app.locals.basedir = path.join(__dirname, '../views');
 app.set('view engine', 'pug');
@@ -61,6 +62,18 @@ app.use((req, res, next) => {
     res.locals.bc = [[]];
     next();
 });
+app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    const count = yield model_3.default.count({});
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+    const oneDay = 1000 * 60 * 60 * 24;
+    const day = Math.floor(diff / oneDay);
+    const skip = day % count;
+    let citation = (yield model_3.default.find().skip(skip).limit(1))[0];
+    res.locals.citation = citation ? citation : { content: "" };
+    next();
+}));
 app.use("/users", controller_1.default);
 app.use("/admin", controller_5.default);
 app.use("/games", controller_2.default);

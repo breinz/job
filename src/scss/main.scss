@@ -39,7 +39,7 @@
 //@include foundation-title-bar;
 //@include foundation-tooltip;
 //@include foundation-top-bar;
-//@include foundation-visibility-classes;
+@include foundation-visibility-classes;
 @include foundation-float-classes;
 
 $home-color: #8d8d8d;
@@ -50,11 +50,27 @@ $bazaar-color: #877f8f;
 
 body {
     margin: 0;
-    background-color: $home-color;
+    //background-color: $home-color;
 }
 
 h1 {
+    font-family: Cabin;
     font-weight: bold;
+}
+
+#citation {
+    position: relative;
+
+    #citation-content {
+        font-family: "Dancing Script";
+        //font-style: italic;
+        font-size: 1rem;
+        color: #666;
+        text-align: right;
+        position: absolute;
+        bottom: 1rem;
+        right: 0;
+    }
 }
 
 .error {
@@ -186,7 +202,7 @@ footer {
     border-top: 3px solid rgba(#FFF, .7);
 }
 
-.travel {
+/*.travel {
     background-color: $travel-color;
     header {
         .header-title-content {
@@ -220,7 +236,7 @@ footer {
     footer {
         background-color: $bazaar-color;
     }
-}
+}*/
 
 .home-item {
     display: inline-block;

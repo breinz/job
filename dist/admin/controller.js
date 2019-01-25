@@ -5,6 +5,7 @@ const controller_1 = require("./games/controller");
 const controller_2 = require("./users/controller");
 const controller_3 = require("./travels/controller");
 const controller_4 = require("./bazaar/controller");
+const controller_5 = require("./citations/controller");
 let router = express.Router();
 router.use((req, res, next) => {
     if (!req.current_user) {
@@ -23,6 +24,7 @@ router.use("/games", controller_1.default);
 router.use("/users", controller_2.default);
 router.use("/travels", controller_3.default);
 router.use("/bazaar", controller_4.default);
+router.use("/citations", controller_5.default);
 router.get("/", (req, res) => {
     res.render("admin/index");
 });

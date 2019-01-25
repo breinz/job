@@ -1,0 +1,12 @@
+-data = data || {}
+-errors = errors || {}
+
+form(method="POST")
+    div
+        label(for="content") 
+            span Content
+            span.error=errors.content
+        input(type="text" name="content" id="content" value=data.content autofocus)
+
+    div
+        input.button(type="submit" value="Save")

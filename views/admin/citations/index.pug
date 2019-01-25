@@ -1,0 +1,26 @@
+extends ../../layout/_admin
+
+mixin line(item, index)
+    tr
+        td
+            a(href=`/admin/citations/${item.id}`)
+                span!=item.content
+        td.text-right
+            +delete(href=`/admin/citations/${item.id}/delete`)
+
+block content
+    .grid-container.full
+        .grid-x
+            .cell.medium-6
+                h1 Citations
+            .cell.medium-6
+                .admin-right-btn
+                    a.button.success(href="/admin/citations/new") New citation
+
+    table.hover
+        for item in items
+            +line(item)
+        else
+            tr
+                td
+                    div.text-center No citations yet

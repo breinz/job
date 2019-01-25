@@ -2607,6 +2607,95 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 .table-scroll {
   overflow-x: auto; }
 
+.hide {
+  display: none !important; }
+
+.invisible {
+  visibility: hidden; }
+
+@media screen and (max-width: 39.99875em) {
+  .hide-for-small-only {
+    display: none !important; } }
+
+@media screen and (max-width: 0em), screen and (min-width: 40em) {
+  .show-for-small-only {
+    display: none !important; } }
+
+@media print, screen and (min-width: 40em) {
+  .hide-for-medium {
+    display: none !important; } }
+
+@media screen and (max-width: 39.99875em) {
+  .show-for-medium {
+    display: none !important; } }
+
+@media screen and (min-width: 40em) and (max-width: 63.99875em) {
+  .hide-for-medium-only {
+    display: none !important; } }
+
+@media screen and (max-width: 39.99875em), screen and (min-width: 64em) {
+  .show-for-medium-only {
+    display: none !important; } }
+
+@media print, screen and (min-width: 64em) {
+  .hide-for-large {
+    display: none !important; } }
+
+@media screen and (max-width: 63.99875em) {
+  .show-for-large {
+    display: none !important; } }
+
+@media screen and (min-width: 64em) and (max-width: 74.99875em) {
+  .hide-for-large-only {
+    display: none !important; } }
+
+@media screen and (max-width: 63.99875em), screen and (min-width: 75em) {
+  .show-for-large-only {
+    display: none !important; } }
+
+.show-for-sr,
+.show-on-focus {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0; }
+
+.show-on-focus:active, .show-on-focus:focus {
+  position: static !important;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal; }
+
+.show-for-landscape,
+.hide-for-portrait {
+  display: block !important; }
+  @media screen and (orientation: landscape) {
+    .show-for-landscape,
+    .hide-for-portrait {
+      display: block !important; } }
+  @media screen and (orientation: portrait) {
+    .show-for-landscape,
+    .hide-for-portrait {
+      display: none !important; } }
+
+.hide-for-landscape,
+.show-for-portrait {
+  display: none !important; }
+  @media screen and (orientation: landscape) {
+    .hide-for-landscape,
+    .show-for-portrait {
+      display: none !important; } }
+  @media screen and (orientation: portrait) {
+    .hide-for-landscape,
+    .show-for-portrait {
+      display: block !important; } }
+
 .float-left {
   float: left !important; }
 
@@ -2628,11 +2717,22 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
   clear: both; }
 
 body {
-  margin: 0;
-  background-color: #8d8d8d; }
+  margin: 0; }
 
 h1 {
+  font-family: Cabin;
   font-weight: bold; }
+
+#citation {
+  position: relative; }
+  #citation #citation-content {
+    font-family: "Dancing Script";
+    font-size: 1rem;
+    color: #666;
+    text-align: right;
+    position: absolute;
+    bottom: 1rem;
+    right: 0; }
 
 .error {
   color: #cc4b37; }
@@ -2715,28 +2815,41 @@ footer {
   background-color: #8d8d8d;
   border-top: 3px solid rgba(255, 255, 255, 0.7); }
 
-.travel {
-  background-color: #818f7f; }
-  .travel header .header-title-content {
-    background-color: rgba(129, 143, 127, 0.3); }
-  .travel header .main-menu {
-    background-color: #818f7f; }
-  .travel .content-content {
-    background-color: rgba(129, 143, 127, 0.1); }
-  .travel footer {
-    background-color: #818f7f; }
+/*.travel {
+    background-color: $travel-color;
+    header {
+        .header-title-content {
+            background-color: rgba($travel-color, .3);
+        }
+        .main-menu {
+            background-color: $travel-color;
+        }
+    }
+    .content-content {
+        background-color: rgba($travel-color, .1);
+    }
+    footer {
+        background-color: $travel-color;
+    }
+}
 
 .bazaar {
-  background-color: #877f8f; }
-  .bazaar header .header-title-content {
-    background-color: rgba(135, 127, 143, 0.3); }
-  .bazaar header .main-menu {
-    background-color: #877f8f; }
-  .bazaar .content-content {
-    background-color: rgba(135, 127, 143, 0.1); }
-  .bazaar footer {
-    background-color: #877f8f; }
-
+    background-color: $bazaar-color;
+    header {
+        .header-title-content {
+            background-color: rgba($bazaar-color, .3);
+        }
+        .main-menu {
+            background-color: $bazaar-color;
+        }
+    }
+    .content-content {
+        background-color: rgba($bazaar-color, .1);
+    }
+    footer {
+        background-color: $bazaar-color;
+    }
+}*/
 .home-item {
   display: inline-block;
   margin-bottom: 1rem; }

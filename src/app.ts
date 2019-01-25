@@ -18,6 +18,7 @@ import Game from "./games/model";
 import * as fileUpload from "express-fileupload"
 import { getPic } from "./utils";
 import { resolve } from "url";
+import Citation, { CitationModel } from "./citations/model";
 
 const app = express();
 
@@ -83,6 +84,29 @@ app.use(async (req, res, next) => {
 app.use((req, res, next) => {
     res.locals.menu = "home";
     res.locals.bc = [[]];
+    next();
+})
+
+/**
+ * Citation
+ * TODO: Find one a day
+ */
+app.use(async (req, res, next) => {
+    const count = await Citation.count({});
+
+    // Get the day of the year
+    const now: any = new Date();
+    const start: any = new Date(now.getFullYear(), 0, 0);
+    const diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+    const oneDay = 1000 * 60 * 60 * 24;
+    const day = Math.floor(diff / oneDay);
+
+    const skip = day % count;
+
+    let citation = (await Citation.find().skip(skip).limit(1))[0] as CitationModel;
+
+    res.locals.citation = citation ? citation : { content: "" };
+
     next();
 })
 
