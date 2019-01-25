@@ -1,9 +1,9 @@
 extends layout/_layout
 
 block content
-    h2 Hey
+    //h2 Welcome blabla
 
-    ul
+    ul(style="margin:1rem 0;list-style-type:none")
         for game in games
             li
                 a(href=`/games/${game.id}`)=game.name

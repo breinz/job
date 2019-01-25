@@ -18,6 +18,7 @@ router.use((req, res, next) => {
 });
 router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     res.locals.bc = [["Travels"]];
+    res.locals.bc = [];
     let travels = yield model_1.default.find({ parent: null }).sort({ name: 1 }).populate("pic");
     res.render("travels/index", { travels: travels });
 }));

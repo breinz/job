@@ -2717,7 +2717,8 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
   clear: both; }
 
 body {
-  margin: 0; }
+  margin: 0;
+  background-color: #EEE; }
 
 h1 {
   font-family: Cabin;
@@ -2818,9 +2819,6 @@ header nav.main ul li, header nav.user ul li {
   display: inline-block;
   margin-right: 1rem; }
 
-.content {
-  background-color: #fff; }
-
 footer {
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -2868,10 +2866,10 @@ footer {
   .home-item a {
     display: inline-block;
     padding: 5px;
-    border-radius: 8px;
-    transition: background-color 500ms, box-shadow 500ms; }
+    transition: background-color 500ms, box-shadow 500ms;
+    box-shadow: 0px 0px 3px #999; }
     .home-item a:hover {
-      box-shadow: 0px 0px 10px #999;
+      box-shadow: 0px 0px 8px #999;
       background-color: #fff; }
   .home-item .title {
     color: #0a0a0a;
@@ -2885,8 +2883,16 @@ footer {
   padding-top: 1rem;
   float: right !important; }
 
+#page {
+  background-color: #f6f6f6;
+  border: 1px solid #CCC;
+  margin-bottom: 1rem;
+  margin-top: 1rem; }
+
 #breadcrumb {
-  padding-bottom: 5px; }
+  margin-bottom: 5px; }
+  #breadcrumb + #page {
+    margin-top: 0; }
   #breadcrumb ul {
     list-style-type: none;
     padding: 0;

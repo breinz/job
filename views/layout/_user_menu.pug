@@ -17,7 +17,7 @@
 
                     if current_user && current_user.admin
                         li
-                            if bc && bc[0][0] == "Admin"
+                            if bc && bc[0] && bc[0][0] == "Admin"
                                 a(href="/") Site
                             else
                                 a(href="/admin") Admin

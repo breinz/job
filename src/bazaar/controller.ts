@@ -18,6 +18,7 @@ router.use((req, res, next) => {
  */
 router.get("/", async (req, res) => {
     res.locals.bc = [["Bazaar"]];
+    res.locals.bc = [];
 
     let items = await Bazaar.find({ parent: null }).sort({ title: 1 }) as [BazaarModel];
 

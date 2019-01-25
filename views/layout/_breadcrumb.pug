@@ -1,10 +1,11 @@
-#breadcrumb.grid-container
-    .grid-x
-        .cell
-            ul
-                for item in bc
-                    li
-                        if item[1]
-                            a(href=`${item[1]}`)=item[0]
-                        else
-                            span=item[0]
+if bc.length && bc[0].length
+    #breadcrumb.grid-container
+        .grid-x
+            .cell
+                ul
+                    for item in bc
+                        li
+                            if item[1]
+                                a(href=`${item[1]}`)=item[0]
+                            else
+                                span=item[0]

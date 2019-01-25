@@ -51,6 +51,7 @@ $bazaar-color: #877f8f;
 body {
     margin: 0;
     //background-color: $home-color;
+    background-color: #EEE;
 }
 
 h1 {
@@ -206,7 +207,7 @@ header {
 }
 
 .content {
-    background-color: #fff;
+    //background-color: #fff;
 }
 
 footer {
@@ -260,12 +261,13 @@ footer {
     a {
         display: inline-block;
         padding: 5px;
-        border-radius: 8px;
+        //border-radius: 8px;
         
         transition: background-color 500ms, box-shadow 500ms;
+        box-shadow: 0px 0px 3px #999;
         
         &:hover {
-            box-shadow: 0px 0px 10px #999;
+            box-shadow: 0px 0px 8px #999;
             background-color: #fff;
         }
     }
@@ -286,8 +288,22 @@ footer {
     float: right !important;
 }
 
+#page {
+    background-color: #f6f6f6;
+    border:1px solid #CCC;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
 #breadcrumb {
-    padding-bottom: 5px;
+
+    &+ #page {
+        margin-top: 0;
+    }
+    margin-bottom: 5px;
+
+    //background-color: #f6f6f6;
+    //border:1px solid #CCC;
 
     ul {
         list-style-type: none;

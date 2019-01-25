@@ -19,6 +19,7 @@ router.use((req, res, next) => {
  */
 router.get("/", async (req, res) => {
     res.locals.bc = [["Travels"]];
+    res.locals.bc = [];
 
     let travels = await Travel.find({ parent: null }).sort({ name: 1 }).populate("pic") as [TravelModel];
 
