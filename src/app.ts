@@ -89,7 +89,6 @@ app.use((req, res, next) => {
 
 /**
  * Citation
- * TODO: Find one a day
  */
 app.use(async (req, res, next) => {
     const count = await Citation.count({});
