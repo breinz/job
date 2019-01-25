@@ -28,6 +28,7 @@ router.post("/signup", validator.signup, async (req, res) => {
 
     await user.save();
 
+
     res.redirect("/");
 });
 
