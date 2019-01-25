@@ -118,7 +118,7 @@ export function getPic(file: any, size?: string): string {
         }
 
         sharp(path.join(__dirname, "../public/", file.url, file.file))
-            .resize(resize_data)
+            .resize(resize_data.width, resize_data.height)
             .toFile(path.join(__dirname, "../public/", file.url, size, file.file));
 
         return url;
