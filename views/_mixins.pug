@@ -8,3 +8,7 @@ mixin textarea(name, rows=10)
         b **bold**&nbsp;&nbsp;
         i __italic__&nbsp;&nbsp;
         span [text>link]
+
+mixin to_admin(link)
+    if current_user && current_user.admin
+        a(href=link style="position:absolute;right:0;color:red;font-size:1.5rem" title="Edit") &ofcir;

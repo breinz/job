@@ -2,6 +2,8 @@ extends /layout/_layout
 
 block content
 
+
+    +to_admin(`/admin/travels/${travel.id}`)
     h1=travel.name
 
     if travel.pic
