@@ -16,6 +16,11 @@ export const D2R = Math.PI / 180;
 export const R2D = 180 / Math.PI;
 
 /**
+ * Potential sizes for an image
+ */
+const pic_sizes = ["nano", "mini", "home", "banner"];
+
+/**
  * Shuffles an array
  * @param ar The array to shuffle
  * @return Array<Object>
@@ -59,22 +64,50 @@ export function mkdir(url: string) {
     })
 }
 
-export function mv_pic(url: string, file: UploadedFile): Promise<string> {
+export function mv_pic(
+    url: string,
+    file: UploadedFile,
+    name: string = undefined,
+    description: string = ""): Promise<string> {
+
     return new Promise(async (resolve, reject) => {
 
         let parts = file.name.split('.');
-        let name = `${uuid()}.${parts[parts.length - 1]}`;
+        let fileName = `${uuid()}.${parts[parts.length - 1]}`;
+        name = name ? name : fileName;//`${uuid()}.${parts[parts.length - 1]}`;
 
-        await file.mv(path.join(__dirname, "../public/", url, name));
+        await file.mv(path.join(__dirname, "../public/", url, fileName));
 
         let image = new Image() as ImageModel;
-        image.name = file.name;
-        image.file = name;
+        image.name = name;
+        image.description = description;
+        image.file = fileName;
         image.url = `/${url}/`;
 
         await image.save();
 
         resolve(image.id);
+    });
+}
+
+export function rm_pic(pic: ImageModel) {
+    return new Promise((resolve, reject) => {
+        // Delete the original
+        fs.unlink(path.join(__dirname, "../public/", pic.url, pic.file), err => {
+            if (err) {
+                return reject(err);
+            }
+
+            // Delete different sizes
+            pic_sizes.forEach(size => {
+                fs.unlink(path.join(__dirname, "../public/", pic.url, size, pic.file), err => {
+                    if (err && err.code !== "ENOENT") {
+                        return reject(err);
+                    }
+                });
+            });
+            resolve();
+        });
     });
 }
 

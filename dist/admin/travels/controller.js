@@ -13,6 +13,7 @@ const model_1 = require("../../travels/model");
 const validator_1 = require("./validator");
 const utils_1 = require("../../utils");
 const changeCase = require("change-case");
+const picsController_1 = require("./picsController");
 const PIC_PATH = "img/travels";
 exports.getAvailableParents = () => __awaiter(this, void 0, void 0, function* () {
     let travels = yield model_1.Travel.find({ parent: null });
@@ -35,6 +36,7 @@ router.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
     yield utils_1.mkdir(PIC_PATH);
     next();
 }));
+router.use("/:travel_id/pictures", picsController_1.default);
 router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     res.locals.bc.pop();
     res.locals.bc.push(["Travels"]);
@@ -98,8 +100,9 @@ router.post("/:id", validator_1.default.edit, (req, res, next) => __awaiter(this
     }
     res.redirect("/admin/travels");
 }));
-router.get("/:id/delete", (req, res) => __awaiter(this, void 0, void 0, function* () {
-    yield model_1.Travel.findByIdAndDelete(req.params.id);
+router.get("/:id/delete", (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    let travel = yield model_1.Travel.findById(req.params.id);
+    travel.remove();
     res.redirect("/admin/travels");
 }));
 const populateTravel = (travel, data, req) => {
@@ -110,7 +113,6 @@ const populateTravel = (travel, data, req) => {
         travel.parent = data.parent || null;
         travel.description = data.description;
         if (req.files.pic) {
-            console.log("save pic");
             let pic = req.files.pic;
             let pic_id = yield utils_1.mv_pic(`${PIC_PATH}`, pic);
             travel.pic = pic_id;

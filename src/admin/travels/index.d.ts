@@ -13,6 +13,11 @@ export interface NewErrors {
     parent?: string
 }
 
+export interface NewPicData {
+    name: string,
+    description: string
+}
+
 export interface EditData {
     name: string,
     title: string,

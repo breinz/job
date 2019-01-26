@@ -2750,6 +2750,14 @@ textarea.with-tools {
 .error {
   color: #cc4b37; }
 
+.admin-link {
+  font-weight: bold; }
+
+.off {
+  color: #999;
+  font-style: italic;
+  font-size: .8rem; }
+
 .delete-link {
   font-weight: bold;
   font-size: 1.5rem;

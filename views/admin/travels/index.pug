@@ -16,6 +16,8 @@ mixin line(travel, index)
                 span=travel.name
             //span=travel.pic
         td.text-right
+            a.admin-link(href=`/admin/travels/${travel.id}/pictures` title="Pictures") &boxbox;
+            span &nbsp;
             if travel.children && travel.children.length==0
                 +delete(href=`/admin/travels/${travel.id}/delete`)
             else

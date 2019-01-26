@@ -1,0 +1,30 @@
+extends ../../../layout/_admin
+
+mixin line(pic)
+    -let link=`/admin/travels/${travel.id}/pictures/${pic.id}`
+
+    .cell.small-4.medium-3
+        a(href=link)
+            img(src=getImg(pic, "home"))
+        a(href=link)=pic.name
+        .clearfix
+            +delete(href=`${link}/delete`)
+
+block content
+    .grid-container.full
+        .grid-x
+            .cell.medium-6
+                h1=travel.name
+            .cell.medium-6
+                .admin-right-btn
+                    a.button.success(href=`/admin/travels/${travel.id}/pictures/new`) New picture
+
+    
+    if (travel.pics.length==0)
+        div.text-center.off No pictures for now
+    else
+        .grid-container.full
+            .grid-x.grid-margin-x
+                for pic in travel.pics
+                    +line(pic)
+

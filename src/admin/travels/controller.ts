@@ -5,8 +5,11 @@ import { NewData, EditData } from ".";
 import validator from "./validator";
 import { UploadedFile } from "express-fileupload";
 import * as fs from 'fs'
-import { mkdir, mv_pic } from "../../utils";
+import { mkdir, mv_pic, rm_pic } from "../../utils";
 import * as changeCase from "change-case"
+import picsController from "./picsController";
+import Image, { ImageModel } from "../../images/model";
+import { runInNewContext } from "vm";
 
 const PIC_PATH = "img/travels"
 
@@ -52,6 +55,8 @@ router.use(async (req, res, next) => {
     next();
 
 })
+
+router.use("/:travel_id/pictures", picsController);
 
 /**
  * Index
@@ -150,8 +155,10 @@ router.post("/:id", validator.edit, async (req, res, next) => {
 /**
  * Delete
  */
-router.get("/:id/delete", async (req, res) => {
-    await Travel.findByIdAndDelete(req.params.id);
+router.get("/:id/delete", async (req, res, next) => {
+    let travel = await Travel.findById(req.params.id) as TravelModel;
+    travel.remove();
+
     res.redirect("/admin/travels");
 });
 
@@ -174,7 +181,6 @@ const populateTravel = (travel: TravelModel, data: NewData | EditData, req: expr
         travel.description = data.description
 
         if (req.files.pic) {
-            console.log("save pic");
             let pic = req.files.pic as UploadedFile;
 
             //await mkdir(`${PIC_PATH}/${travel.id}`);

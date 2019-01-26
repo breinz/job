@@ -15,6 +15,7 @@ const sharp = require("sharp");
 const uuid = require("uuid/v4");
 exports.D2R = Math.PI / 180;
 exports.R2D = 180 / Math.PI;
+const pic_sizes = ["nano", "mini", "home", "banner"];
 function shuffle(ar) {
     for (let i = ar.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -42,20 +43,40 @@ function mkdir(url) {
     });
 }
 exports.mkdir = mkdir;
-function mv_pic(url, file) {
+function mv_pic(url, file, name = undefined, description = "") {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         let parts = file.name.split('.');
-        let name = `${uuid()}.${parts[parts.length - 1]}`;
-        yield file.mv(path.join(__dirname, "../public/", url, name));
+        let fileName = `${uuid()}.${parts[parts.length - 1]}`;
+        name = name ? name : fileName;
+        yield file.mv(path.join(__dirname, "../public/", url, fileName));
         let image = new model_1.default();
-        image.name = file.name;
-        image.file = name;
+        image.name = name;
+        image.description = description;
+        image.file = fileName;
         image.url = `/${url}/`;
         yield image.save();
         resolve(image.id);
     }));
 }
 exports.mv_pic = mv_pic;
+function rm_pic(pic) {
+    return new Promise((resolve, reject) => {
+        fs.unlink(path.join(__dirname, "../public/", pic.url, pic.file), err => {
+            if (err) {
+                return reject(err);
+            }
+            pic_sizes.forEach(size => {
+                fs.unlink(path.join(__dirname, "../public/", pic.url, size, pic.file), err => {
+                    if (err && err.code !== "ENOENT") {
+                        return reject(err);
+                    }
+                });
+            });
+            resolve();
+        });
+    });
+}
+exports.rm_pic = rm_pic;
 function getPic(file, size) {
     if (size === undefined)
         return file.url + file.file;
