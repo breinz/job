@@ -102,7 +102,7 @@ function formatText(txt) {
     txt = txt.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
     txt = txt.replace(/__([^_]+)__/g, "<i>$1</i>");
     txt = txt.replace(/\n/g, "</p><p>");
-    txt = txt.replace(/\[([^\].]+):([^\].]+)\]/g, "<a href='$2'>$1</a>");
+    txt = txt.replace(/\[([^\].]+)>([^\]]+)\]/g, "<a href='$2'>$1</a>");
     return txt;
 }
 exports.formatText = formatText;
