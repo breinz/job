@@ -38,7 +38,13 @@ function visionneuse(src) {
         if (imgRatio < portRatio) {
             content.width(viewPort.height * imgSize.width / imgSize.height);
         }
-        $("#visionneuse-next,#visionneuse-prev").css('top', content.height() / 2 - 5);
+        if (all.length == 1) {
+            $("#visionneuse-next,#visionneuse-prev").hide();
+        }
+        else {
+            $("#visionneuse-next,#visionneuse-prev").show();
+            $("#visionneuse-next,#visionneuse-prev").css('top', content.height() / 2 - 5);
+        }
         content.css("visibility", "visible");
     });
 }

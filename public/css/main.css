@@ -2780,6 +2780,9 @@ textarea.with-tools {
 .user-menu #user-link {
   font-weight: bold; }
 
+.visionneuse-reveal {
+  cursor: pointer; }
+
 #visionneuse {
   display: none;
   position: fixed;
@@ -2802,7 +2805,7 @@ textarea.with-tools {
     font-size: 2rem;
     font-weight: bold;
     position: absolute;
-    transition: color 500ms, text-shadow 300ms;
+    transition: color 500ms, text-shadow 300ms, transform 300ms;
     cursor: pointer; }
     #visionneuse button:hover {
       text-shadow: 0px 0px 5px #FFF; }
@@ -2817,7 +2820,10 @@ textarea.with-tools {
   #visionneuse #visionneuse-close {
     padding: 10px;
     top: 0;
-    right: 10px; }
+    right: 10px;
+    transform-origin: 50% 57%; }
+    #visionneuse #visionneuse-close:hover {
+      transform: rotate(180deg); }
 
 .hidden {
   display: none; }

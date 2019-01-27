@@ -142,6 +142,10 @@ textarea.with-tools {
     
 }
 
+.visionneuse-reveal {
+    cursor: pointer;
+}
+
 #visionneuse {
     display: none;
     position: fixed;
@@ -169,7 +173,7 @@ textarea.with-tools {
         font-weight: bold;
         position: absolute;
 
-        transition: color 500ms, text-shadow 300ms;
+        transition: color 500ms, text-shadow 300ms, transform 300ms;
         
 
         cursor: pointer;
@@ -196,6 +200,10 @@ textarea.with-tools {
         padding: 10px;
         top: 0;
         right: 10px;
+        transform-origin: 50% 57%;
+        &:hover{
+            transform: rotate(180deg);
+        }
     }
 }
 

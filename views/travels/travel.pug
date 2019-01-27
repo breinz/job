@@ -6,20 +6,20 @@ block content
     h1=travel.name
 
     if travel.pic
-        img(src=getImg(travel.pic, "banner"))
+        img.visionneuse-reveal(src=getImg(travel.pic, "banner") data-src=getImg(travel.pic) data-all="travel-pics" data-index=0)
     
     .justify
         p!=format(travel.description)
     
-    -let pics=[]
-    
+    -let pics=[getImg(travel.pic)]
+
 
     if travel.pics.length > 0
         .pics
             .grid-container.full
                 .grid-x.grid-margin-x.grid-margin-y(stype="positition:relative")
                     +to_admin(`/admin/travels/${travel.id}/pictures`)
-                    -let index=0
+                    -let index=1
                     for pic in travel.pics
                         -pics.push(getImg(pic))
                         .cell.small-3.medium-2
