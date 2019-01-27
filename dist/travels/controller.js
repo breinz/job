@@ -26,7 +26,7 @@ router.get("*", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let route = req.path.substr(1).split('/');
     let travel;
     try {
-        travel = (yield model_1.default.findOne({ url: route[route.length - 1] }).populate("pic"));
+        travel = (yield model_1.default.findOne({ url: route[route.length - 1] }).populate("pic").populate('pics'));
     }
     catch (err) {
         return res.redirect("/travels");

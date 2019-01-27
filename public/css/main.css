@@ -2719,6 +2719,8 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 body {
   margin: 0;
   background-color: #EEE; }
+  body.modal-open {
+    overflow: hidden; }
 
 h1 {
   font-family: Cabin;
@@ -2777,6 +2779,48 @@ textarea.with-tools {
 
 .user-menu #user-link {
   font-weight: bold; }
+
+#visionneuse {
+  display: none;
+  position: fixed;
+  overflow-y: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(10, 10, 10, 0.45); }
+  #visionneuse #visionneuse-content {
+    position: relative;
+    top: 50px;
+    border: 5px solid #FFF;
+    margin: 0 auto;
+    box-shadow: 0 0 30px #000;
+    border-radius: 5px; }
+  #visionneuse button {
+    color: #FFF;
+    text-shadow: 0px 0px 2px #000;
+    font-size: 2rem;
+    font-weight: bold;
+    position: absolute;
+    transition: color 500ms, text-shadow 300ms;
+    cursor: pointer; }
+    #visionneuse button:hover {
+      text-shadow: 0px 0px 5px #FFF; }
+  #visionneuse #visionneuse-next {
+    right: 0px;
+    padding: 40px 20px;
+    padding-right: 10px; }
+  #visionneuse #visionneuse-prev {
+    left: 0px;
+    padding: 40px 20px;
+    padding-left: 10px; }
+  #visionneuse #visionneuse-close {
+    padding: 10px;
+    top: 0;
+    right: 10px; }
+
+.hidden {
+  display: none; }
 
 header .header-title {
   background-color: #fff; }
@@ -2886,6 +2930,9 @@ footer {
     padding-top: 0.5rem; }
   .home-item .sub {
     color: #999; }
+
+.pics {
+  margin-bottom: 1rem; }
 
 .admin-right-btn {
   padding-top: 1rem;

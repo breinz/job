@@ -2,7 +2,6 @@ extends /layout/_layout
 
 block content
 
-
     +to_admin(`/admin/travels/${travel.id}`)
     h1=travel.name
 
@@ -11,6 +10,21 @@ block content
     
     .justify
         p!=format(travel.description)
+    
+    -let pics=[]
+
+    if travel.pics.length > 0
+        .pics
+            .grid-container.full
+                .grid-x.grid-margin-x.grid-margin-y(stype="positition:relative")
+                    +to_admin(`/admin/travels/${travel.id}/pictures`)
+                    -let index=0
+                    for pic in travel.pics
+                        -pics.push(getImg(pic))
+                        .cell.small-3.medium-2
+                            img.visionneuse-reveal(src=getImg(pic, "mini") data-src=getImg(pic) data-all="travel-pics" data-index=index++)
+    
+    .hidden#travel-pics(data-src=pics.join(','))
 
 
     .grid-container.full

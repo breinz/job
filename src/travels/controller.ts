@@ -35,7 +35,7 @@ router.get("*", async (req, res) => {
     // The current travel
     let travel: TravelModel;
     try {
-        travel = await Travel.findOne({ url: route[route.length - 1] }).populate("pic") as TravelModel;
+        travel = await Travel.findOne({ url: route[route.length - 1] }).populate("pic").populate('pics') as TravelModel;
     } catch (err) {
         return res.redirect("/travels");
     }
