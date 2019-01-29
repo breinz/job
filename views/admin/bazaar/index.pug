@@ -30,6 +30,12 @@ block content
             .cell.medium-6
                 .admin-right-btn
                     a.button.success(href="/admin/bazaar/new") New item
+                    ul.dropdown.menu(data-dropdown-menu)
+                        li
+                            a(href="#") Items
+                            ul.menu
+                                li
+                                    a(href="/admin/bazaar/podcasts") Podcasts
 
     table.hover
         for item in items

@@ -1,0 +1,10 @@
+extends ../../../layout/_admin
+
+block content
+    h1 New Podcast
+
+    if (error)
+        .error=error
+
+    include _form
+

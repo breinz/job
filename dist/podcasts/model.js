@@ -11,11 +11,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const model_1 = require("../images/model");
 let old_pic;
-const travelSchema = new mongoose_1.Schema({
+const podcastSchema = new mongoose_1.Schema({
     name: String,
     title: String,
     url: String,
-    parent: { type: mongoose_1.Schema.Types.ObjectId, ref: "Travel" },
+    description: String,
     pic: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: "Image",
@@ -23,17 +23,15 @@ const travelSchema = new mongoose_1.Schema({
             old_pic = this.pic;
             return value;
         }
-    },
-    pics: [{ type: mongoose_1.Schema.Types.ObjectId, ref: "Image" }],
-    description: String
+    }
 });
-travelSchema.pre("save", function (next) {
+podcastSchema.pre("save", function (next) {
     return __awaiter(this, void 0, void 0, function* () {
-        let travel = this;
-        if (travel.isNew) {
+        let podcast = this;
+        if (podcast.isNew) {
             return next();
         }
-        if (travel.pic !== old_pic) {
+        if (podcast.pic !== old_pic) {
             try {
                 let img = yield model_1.default.findById(old_pic);
                 img.remove();
@@ -45,26 +43,21 @@ travelSchema.pre("save", function (next) {
         next();
     });
 });
-travelSchema.pre("remove", function (next) {
+podcastSchema.pre("remove", function (next) {
     return __awaiter(this, void 0, void 0, function* () {
-        let travel = this;
-        try {
-            let img;
-            if (travel.pic) {
-                img = (yield model_1.default.findById(travel.pic));
+        let podcast = this;
+        if (podcast.pic) {
+            try {
+                let img = yield model_1.default.findById(podcast.pic);
                 img.remove();
             }
-            travel.pics.forEach((pic) => __awaiter(this, void 0, void 0, function* () {
-                img = (yield model_1.default.findById(pic));
-                img.remove();
-            }));
-        }
-        catch (err) {
-            return next(err);
+            catch (err) {
+                return next(err);
+            }
         }
         next();
     });
 });
-exports.Travel = mongoose_1.model("Travel", travelSchema);
-exports.default = exports.Travel;
+exports.Podcast = mongoose_1.model("Podcast", podcastSchema);
+exports.default = exports.Podcast;
 //# sourceMappingURL=model.js.map

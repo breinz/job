@@ -1,0 +1,24 @@
+-data = data || {}
+-errors = errors || {}
+
+form(method="POST" encType="multipart/form-data")
+    div
+        label(for="title") 
+            span Name
+            span.error=errors.name
+        input(type="text" name="name" id="name" value=data.name autofocus)
+
+    div
+        label(for="description") 
+            span Description
+        textarea(name="description" rows="10")=data.description
+    
+    div
+        label(for="pic")
+            span Pic
+        if data.pic
+            img(src=getImg(data.pic, "nano"))
+        input(type="file", name="pic")
+
+    div
+        input.button(type="submit" value="Save")

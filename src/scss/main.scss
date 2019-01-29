@@ -21,7 +21,7 @@
 //@include foundation-menu-icon;
 //@include foundation-drilldown-menu;
 //@include foundation-dropdown;
-//@include foundation-dropdown-menu;
+@include foundation-dropdown-menu;
 //@include foundation-responsive-embed;
 @include foundation-label;
 //@include foundation-media-object;
@@ -376,6 +376,17 @@ footer {
 .admin-right-btn {
     padding-top: 1rem;
     float: right !important;
+}
+
+.dropdown.menu {
+    list-style-type: none;
+    display: inline-block;
+    ul{
+        list-style-type: none;
+    }
+    a {
+        display: block;
+    }
 }
 
 #page {

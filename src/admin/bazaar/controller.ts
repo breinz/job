@@ -7,6 +7,7 @@ import * as fs from 'fs'
 import { mkdir, mv_pic } from "../../utils";
 import * as changeCase from "change-case"
 import Bazaar, { BazaarModel } from "../../bazaar/model";
+import podcastController from "../podcasts/controller"
 
 const PIC_PATH = "img/bazaar"
 
@@ -51,7 +52,9 @@ router.use(async (req, res, next) => {
 
     next();
 
-})
+});
+
+router.use("/podcasts", podcastController);
 
 // --------------------------------------------------
 // INDEX

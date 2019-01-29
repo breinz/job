@@ -58,6 +58,10 @@ router.use(async (req, res, next) => {
 
 router.use("/:travel_id/pictures", picsController);
 
+// --------------------------------------------------
+// ROUTES
+// --------------------------------------------------
+
 /**
  * Index
  */

@@ -1,0 +1,30 @@
+extends ../../../layout/_admin
+
+mixin line(item)
+    tr
+        td
+            a(href=`/admin/bazaar/podcasts/${item.id}`)
+                if (item.pic)
+                    img(src=getImg(item.pic, "nano"))
+                    span &nbsp;
+                span=item.name
+        td.text-right
+            +delete(href=`/admin/bazaar/podcasts/${item.id}/delete`)
+    
+
+block content
+    .grid-container.full
+        .grid-x
+            .cell.medium-6
+                h1 Podcasts
+            .cell.medium-6
+                .admin-right-btn
+                    a.button.success(href="/admin/bazaar/podcasts/new") New podcast
+
+    table.hover
+        for item in items
+            +line(item)
+        else
+            tr
+                td
+                    div.text-center No item yet
