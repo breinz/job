@@ -83,9 +83,6 @@ app.use("/admin", controller_5.default);
 app.use("/games", controller_2.default);
 app.use("/travels", controller_3.default);
 app.use("/bazaar", controller_4.default);
-app.get("/test", (req, res) => {
-    res.json("/img/travels/5c3b52a02278b8563122d9d9/e8c3c2fd-4dca-4add-8ef3-eecb2c61e220.JPG");
-});
 app.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let users = yield model_1.default.find();
     const games = yield model_2.default.find().setOptions({ sort: { name: 1 } });

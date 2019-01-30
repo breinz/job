@@ -9,7 +9,7 @@ $(function () {
 
     Foundation.addToJquery($);
 
-    console.log($(document).foundation());
+    //console.log($(document).foundation());
 
     //new Foundation.Dropdown($("#test"));
 
