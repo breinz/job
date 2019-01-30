@@ -26,7 +26,7 @@ router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
 router.get("/podcasts", (req, res) => __awaiter(this, void 0, void 0, function* () {
     res.locals.bc.push(["Podcasts"]);
     let item = yield model_1.default.findOne({ url: "podcasts" });
-    let list = yield model_2.default.find().populate("pic");
+    let list = yield model_2.default.find().sort({ name: 1 }).populate("pic");
     res.render("bazaar/podcasts/index", { item: item, list: list });
 }));
 router.get("*", (req, res) => __awaiter(this, void 0, void 0, function* () {

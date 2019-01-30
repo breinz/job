@@ -31,7 +31,7 @@ router.get("/podcasts", async (req, res) => {
 
     let item = await Bazaar.findOne({ url: "podcasts" }) as BazaarModel;
 
-    let list = await Podcast.find().populate("pic") as [PodcastModel];
+    let list = await Podcast.find().sort({ name: 1 }).populate("pic") as [PodcastModel];
 
     res.render("bazaar/podcasts/index", { item: item, list: list });
 });
