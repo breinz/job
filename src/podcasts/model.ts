@@ -10,6 +10,7 @@ let old_pic: string;
 export type PodcastModel = Document & {
     name: string,
     title: string,
+    link: string,
     url: string,
     description: string,
     pic?: Types.ObjectId | string,
@@ -22,6 +23,7 @@ export type PodcastModel = Document & {
 const podcastSchema = new Schema({
     name: String,
     title: String,
+    link: String,
     url: String,
     description: String,
     pic: {
@@ -45,7 +47,9 @@ podcastSchema.pre("save", async function (next) {
     if (podcast.pic !== old_pic) {
         try {
             let img = await Image.findById(old_pic) as ImageModel;
-            img.remove();
+            if (img) {
+                img.remove();
+            }
         } catch (err) {
             return next(err);
         }

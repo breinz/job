@@ -49,7 +49,7 @@ $travel-color: #818f7f;//#618C6D;
 $bazaar-color: #877f8f;
 
 body {
-    margin: 0;
+    //margin: 0;
     //background-color: $home-color;
     background-color: #EEE;
 
@@ -131,6 +131,33 @@ textarea.with-tools {
     div{
         color: #999;
         padding-bottom: 1rem;
+    }
+}
+
+.page-title {
+    display: block;
+    h1 {
+        display: inline-block;
+        //padding-bottom: 1rem;
+    }
+    .sub{
+        padding-left: .5rem;
+        font-variant: small-caps;
+        font-size: 1.4rem;
+        color: #999;
+        display: inline-block;
+    }
+}
+
+.bazaar-link-item {
+    padding-bottom: 1rem;
+
+    a{
+        display: block;
+
+        &:hover {
+            color: $black;
+        }
     }
 }
 

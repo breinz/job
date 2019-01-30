@@ -89,6 +89,7 @@ const populate = (podcast, data, req) => {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         podcast.name = data.name;
         podcast.title = data.title;
+        podcast.link = data.link;
         podcast.url = changeCase.paramCase(data.name);
         podcast.description = data.description;
         if (req.files.pic) {

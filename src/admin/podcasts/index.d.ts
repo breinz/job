@@ -4,6 +4,7 @@ import { json } from "body-parser";
 export interface NewData {
     name: string,
     title: string,
+    link: string,
     description: string,
     pic: string
 }
@@ -20,6 +21,7 @@ export interface NewPicData {
 export interface EditData {
     name: string,
     title: string,
+    link: string,
     description: string
 }
 

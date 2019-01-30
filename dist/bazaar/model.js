@@ -4,6 +4,7 @@ const mongoose_1 = require("mongoose");
 const bazaarSchema = new mongoose_1.Schema({
     title: String,
     url: String,
+    link: String,
     parent: { type: mongoose_1.Schema.Types.ObjectId, ref: "Bazaar" },
     description: String
 });

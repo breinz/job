@@ -106,6 +106,7 @@ const populateModel = (bazaar, data, req) => {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         bazaar.title = data.title;
         bazaar.url = changeCase.paramCase(data.title);
+        bazaar.link = data.link;
         bazaar.parent = data.parent || null;
         bazaar.description = data.description;
         resolve();

@@ -141,6 +141,7 @@ const populate = (podcast: PodcastModel, data: NewData | EditData, req: express.
     return new Promise(async (resolve, reject) => {
         podcast.name = data.name;
         podcast.title = data.title;
+        podcast.link = data.link;
         podcast.url = changeCase.paramCase(data.name);
         podcast.description = data.description
 

@@ -1,0 +1,24 @@
+extends ../../layout/_layout
+
+block content
+
+    h1=item.title
+    p=item.description
+
+    .grid-container.full
+        .grid-x
+            .cell
+                -let index=0
+                for podcast in list
+                    -index++
+                    .grid-container.full
+                        .grid-x
+                            .cell.small-2
+                                img(src=getImg(podcast.pic, "mini"))
+                            .cell.small-10
+                                if (current_user && current_user.admin)
+                                    +to_admin(`/admin/bazaar/podcasts/${podcast.id}`)
+                                h4=podcast.name
+                                p=podcast.description
+                                if (index<list.length)
+                                    hr

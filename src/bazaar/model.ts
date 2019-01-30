@@ -5,8 +5,18 @@ import { Document, Schema, model, Model, Types } from "mongoose";
 // --------------------------------------------------
 
 export type BazaarModel = Document & {
+    /**
+     * Title of the page
+     */
     title: string,
+    /**
+     * The text used to form the url in the navigator
+     */
     url: string,
+    /**
+     * The text used for the link
+     */
+    link: string,
     parent?: Types.ObjectId | string,
     description: string,
 
@@ -20,6 +30,7 @@ export type BazaarModel = Document & {
 const bazaarSchema = new Schema({
     title: String,
     url: String,
+    link: String,
     parent: { type: Schema.Types.ObjectId, ref: "Bazaar" },
     description: String
 });

@@ -1,11 +1,14 @@
 extends /layout/_layout
 
 block content
-    h1 Bazaar
-    div Welcome into my brain
+    .page-title
+        h1 Bazaar
+        .sub.show-for-medium Welcome into my brain
 
     .grid-container.full
         .grid-x
             for item in items
-                .cell.medium-4
-                    a(href=`/bazaar/${item.url}`)=item.title
+                .cell.medium-3.small-6
+                    .bazaar-link-item
+                        a(href=`/bazaar/${item.url}`)=item.link
+            

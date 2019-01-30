@@ -32,15 +32,18 @@ form(method="POST")
                         option(value="") 
                         for parent in parents
                             +line(parent, 0)
-                    //select(name="parent")
-                    //    option(value="") 
-                    //    for parent in parents
-                    //        +line(parent, 0)
+            
+            .cel.medium-6.small-12
+                div
+                    label(for="link") 
+                        span Link
+                        span.error=errors.link
+                    input(type="text" name="link" id="link" value=data.link)
 
     div
         label(for="description") 
             span Description
-        textarea(name="description" rows="10")=data.description
+        +textarea("description")=data.description
 
     div
         input.button(type="submit" value="Save")

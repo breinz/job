@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const model_1 = require("./model");
+const model_2 = require("../podcasts/model");
 const router = express.Router();
 router.use((req, res, next) => {
     res.locals.menu = "bazaar";
@@ -21,6 +22,12 @@ router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     res.locals.bc = [];
     let items = yield model_1.default.find({ parent: null }).sort({ title: 1 });
     res.render("bazaar/index", { items: items });
+}));
+router.get("/podcasts", (req, res) => __awaiter(this, void 0, void 0, function* () {
+    res.locals.bc.push(["Podcasts"]);
+    let item = yield model_1.default.findOne({ url: "podcasts" });
+    let list = yield model_2.default.find().populate("pic");
+    res.render("bazaar/podcasts/index", { item: item, list: list });
 }));
 router.get("*", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let route = req.path.substr(1).split('/');

@@ -1,5 +1,6 @@
 import express = require("express");
 import Bazaar, { BazaarModel } from "./model";
+import Podcast, { PodcastModel } from "../podcasts/model";
 
 const router = express.Router();
 
@@ -23,6 +24,16 @@ router.get("/", async (req, res) => {
     let items = await Bazaar.find({ parent: null }).sort({ title: 1 }) as [BazaarModel];
 
     res.render("bazaar/index", { items: items });
+});
+
+router.get("/podcasts", async (req, res) => {
+    res.locals.bc.push(["Podcasts"]);
+
+    let item = await Bazaar.findOne({ url: "podcasts" }) as BazaarModel;
+
+    let list = await Podcast.find().populate("pic") as [PodcastModel];
+
+    res.render("bazaar/podcasts/index", { item: item, list: list });
 });
 
 /**

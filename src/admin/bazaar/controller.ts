@@ -191,6 +191,7 @@ const populateModel = (bazaar: BazaarModel, data: NewData | EditData, req: expre
         bazaar.title = data.title;
         // TODO: url unique
         bazaar.url = changeCase.paramCase(data.title);
+        bazaar.link = data.link;
         bazaar.parent = data.parent || null;
         bazaar.description = data.description
 

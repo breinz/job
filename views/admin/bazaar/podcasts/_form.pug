@@ -2,16 +2,23 @@
 -errors = errors || {}
 
 form(method="POST" encType="multipart/form-data")
-    div
-        label(for="title") 
-            span Name
-            span.error=errors.name
-        input(type="text" name="name" id="name" value=data.name autofocus)
+    .grid-container.full
+        .grid-x
+            .cell.medium-6
+                label(for="name") 
+                    span Name
+                    span.error=errors.name
+                input(type="text" name="name" id="name" value=data.name autofocus)
+            .cell.medium-6
+                label(for="link") 
+                    span Link
+                    span.error=errors.link
+                input(type="text" name="link" id="link" value=data.link)
 
     div
         label(for="description") 
             span Description
-        textarea(name="description" rows="10")=data.description
+        +textarea("description")=data.description
     
     div
         label(for="pic")

@@ -14,6 +14,7 @@ let old_pic;
 const podcastSchema = new mongoose_1.Schema({
     name: String,
     title: String,
+    link: String,
     url: String,
     description: String,
     pic: {
@@ -34,7 +35,9 @@ podcastSchema.pre("save", function (next) {
         if (podcast.pic !== old_pic) {
             try {
                 let img = yield model_1.default.findById(old_pic);
-                img.remove();
+                if (img) {
+                    img.remove();
+                }
             }
             catch (err) {
                 return next(err);
