@@ -36,7 +36,9 @@ travelSchema.pre("save", function (next) {
         if (travel.pic !== old_pic) {
             try {
                 let img = yield model_1.default.findById(old_pic);
-                img.remove();
+                if (img) {
+                    img.remove();
+                }
             }
             catch (err) {
                 return next(err);
@@ -52,11 +54,15 @@ travelSchema.pre("remove", function (next) {
             let img;
             if (travel.pic) {
                 img = (yield model_1.default.findById(travel.pic));
-                img.remove();
+                if (img) {
+                    img.remove();
+                }
             }
             travel.pics.forEach((pic) => __awaiter(this, void 0, void 0, function* () {
                 img = (yield model_1.default.findById(pic));
-                img.remove();
+                if (img) {
+                    img.remove();
+                }
             }));
         }
         catch (err) {

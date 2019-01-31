@@ -53,7 +53,9 @@ travelSchema.pre("save", async function (next) {
     if (travel.pic !== old_pic) {
         try {
             let img = await Image.findById(old_pic) as ImageModel;
-            img.remove();
+            if (img) {
+                img.remove();
+            }
         } catch (err) {
             return next(err);
         }
@@ -75,12 +77,16 @@ travelSchema.pre("remove", async function (next) {
         let img: ImageModel;
         if (travel.pic) {
             img = await Image.findById(travel.pic) as ImageModel;
-            img.remove();
+            if (img) {
+                img.remove();
+            }
         }
 
         travel.pics.forEach(async pic => {
             img = await Image.findById(pic) as ImageModel;
-            img.remove();
+            if (img) {
+                img.remove();
+            }
         });
     } catch (err) {
         return next(err);
