@@ -159,12 +159,57 @@ export function getPic(file: any, size?: string): string {
 }
 
 export function formatText(txt: string): string {
+
     // bold
     txt = txt.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
     // italic
     txt = txt.replace(/__([^_]+)__/g, "<i>$1</i>");
     // new paragraph
     txt = txt.replace(/\n/g, "</p><p>");
+    // img
+    txt = txt.replace(/\[img>([^\]]+)\]/g, function (str, data) {
+        var [file, size, visionneuse, align] = data.split(">");
+
+        align = align || "left";
+
+        let rpl: string = `<img class='img-in-text-align-${align}`;
+        // visionneuse
+        if (visionneuse === "1") rpl += " visionneuse-reveal ";
+        // src
+        rpl += "' src='";
+        rpl += getPic({
+            url: "/img/vrac/",
+            file: file
+        }, size ? size : "home");
+        rpl += "'";
+        // data-src
+        rpl += ` data-src="/img/vrac/${file}"`;
+        rpl += "'/>";
+        return rpl;
+    });
+    /*txt = txt.replace(/\[img>([^\]]+?)>([^\>]]+?)(>(\d?))?(>([^|]]+?))?]/g, function (str: string, file: string, size: string, unused, visionneuse, unused2, align): string {
+        console.log("str", str);
+        console.log("file", file);
+        console.log("size", size);
+        console.log("unused", unused);
+        console.log("visionneuse", visionneuse);
+        console.log("unused2", unused2);
+        console.log("align", align);
+        let rpl = `<img class=' in-img-${align}`;
+        if (visionneuse == 1) {
+            rpl += " visionneuse-reveal";
+        }
+        rpl += "' src='";
+        rpl += getPic({
+            url: "/img/vrac/",
+            file: file
+        }, size);
+        rpl += "'";
+        rpl += ` data-src="/img/vrac/${file}"`;
+        rpl += "/>";
+        console.log(rpl);
+        return rpl;
+    });*/
     // link
     txt = txt.replace(/\[([^\].]+)>([^\]]+)\]/g, "<a href='$2'>$1</a>");
 

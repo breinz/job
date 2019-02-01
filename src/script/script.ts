@@ -33,7 +33,11 @@ $(function () {
 
         index = parseInt($(this).attr("data-index"));
 
-        all = $("#" + $(this).attr("data-all")).attr("data-src").split(',');
+        if (isNaN(index)) {
+            all = [];
+        } else {
+            all = $("#" + $(this).attr("data-all")).attr("data-src").split(',');
+        }
 
         visionneuse($(this).attr("data-src"));
     });
@@ -65,7 +69,7 @@ $(function () {
                 content.width(viewPort.height * imgSize.width / imgSize.height);
             }
 
-            if (all.length == 1) {
+            if (all.length <= 1) {
                 $("#visionneuse-next,#visionneuse-prev").hide();
             } else {
                 $("#visionneuse-next,#visionneuse-prev").show();

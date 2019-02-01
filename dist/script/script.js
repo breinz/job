@@ -18,7 +18,12 @@ $(function () {
     $(".visionneuse-reveal").click(function () {
         $("body").addClass("modal-open");
         index = parseInt($(this).attr("data-index"));
-        all = $("#" + $(this).attr("data-all")).attr("data-src").split(',');
+        if (isNaN(index)) {
+            all = [];
+        }
+        else {
+            all = $("#" + $(this).attr("data-all")).attr("data-src").split(',');
+        }
         visionneuse($(this).attr("data-src"));
     });
     function visionneuse(src) {
@@ -40,7 +45,7 @@ $(function () {
             if (imgRatio < portRatio) {
                 content.width(viewPort.height * imgSize.width / imgSize.height);
             }
-            if (all.length == 1) {
+            if (all.length <= 1) {
                 $("#visionneuse-next,#visionneuse-prev").hide();
             }
             else {

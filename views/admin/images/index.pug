@@ -1,0 +1,31 @@
+extends ../../layout/_admin
+
+mixin line(item)
+    .cell.medium-2.small-3
+        a(href=`/admin/images/${item.id}`)
+            img(src=getImg(item, "mini"))
+        .grid-container.full
+            .grid-x
+                .cell.small-6
+                    if item.name == item.file
+                        .off no title
+                    else
+                        span=item.name
+                .cell.small-6.text-right
+                    +delete(href=`/admin/images/${item.id}/delete`)
+
+block content
+    .grid-container.full
+        .grid-x
+            .cell.medium-6
+                h1 Images
+            .cell.medium-6
+                .admin-right-btn
+                    a.button.success(href="/admin/images/new") New image
+
+    .grid-container.full
+        .grid-x.grid-margin-x
+            for item in items
+                +line(item)
+            else
+                .cell.small-12.text-center No images yet

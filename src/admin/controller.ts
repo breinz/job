@@ -5,6 +5,7 @@ import usersController from "./users/controller"
 import travelsController from "./travels/controller"
 import bazaarController from "./bazaar/controller"
 import citationController from "./citations/controller"
+import imagesController from "./images/controller"
 
 
 let router = express.Router();
@@ -36,6 +37,7 @@ router.use("/users", usersController);
 router.use("/travels", travelsController);
 router.use("/bazaar", bazaarController);
 router.use("/citations", citationController);
+router.use("/images", imagesController);
 
 /**
  * Index

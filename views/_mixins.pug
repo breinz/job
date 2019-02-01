@@ -5,9 +5,30 @@ mixin textarea(name, rows=10)
     textarea.with-tools(name=name, rows=rows)&attributes(attributes) 
         block
     .textarea-tools 
-        b **bold**&nbsp;&nbsp;
+        strong **bold**&nbsp;&nbsp;
         i __italic__&nbsp;&nbsp;
-        span [text>link]
+        div
+            b [
+            span text
+            b >
+            span link
+            b ]
+        div 
+            b [img>
+            span fileName (
+            b >
+            span size(nano|
+            u mini
+            span |home|banner)
+            b >
+            span visionneuse(
+            u 0
+            span |1)
+            b >
+            span align(
+            u left
+            span |right|center) )
+            b ]
 
 mixin to_admin(link)
     if current_user && current_user.admin

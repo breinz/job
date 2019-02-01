@@ -3009,6 +3009,25 @@ textarea.with-tools {
   font-size: .8rem;
   color: #666;
   margin-bottom: 1rem; }
+  .textarea-tools b {
+    color: #000; }
+
+.article-banner {
+  margin-bottom: 1rem; }
+
+.img-in-text-align-left {
+  float: left;
+  padding-right: .5rem; }
+
+.img-in-text-align-right {
+  float: right;
+  padding-left: .5rem; }
+
+.img-in-text-align-center {
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto; }
 
 .error {
   color: #cc4b37; }
@@ -3019,7 +3038,8 @@ textarea.with-tools {
 .off {
   color: #999;
   font-style: italic;
-  font-size: .8rem; }
+  font-size: .8rem;
+  line-height: 1rem; }
 
 .delete-link {
   font-weight: bold;

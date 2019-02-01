@@ -123,6 +123,22 @@ function formatText(txt) {
     txt = txt.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
     txt = txt.replace(/__([^_]+)__/g, "<i>$1</i>");
     txt = txt.replace(/\n/g, "</p><p>");
+    txt = txt.replace(/\[img>([^\]]+)\]/g, function (str, data) {
+        var [file, size, visionneuse, align] = data.split(">");
+        align = align || "left";
+        let rpl = `<img class='img-in-text-align-${align}`;
+        if (visionneuse === "1")
+            rpl += " visionneuse-reveal ";
+        rpl += "' src='";
+        rpl += getPic({
+            url: "/img/vrac/",
+            file: file
+        }, size ? size : "home");
+        rpl += "'";
+        rpl += ` data-src="/img/vrac/${file}"`;
+        rpl += "'/>";
+        return rpl;
+    });
     txt = txt.replace(/\[([^\].]+)>([^\]]+)\]/g, "<a href='$2'>$1</a>");
     return txt;
 }

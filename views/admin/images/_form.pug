@@ -1,0 +1,19 @@
+-data = data || {}
+
+form(method="POST"  encType="multipart/form-data")
+
+    div
+        label(for="name") 
+            span Name
+        input(type="text" name="name" id="name" value=data.name)
+
+    div
+        label(for="description") 
+            span Description
+        +textarea("description")=data.description
+
+    div
+        input(type="file", name="pic")
+
+    div
+        input.button(type="submit" value="Save")

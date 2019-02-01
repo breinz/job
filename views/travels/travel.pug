@@ -6,7 +6,7 @@ block content
     h1=travel.name
 
     if travel.pic
-        img.visionneuse-reveal(src=getImg(travel.pic, "banner") data-src=getImg(travel.pic) data-all="travel-pics" data-index=0)
+        img.article-banner.visionneuse-reveal(src=getImg(travel.pic, "banner") data-src=getImg(travel.pic) data-all="travel-pics" data-index=0)
     
     .justify
         p!=format(travel.description)
