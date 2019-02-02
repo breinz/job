@@ -135,7 +135,7 @@ app.get("/", async (req, res) => {
     // How many travels
     let travels_count = await Travel.estimatedDocumentCount();
     let index = (dayOfYear() * 3 + 2) % travels_count;
-    let travel = (await Travel.find().skip(index).limit(1))[0] as TravelModel;
+    let travel = (await Travel.find().skip(index).limit(1).populate("pic"))[0] as TravelModel;
 
 
     let users = await User.find();
