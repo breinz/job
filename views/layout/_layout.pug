@@ -20,11 +20,12 @@ html
       .content-content
         include _breadcrumb 
 
-
-              
-        .grid-container#page
-          .grid-x
-              .cell(style="position:relative")
+        if menu == "home"
+          block content
+        else 
+          .grid-container#page
+            .grid-x
+              .cell.medium-8
                 block content
       
     include _footer

@@ -1,44 +1,26 @@
 extends layout/_layout
 
 block content
-    //h2 Welcome blabla
+    .grid-container
+        .grid-x.grid-padding-x.grid-margin-xs
+            .cell.medium-auto.page(style="margin-right:1rem")
+                h4 Welcome
+                p Currently looking for a job as a web developer, this website is aimed to show who I am and what I can offer you.
 
-    if travel
-        h4 Featured travel
-        .home-item
-            a(href=`/travels/${travel.url}`)
-                if travel.pic
-                    img(src=getImg(travel.pic, "home"), alt="")
-                .title=travel.name
-                .sub=travel.title
+            .cell.medium-shrink.page
+
+                if travel
+                    h4 Featured travel
+                    .home-item
+                        a(href=`/travels/${travel.url}`)
+                            if travel.pic
+                                img(src=getImg(travel.pic, "home"), alt="")
+                            .title=travel.name
+                            .sub=travel.title
 
 
-    ul(style="margin:1rem 0;list-style-type:none")
-        for game in games
-            li
-                a(href=`/games/${game.id}`)=game.name
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
-    br
+                //ul(style="margin:1rem 0;list-style-type:none")
+                //    for game in games
+                //        li
+                //            a(href=`/games/${game.id}`)=game.name
+                
