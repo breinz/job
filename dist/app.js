@@ -25,6 +25,7 @@ const model_2 = require("./games/model");
 const fileUpload = require("express-fileupload");
 const utils_1 = require("./utils");
 const model_3 = require("./citations/model");
+const model_4 = require("./travels/model");
 const app = express();
 app.locals.basedir = path.join(__dirname, '../views');
 app.set('view engine', 'pug');
@@ -64,11 +65,7 @@ app.use((req, res, next) => {
 });
 app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
     const count = yield model_3.default.count({});
-    const now = new Date();
-    const start = new Date(now.getFullYear(), 0, 0);
-    const diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
-    const oneDay = 1000 * 60 * 60 * 24;
-    const day = Math.floor(diff / oneDay);
+    const day = utils_1.dayOfYear();
     const skip = day % count;
     let citation = (yield model_3.default.find().skip(skip).limit(1))[0];
     res.locals.citation = citation ? citation : { content: "" };
@@ -84,11 +81,15 @@ app.use("/games", controller_2.default);
 app.use("/travels", controller_3.default);
 app.use("/bazaar", controller_4.default);
 app.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
+    let travels_count = yield model_4.default.estimatedDocumentCount();
+    let index = (utils_1.dayOfYear() * 3 + 2) % travels_count;
+    let travel = (yield model_4.default.find().skip(index).limit(1))[0];
     let users = yield model_1.default.find();
     const games = yield model_2.default.find().setOptions({ sort: { name: 1 } });
     res.render("index", {
         users: users,
-        games: games
+        games: games,
+        travel: travel
     });
 }));
 mongoose.connect(config_1.default.mongoUri, { useNewUrlParser: true }).then(db => {

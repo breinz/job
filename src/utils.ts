@@ -34,6 +34,17 @@ export function shuffle(ar: Object[]) {
 }
 
 /**
+ * Get the day of the year [0-365]
+ */
+export function dayOfYear(): number {
+    const now: any = new Date();
+    const start: any = new Date(now.getFullYear(), 0, 0);
+    const diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+    const oneDay = 1000 * 60 * 60 * 24;
+    return Math.floor(diff / oneDay);
+}
+
+/**
  * Determine the distance between two objects
  * @param obj1 First object
  * @param obj2 Second object
@@ -180,7 +191,7 @@ export function formatText(txt: string): string {
         rpl += getPic({
             url: "/img/vrac/",
             file: file
-        }, size ? size : "home");
+        }, size || "mini");
         rpl += "'";
         // data-src
         rpl += ` data-src="/img/vrac/${file}"`;

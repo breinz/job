@@ -24,6 +24,14 @@ function shuffle(ar) {
     return ar;
 }
 exports.shuffle = shuffle;
+function dayOfYear() {
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+    const oneDay = 1000 * 60 * 60 * 24;
+    return Math.floor(diff / oneDay);
+}
+exports.dayOfYear = dayOfYear;
 function distance(obj1, obj2, rapid = false) {
     if (rapid) {
         return Math.abs(obj1.x - obj2.x) + Math.abs(obj1.y - obj2.y);
@@ -133,7 +141,7 @@ function formatText(txt) {
         rpl += getPic({
             url: "/img/vrac/",
             file: file
-        }, size ? size : "home");
+        }, size || "mini");
         rpl += "'";
         rpl += ` data-src="/img/vrac/${file}"`;
         rpl += "'/>";

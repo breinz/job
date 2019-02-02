@@ -3,6 +3,16 @@ extends layout/_layout
 block content
     //h2 Welcome blabla
 
+    if travel
+        h4 Featured travel
+        .home-item
+            a(href=`/travels/${travel.url}`)
+                if travel.pic
+                    img(src=getImg(travel.pic, "home"), alt="")
+                .title=travel.name
+                .sub=travel.title
+
+
     ul(style="margin:1rem 0;list-style-type:none")
         for game in games
             li

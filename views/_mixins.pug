@@ -2,7 +2,7 @@ mixin delete()
     a.delete-link(title="Delete" onclick="javascript: return confirm('Confirmer cette action')")&attributes(attributes) &times;
 
 mixin textarea(name, rows=10)
-    textarea.with-tools(name=name, rows=rows)&attributes(attributes) 
+    textarea.with-tools(name=name, rows=rows)&attributes(attributes)
         block
     .textarea-tools 
         strong **bold**&nbsp;&nbsp;

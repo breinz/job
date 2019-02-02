@@ -16,9 +16,10 @@ import config from "./config";
 import User, { UserModel } from "./user/model";
 import Game from "./games/model";
 import * as fileUpload from "express-fileupload"
-import { getPic, formatText } from "./utils";
+import { getPic, formatText, shuffle, dayOfYear } from "./utils";
 import { resolve } from "url";
 import Citation, { CitationModel } from "./citations/model";
+import Travel, { TravelModel } from "./travels/model";
 
 const app = express();
 
@@ -94,11 +95,12 @@ app.use(async (req, res, next) => {
     const count = await Citation.count({});
 
     // Get the day of the year
-    const now: any = new Date();
-    const start: any = new Date(now.getFullYear(), 0, 0);
-    const diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
-    const oneDay = 1000 * 60 * 60 * 24;
-    const day = Math.floor(diff / oneDay);
+    const day = dayOfYear();
+    //const now: any = new Date();
+    //const start: any = new Date(now.getFullYear(), 0, 0);
+    //const diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+    //const oneDay = 1000 * 60 * 60 * 24;
+    //const day = Math.floor(diff / oneDay);
 
     const skip = day % count;
 
@@ -130,6 +132,11 @@ app.use("/bazaar", bazaarController);
 
 /** Index */
 app.get("/", async (req, res) => {
+    // How many travels
+    let travels_count = await Travel.estimatedDocumentCount();
+    let index = (dayOfYear() * 3 + 2) % travels_count;
+    let travel = (await Travel.find().skip(index).limit(1))[0] as TravelModel;
+
 
     let users = await User.find();
 
@@ -137,7 +144,8 @@ app.get("/", async (req, res) => {
 
     res.render("index", {
         users: users,
-        games: games
+        games: games,
+        travel: travel
     });
 });
 
