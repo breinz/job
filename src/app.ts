@@ -20,6 +20,7 @@ import { getPic, formatText, shuffle, dayOfYear } from "./utils";
 import { resolve } from "url";
 import Citation, { CitationModel } from "./citations/model";
 import Travel, { TravelModel } from "./travels/model";
+import Podcast, { PodcastModel } from "./podcasts/model";
 
 const app = express();
 
@@ -132,11 +133,15 @@ app.use("/bazaar", bazaarController);
 
 /** Index */
 app.get("/", async (req, res) => {
-    // How many travels
+    // Feature travel
     let travels_count = await Travel.estimatedDocumentCount();
     let index = (dayOfYear() * 3 + 2) % travels_count;
     let travel = (await Travel.find().skip(index).limit(1).populate("pic"))[0] as TravelModel;
 
+    // Feature podcast
+    let podcast_count = await Podcast.estimatedDocumentCount();
+    const podcast_index = (dayOfYear() * 3 + 2) % podcast_count;
+    let podcast = (await Podcast.find().skip(podcast_index).limit(1).populate("pic"))[0] as PodcastModel;
 
     let users = await User.find();
 
@@ -145,7 +150,8 @@ app.get("/", async (req, res) => {
     res.render("index", {
         users: users,
         games: games,
-        travel: travel
+        travel: travel,
+        podcast: podcast
     });
 });
 

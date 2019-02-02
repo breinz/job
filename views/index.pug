@@ -3,20 +3,57 @@ extends layout/_layout
 block content
     .grid-container
         .grid-x.grid-padding-x.grid-margin-xs
-            .cell.medium-auto.page(style="margin-right:1rem")
-                h4 Welcome
-                p Currently looking for a job as a web developer, this website is aimed to show who I am and what I can offer you.
+            .cell.medium-auto(style="margin-right:1rem")
+                .grid-container.full
+                    .grid-y.grid-padding-x
+                        .cell.page
+                            h4 Welcome
+                            p.callout.secondary.small 
+                                |This website is under construction. Some parts (including this one) might be incomplete. 
+                                i Thanks for your comprehension
+                            p Currently looking for a job as a web developer, this website is aimed to show who I am and what I can offer you.
+                            p 
+                                |Let's put things strait, I'm looking for a 
+                                b sponsorship
+                            p 
+                                i more text to come...
+                        .cell#cv-home-box
+                            a(href="/cv") View my CV
+                        .cell.page
+                            h4 Featured work
+                            .callout 
+                                |To come, 
+                                i probably during next week
 
-            .cell.medium-shrink.page
 
-                if travel
-                    h4 Featured travel
-                    .home-item
-                        a(href=`/travels/${travel.url}`)
-                            if travel.pic
-                                img(src=getImg(travel.pic, "home"), alt="")
-                            .title=travel.name
-                            .sub=travel.title
+            .cell.medium-shrink
+                .grid-container.full
+                    .grid-y.grid-padding-x
+                        .cell.page
+                            if travel
+                                h4 Featured travel
+                                .home-item
+                                    a(href=`/travels/${travel.url}`)
+                                        if travel.pic
+                                            img.hide-for-small-only(src=getImg(travel.pic, "home"), alt="")
+                                            img.show-for-small-only(src=getImg(travel.pic, "banner"), alt="")
+                                        .title(style="font-size:1rem")=travel.name
+                                        .sub=travel.title
+                                br
+                                a(href="/travels" style="margin-bottom:1rem;text-align:right;display:block") See all travels
+                        
+                        .cell.page.page-y
+                            if podcast
+                                h4 Featured podcast
+                                .home-item
+                                    a(href=`bazaar/podcasts`)
+                                        if podcast.pic
+                                            img.hide-for-small-only(src=getImg(podcast.pic, "home"), alt="")
+                                            img.show-for-small-only(src=getImg(podcast.pic, "banner"), alt="")
+                                        .title(style="font-size:1rem")=podcast.name
+                                        .sub=podcast.title
+                                br
+                                a(href="/bazaar/podcasts" style="margin-bottom:1rem;text-align:right;display:block") See all podcasts
 
 
                 //ul(style="margin:1rem 0;list-style-type:none")

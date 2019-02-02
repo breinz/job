@@ -447,6 +447,27 @@ footer {
     margin-top: 1rem;
 }
 
+.page-y {
+    margin-top: 0;
+}
+
+#cv-home-box {
+    a {
+        color:$black;
+        font-size: 1.8rem;
+        display: block;
+        text-align: center;
+        font-weight: bold;
+        padding: 1rem;
+        border:1px solid #CCC;
+        background-color: #F6F6F6;
+
+        &:hover {
+            color: #333;
+            background-color: #fff;
+        }
+    }
+}
 
 #breadcrumb {
 

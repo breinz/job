@@ -3257,6 +3257,22 @@ footer {
   margin-bottom: 1rem;
   margin-top: 1rem; }
 
+.page-y {
+  margin-top: 0; }
+
+#cv-home-box a {
+  color: #0a0a0a;
+  font-size: 1.8rem;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  padding: 1rem;
+  border: 1px solid #CCC;
+  background-color: #F6F6F6; }
+  #cv-home-box a:hover {
+    color: #333;
+    background-color: #fff; }
+
 #breadcrumb {
   margin-bottom: 5px; }
   #breadcrumb + #page {

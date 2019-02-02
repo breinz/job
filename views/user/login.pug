@@ -1,15 +1,18 @@
 extends ../layout/_layout
 
 block content
-    h1 Login
-    if error
-        div Error
-    form(method="POST")
-        div
-            span Email
-            input(type="text" name="email" autofocus)
-        div
-            span Password
-            input(type="password", name="password")
-        div
-            input.button(type="submit", value="Submit")
+    .grid-container
+        .grid-x
+            .cell
+                h1 Login
+                if error
+                    div Error
+                form(method="POST")
+                    div
+                        span Email
+                        input(type="text" name="email" autofocus)
+                    div
+                        span Password
+                        input(type="password", name="password")
+                    div
+                        input.button(type="submit", value="Submit")
