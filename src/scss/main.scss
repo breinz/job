@@ -462,6 +462,8 @@ footer {
         border:1px solid #CCC;
         background-color: #F6F6F6;
 
+        transition: color 800ms, background-color 800ms;
+
         &:hover {
             color: #333;
             background-color: #fff;
