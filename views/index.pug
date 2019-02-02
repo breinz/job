@@ -32,28 +32,41 @@ block content
                         .cell.page
                             if travel
                                 h4 Featured travel
-                                .home-item
-                                    a(href=`/travels/${travel.url}`)
-                                        if travel.pic
-                                            img.hide-for-small-only(src=getImg(travel.pic, "home"), alt="")
-                                            img.show-for-small-only(src=getImg(travel.pic, "banner"), alt="")
+                                a(href=`/travels/${travel.url}`)
+                                    if travel.pic
+                                        img.hide-for-small-only(src=getImg(travel.pic, "home"), alt="")
+                                        img.show-for-small-only(src=getImg(travel.pic, "banner"), alt="")
+                                    else 
                                         .title(style="font-size:1rem")=travel.name
-                                        .sub=travel.title
+
+                                //.home-item
+                                //    a(href=`/travels/${travel.url}`)
+                                //        if travel.pic
+                                //            img.hide-for-small-only(src=getImg(travel.pic, "home"), alt="")
+                                //            img.show-for-small-only(src=getImg(travel.pic, "banner"), alt="")
+                                //        .title(style="font-size:1rem")=travel.name
+                                //        .sub=travel.title
                                 br
-                                a(href="/travels" style="margin-bottom:1rem;text-align:right;display:block") See all travels
+                                a(href="/travels" style="margin:1rem 0;text-align:right;display:block") See all travels
                         
                         .cell.page.page-y
                             if podcast
                                 h4 Featured podcast
-                                .home-item
-                                    a(href=`bazaar/podcasts`)
-                                        if podcast.pic
-                                            img.hide-for-small-only(src=getImg(podcast.pic, "home"), alt="")
-                                            img.show-for-small-only(src=getImg(podcast.pic, "banner"), alt="")
+                                a(href=`bazaar/podcasts`)
+                                    if podcast.pic
+                                        img.hide-for-small-only(src=getImg(podcast.pic, "home"), alt="")
+                                        img.show-for-small-only(src=getImg(podcast.pic, "banner"), alt="")
+                                    else
                                         .title(style="font-size:1rem")=podcast.name
-                                        .sub=podcast.title
+                                //.home-item
+                                //    a(href=`bazaar/podcasts`)
+                                //        if podcast.pic
+                                //            img.hide-for-small-only(src=getImg(podcast.pic, "home"), alt="")
+                                //            img.show-for-small-only(src=getImg(podcast.pic, "banner"), alt="")
+                                //        .title(style="font-size:1rem")=podcast.name
+                                //        .sub=podcast.title
                                 br
-                                a(href="/bazaar/podcasts" style="margin-bottom:1rem;text-align:right;display:block") See all podcasts
+                                a(href="/bazaar/podcasts" style="margin:1rem 0;text-align:right;display:block") See all podcasts
 
 
                 //ul(style="margin:1rem 0;list-style-type:none")
