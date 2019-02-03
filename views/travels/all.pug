@@ -10,7 +10,7 @@ mixin line(travel, index)
         //                span &nbsp;&nbsp;
         //-old_index = index
         a(href=`/travels/${travel.url}` )
-            img(src=getImg(travel.pic, "nano") style="margin:2px" data-tooltip title=travel.name)
+            img(src=getImg(travel.pic, "mini") style="margin:2px" data-tooltip title=travel.name)
         if travel.children.length >0
             for child in travel.children
                 +line(child, index+1)
