@@ -85,7 +85,7 @@ app.use("/bazaar", controller_4.default);
 app.use("/work", controller_6.default);
 app.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let travels_count = yield model_4.default.estimatedDocumentCount();
-    let index = (utils_1.dayOfYear() * 3 + 2) % travels_count;
+    let index = (utils_1.dayOfYear() * 13 + 2) % travels_count;
     let travel = (yield model_4.default.find().skip(index).limit(1).populate("pic"))[0];
     let podcast_count = yield model_5.default.estimatedDocumentCount();
     const podcast_index = (utils_1.dayOfYear() * 3 + 2) % podcast_count;

@@ -1,0 +1,29 @@
+extends /layout/_layout
+
+mixin line(travel, index) 
+    if travel.pic
+        if index != old_index || index==0
+            br
+            if index > 0
+                -let i=index
+                    while i--
+                        span &nbsp;&nbsp;
+        -old_index = index
+        a(href=`/travels/${travel.url}` style="margin-top:-10px")
+            img(src=getImg(travel.pic, "nano") style="margin:2px" data-tooltip title=travel.name)
+        if travel.children.length >0
+            for child in travel.children
+                +line(child, index+1)
+
+
+block content
+    -let old_index=NaN
+    +to_admin("/admin/travels")
+    .page-title
+        h1 Travels
+        .sub.show-for-medium My wanderings around the globe
+
+    //.grid-container.full
+    //    .grid-x.grid-margin-x
+    for travel in items
+        +line(travel, 0)

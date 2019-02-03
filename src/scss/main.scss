@@ -392,6 +392,24 @@ footer {
     padding-bottom: 2rem;
     background-color: $home-color;
     border-top: 3px solid rgba(#FFF, .7);
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            padding: 0;
+            margin: 0;
+        }
+    }
+    a {
+        color: $body-font-color !important;
+
+        &:hover{
+            color: $white !important;
+        }
+    }
 }
 
 /*.travel {

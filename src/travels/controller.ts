@@ -1,5 +1,6 @@
 import express = require("express");
 import Travel, { TravelModel } from "./model";
+import { populateChildren } from "../admin/travels/controller";
 //import Game, { GameModel } from "./model";
 
 const router = express.Router();
@@ -18,12 +19,27 @@ router.use((req, res, next) => {
  * Home
  */
 router.get("/", async (req, res) => {
-    res.locals.bc = [["Travels"]];
     res.locals.bc = [];
 
     let travels = await Travel.find({ parent: null }).sort({ name: 1 }).populate("pic") as [TravelModel];
 
     res.render("travels/index", { travels: travels });
+});
+
+/**
+ * All travels
+ */
+router.get("/all", async (req, res) => {
+    res.locals.bc.push(["All"]);
+
+    const items = await Travel.find({ parent: null }).sort({ name: 1 }).populate('pic') as [TravelModel];
+
+
+    for (let i = 0; i < items.length; i++) {
+        await populateChildren(items[i]);
+    }
+
+    res.render("travels/all", { items: items });
 });
 
 /**

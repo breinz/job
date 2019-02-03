@@ -2874,7 +2874,7 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
   display: inline-block;
   border-bottom: none;
   font-weight: normal;
-  cursor: help; }
+  cursor: inherit; }
 
 .tooltip {
   position: absolute;
@@ -3293,6 +3293,17 @@ footer {
   padding-bottom: 2rem;
   background-color: #8d8d8d;
   border-top: 3px solid rgba(255, 255, 255, 0.7); }
+  footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; }
+    footer ul li {
+      padding: 0;
+      margin: 0; }
+  footer a {
+    color: #0a0a0a !important; }
+    footer a:hover {
+      color: #fefefe !important; }
 
 /*.travel {
     background-color: $travel-color;

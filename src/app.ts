@@ -137,7 +137,7 @@ app.use("/work", workController);
 app.get("/", async (req, res) => {
     // Feature travel
     let travels_count = await Travel.estimatedDocumentCount();
-    let index = (dayOfYear() * 3 + 2) % travels_count;
+    let index = (dayOfYear() * 13 + 2) % travels_count;
     let travel = (await Travel.find().skip(index).limit(1).populate("pic"))[0] as TravelModel;
 
     // Feature podcast

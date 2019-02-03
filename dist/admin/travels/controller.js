@@ -18,15 +18,15 @@ const PIC_PATH = "img/travels";
 exports.getAvailableParents = () => __awaiter(this, void 0, void 0, function* () {
     let travels = yield model_1.Travel.find({ parent: null });
     for (let i = 0; i < travels.length; i++) {
-        yield populateChildren(travels[i]);
+        yield exports.populateChildren(travels[i]);
     }
     return travels;
 });
-const populateChildren = (travel) => __awaiter(this, void 0, void 0, function* () {
+exports.populateChildren = (travel) => __awaiter(this, void 0, void 0, function* () {
     const children = yield model_1.Travel.find({ parent: travel.id }).sort({ name: 1 }).populate('pic');
     travel.children = children;
     for (let i = 0; i < children.length; i++) {
-        yield populateChildren(children[i]);
+        yield exports.populateChildren(children[i]);
     }
 });
 let router = express.Router();
@@ -42,7 +42,7 @@ router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     res.locals.bc.push(["Travels"]);
     const graph = yield model_1.Travel.find({ parent: null }).sort({ name: 1 }).populate('pic');
     for (let i = 0; i < graph.length; i++) {
-        yield populateChildren(graph[i]);
+        yield exports.populateChildren(graph[i]);
     }
     res.render("admin/travels/index", { travels: graph });
 }));

@@ -29,7 +29,7 @@ export const getAvailableParents = async () => {
  * Populate children recursively
  * @param travel The travel to populate children
  */
-const populateChildren = async (travel: TravelModel) => {
+export const populateChildren = async (travel: TravelModel) => {
     const children = await Travel.find({ parent: travel.id }).sort({ name: 1 }).populate('pic') as [TravelModel];
 
     travel.children = children;
