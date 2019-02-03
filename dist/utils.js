@@ -86,7 +86,7 @@ function rm_pic(pic) {
 }
 exports.rm_pic = rm_pic;
 function getPic(file, size) {
-    if (size === undefined)
+    if (size === undefined || size == "original")
         return file.url + file.file;
     let resize_data;
     resize_data = {

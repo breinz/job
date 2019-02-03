@@ -1,0 +1,25 @@
+extends /layout/_layout
+
+block content
+    +to_admin("/admin/work")
+    .page-title
+        h1 Work
+        .sub.show-for-medium=tag || "What I've done"
+
+    .grid-container.full.work-items
+        .grid-x.grid-margin-x
+            -let index=0
+            for item in items
+                -index++
+                .cell.work-item
+                    a(href=`/work/${item.url}`)
+                        h4=item.title
+                        img(src=getImg(item.pic, "banner"), alt="")
+                        if (index < items.length)
+                            hr
+                        //.home-item
+                        //    a(href=`/travels/${travel.url}`)
+                        //        if travel.pic
+                        //            img(src=getImg(travel.pic, "home"), alt="")
+                        //        .title=travel.name
+                        //        .sub=travel.title

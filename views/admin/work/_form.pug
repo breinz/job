@@ -1,0 +1,45 @@
+-data = data || {}
+-errors = errors || {}
+
+mixin line(value, index)
+    option(value=`${value.id}` selected=travel && travel.parent==value.id)
+        -var i=0
+            while i<index
+                span &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                -i++
+        span=value.name
+
+    if (value.children)
+        for child in value.children
+            +line(child, index+1)
+
+form(method="POST" encType="multipart/form-data")
+                    
+    div
+        label(for="title") 
+            span 
+                |Title
+                if errors.title
+                    span.error=errors.title
+        input(type="text" name="title" id="title" value=data.title autofocus)
+
+    div
+        label(for="description") 
+            span Description
+        +textarea("description")=data.description
+
+    div
+        label(for="tags") 
+            span 
+                |Tags
+        input(type="text" name="tags" id="tags" value=data.tags)
+    
+    div
+        label(for="pic")
+            span Pic
+        if data.pic
+            img(src=getImg(data.pic, "nano"))
+        input(type="file", name="pic")
+
+    div
+        input.button(type="submit" value="Save")

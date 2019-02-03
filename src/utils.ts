@@ -124,7 +124,7 @@ export function rm_pic(pic: ImageModel) {
 
 export function getPic(file: any, size?: string): string {
     // Original
-    if (size === undefined) return file.url + file.file;
+    if (size === undefined || size == "original") return file.url + file.file;
 
     let resize_data: { width: number, height: number, fit?: string, background?: { r: number, g: number, b: number, alpha: number } };
 

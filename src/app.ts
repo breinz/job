@@ -11,6 +11,7 @@ import gamesController from "./games/controller";
 import travelsController from "./travels/controller";
 import bazaarController from "./bazaar/controller";
 import adminController from "./admin/controller";
+import workController from "./work/controller";
 import * as mongoose from "mongoose";
 import config from "./config";
 import User, { UserModel } from "./user/model";
@@ -126,6 +127,7 @@ app.use("/admin", adminController);
 app.use("/games", gamesController);
 app.use("/travels", travelsController);
 app.use("/bazaar", bazaarController);
+app.use("/work", workController);
 
 /*app.get("/test", (req, res) => {
     res.json("/img/travels/5c3b52a02278b8563122d9d9/e8c3c2fd-4dca-4add-8ef3-eecb2c61e220.JPG");

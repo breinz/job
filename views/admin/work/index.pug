@@ -1,0 +1,31 @@
+extends ../../layout/_admin
+
+mixin line(work)
+    tr
+        td
+            a(href=`/admin/work/${work.id}`)
+                if (work.pic)
+                    img(src=getImg(work.pic, "nano"))
+                    span &nbsp;
+                span=work.title
+        td.text-right
+            //a.admin-link(href=`/admin/work/${work.id}/pictures` title="Pictures") &boxbox;
+            //span &nbsp;
+            +delete(href=`/admin/work/${work.id}/delete`)
+
+block content
+    .grid-container.full
+        .grid-x
+            .cell.medium-6
+                h1 Work
+            .cell.medium-6
+                .admin-right-btn
+                    a.button.success(href="/admin/work/new") New work
+
+    table.hover
+        for item in items
+            +line(item)
+        else
+            tr
+                td
+                    div.text-center.off No work yet

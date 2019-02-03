@@ -18,6 +18,7 @@ const controller_2 = require("./games/controller");
 const controller_3 = require("./travels/controller");
 const controller_4 = require("./bazaar/controller");
 const controller_5 = require("./admin/controller");
+const controller_6 = require("./work/controller");
 const mongoose = require("mongoose");
 const config_1 = require("./config");
 const model_1 = require("./user/model");
@@ -81,6 +82,7 @@ app.use("/admin", controller_5.default);
 app.use("/games", controller_2.default);
 app.use("/travels", controller_3.default);
 app.use("/bazaar", controller_4.default);
+app.use("/work", controller_6.default);
 app.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let travels_count = yield model_4.default.estimatedDocumentCount();
     let index = (utils_1.dayOfYear() * 3 + 2) % travels_count;

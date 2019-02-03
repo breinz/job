@@ -3075,6 +3075,19 @@ h1 {
   font-family: Cabin;
   font-weight: bold; }
 
+a.tag {
+  margin-right: 0.5rem;
+  background-color: #666;
+  color: #fefefe !important;
+  padding: 3px;
+  border: 1px solid #666;
+  font-size: .8rem;
+  transition: background-color 300ms, color 300ms; }
+  a.tag:hover {
+    background-color: transparent;
+    border: 1px solid #666;
+    color: #0a0a0a !important; }
+
 #citation {
   position: relative; }
   #citation #citation-content {
@@ -3163,6 +3176,17 @@ textarea.with-tools {
     display: block; }
     .bazaar-link-item a:hover {
       color: #0a0a0a; }
+
+.work-items {
+  padding-bottom: 1rem; }
+
+.work-item a {
+  color: #0a0a0a; }
+  .work-item a img {
+    box-shadow: 0 0 10px #999;
+    transition: box-shadow 300ms; }
+  .work-item a:hover img {
+    box-shadow: 0 0 15px #333; }
 
 .user-menu #user-link {
   font-weight: bold; }
@@ -3387,4 +3411,7 @@ footer {
   color: #818f7f; }
 
 .bazaar a, .bazaar #breadcrumb a {
+  color: #877f8f; }
+
+.work a, .work #breadcrumb a {
   color: #877f8f; }

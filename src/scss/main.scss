@@ -47,6 +47,7 @@ $home-color: #8d8d8d;
 $travel-color: #818f7f;//#618C6D;
 //$travel-color: #00f7ff;
 $bazaar-color: #877f8f;
+$work-color: #877f8f;
 
 body {
     //margin: 0;
@@ -62,6 +63,23 @@ body {
 h1 {
     font-family: Cabin;
     font-weight: bold;
+}
+
+a.tag {
+    margin-right: 0.5rem;
+    background-color: #666;
+    color:$white !important;
+    padding: 3px;
+    border: 1px solid #666;
+    font-size: .8rem;
+
+    transition: background-color 300ms, color 300ms;
+
+    &:hover {
+        background-color: transparent;
+        border: 1px solid #666;
+        color: $body-font-color !important;
+    }
 }
 
 #citation {
@@ -183,6 +201,27 @@ textarea.with-tools {
             color: $black;
         }
     }
+}
+
+.work-items {
+    padding-bottom: 1rem;
+}
+.work-item {
+    a {
+        color:$body-font-color;
+
+        img {
+            box-shadow: 0 0 10px #999;
+            transition: box-shadow 300ms;
+        }
+
+        &:hover {
+            img {
+                box-shadow: 0 0 15px #333;
+            }
+        }
+    }
+
 }
 
 .user-menu {
@@ -517,4 +556,8 @@ footer {
 
 .bazaar a, .bazaar #breadcrumb a {
     color:$bazaar-color;
+}
+
+.work a, .work #breadcrumb a {
+    color: $work-color;
 }

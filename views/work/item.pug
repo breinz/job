@@ -1,0 +1,26 @@
+extends /layout/_layout
+
+block content
+
+    h1=item.title
+
+    //if travel.pic
+    //    img(src=getImg(travel.pic, "banner"))
+    
+    p
+        for tag in item.tags.split(",")
+            a.tag(href=`/work/tag/${tag}`)=tag
+
+    p!=format(item.description)
+
+
+    //.grid-container.full
+    //    .grid-x.grid-margin-x
+    //        for child in children
+    //            .cell.medium-4.small-6
+    //                .home-item
+    //                    a(href=path+"/"+child.url)
+    //                        //if child.pic
+    //                        //    img(src=getImg(child.pic, "home"), alt="")
+    //                        .title=child.title
+    //                        //.sub=child.title
