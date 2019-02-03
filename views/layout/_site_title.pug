@@ -7,4 +7,7 @@
                     div Eclectic Web Developer
                 .cell.medium-4#citation
                     .hide-for-small-only
-                        div#citation-content.has-tip(data-tooltip title=citation.source data-disable-hover="false" aria-haspopup="true" data-position="bottom" data-alignment="center")!=citation.content 
+                        if citation.source
+                            div#citation-content.has-tip(data-tooltip title=citation.source  data-position="bottom" data-alignment="center")!=citation.content 
+                        else
+                            div#citation-content!=citation.content 
