@@ -6,6 +6,7 @@ import { Document, Schema, model, Model, Types } from "mongoose";
 
 export type CitationModel = Document & {
     content: string,
+    source: string
 };
 
 // --------------------------------------------------
@@ -14,6 +15,7 @@ export type CitationModel = Document & {
 
 const citationSchema = new Schema({
     content: String,
+    source: String
 });
 
 export const Citation = model("Citation", citationSchema) as Model<Document> & CitationModel;

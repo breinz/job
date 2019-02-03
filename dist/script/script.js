@@ -4,6 +4,7 @@ const $ = require("jquery");
 const foundation_sites_1 = require("foundation-sites");
 $(function () {
     foundation_sites_1.Foundation.addToJquery($);
+    $(document).foundation();
     const img = $("#visionneuse-img");
     const content = $('#visionneuse-content');
     $("#visionneuse-content").click(function (e) {

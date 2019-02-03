@@ -7,5 +7,4 @@
                     div Eclectic Web Developer
                 .cell.medium-4#citation
                     .hide-for-small-only
-                        div#citation-content!=citation.content 
-                        //We all gonna die some day.<br/>Let's make sure it's not on the same day.
+                        div#citation-content.has-tip(data-tooltip title=citation.source data-disable-hover="false" aria-haspopup="true" data-position="bottom" data-alignment="center")!=citation.content 

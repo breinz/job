@@ -3,6 +3,7 @@ import { json } from "body-parser";
 
 export interface NewData {
     content: string,
+    source: string
 }
 
 export interface NewErrors {
@@ -11,6 +12,7 @@ export interface NewErrors {
 
 export interface EditData {
     content: string,
+    source: string
 }
 
 export interface EditErrors {

@@ -1,5 +1,5 @@
 import * as $ from "jquery";
-import { Foundation, DropdownMenu } from "foundation-sites"
+import { Foundation, DropdownMenu, Tooltip } from "foundation-sites"
 
 //import "foundation-sites/js/foundation.dropdown.js"
 //import dropdown from "foundation-sites/js/dropdown"
@@ -8,6 +8,7 @@ import { Foundation, DropdownMenu } from "foundation-sites"
 $(function () {
 
     Foundation.addToJquery($);
+    $(document).foundation();
 
     //console.log($(document).foundation());
 

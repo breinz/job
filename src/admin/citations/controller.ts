@@ -48,6 +48,7 @@ router.post("/new", validator.new, async (req, res) => {
     let citation = new Citation() as CitationModel;
 
     citation.content = data.content;
+    citation.source = data.source;
 
     try {
         await citation.save();
@@ -94,6 +95,7 @@ router.post("/:id", validator.edit, async (req, res, next) => {
     const data: EditData = req.body;
 
     citation.content = data.content;
+    citation.source = data.source;
 
     try {
         await citation.save();

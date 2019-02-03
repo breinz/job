@@ -7,6 +7,12 @@ form(method="POST")
             span Content
             span.error=errors.content
         input(type="text" name="content" id="content" value=data.content autofocus)
+    
+    div
+        label(for="source") 
+            span Source
+            span.error=errors.source
+        input(type="text" name="source" id="source" value=data.source)
 
     div
         input.button(type="submit" value="Save")

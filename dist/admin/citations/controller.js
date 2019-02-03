@@ -31,6 +31,7 @@ router.post("/new", validator_1.default.new, (req, res) => __awaiter(this, void 
     const data = req.body;
     let citation = new model_1.Citation();
     citation.content = data.content;
+    citation.source = data.source;
     try {
         yield citation.save();
     }
@@ -67,6 +68,7 @@ router.post("/:id", validator_1.default.edit, (req, res, next) => __awaiter(this
         return res.redirect("/");
     const data = req.body;
     citation.content = data.content;
+    citation.source = data.source;
     try {
         yield citation.save();
     }
