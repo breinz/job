@@ -3294,9 +3294,14 @@ footer {
   background-color: #8d8d8d;
   border-top: 3px solid rgba(255, 255, 255, 0.7); }
   footer ul {
+    border-left: 3px solid rgba(10, 10, 10, 0.25);
     list-style-type: none;
     padding: 0;
-    margin: 0; }
+    padding-left: 5px;
+    margin: 0;
+    transition: border-left-color 300ms; }
+    footer ul:hover {
+      border-left-color: #0a0a0a; }
     footer ul li {
       padding: 0;
       margin: 0; }
@@ -3384,18 +3389,18 @@ footer {
   margin-top: 0; }
 
 #cv-home-box a {
-  color: #0a0a0a;
+  background-color: #666;
+  color: #fefefe;
   font-size: 1.8rem;
   display: block;
   text-align: center;
   font-weight: bold;
   padding: 1rem;
   border: 1px solid #CCC;
-  background-color: #F6F6F6;
-  transition: color 800ms, background-color 800ms; }
+  transition: color 800ms, background-color 300ms; }
   #cv-home-box a:hover {
-    color: #333;
-    background-color: #fff; }
+    color: #0a0a0a;
+    background-color: #F6F6F6; }
 
 #breadcrumb {
   margin-bottom: 5px; }

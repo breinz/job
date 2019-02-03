@@ -394,9 +394,17 @@ footer {
     border-top: 3px solid rgba(#FFF, .7);
 
     ul {
+        border-left: 3px solid rgba($body-font-color, .25);
         list-style-type: none;
         padding: 0;
+        padding-left: 5px;
         margin: 0;
+
+        transition: border-left-color 300ms;
+
+        &:hover {
+            border-left-color: $body-font-color;
+        }
 
         li {
             padding: 0;
@@ -510,20 +518,23 @@ footer {
 
 #cv-home-box {
     a {
-        color:$black;
+        background-color: #666;
+        color:$white;
+
+        //color:$black;
         font-size: 1.8rem;
         display: block;
         text-align: center;
         font-weight: bold;
         padding: 1rem;
         border:1px solid #CCC;
-        background-color: #F6F6F6;
+        //background-color: #F6F6F6;
 
-        transition: color 800ms, background-color 800ms;
+        transition: color 800ms, background-color 300ms;
 
         &:hover {
-            color: #333;
-            background-color: #fff;
+            color: $body-font-color;
+            background-color: #F6F6F6;
         }
     }
 }

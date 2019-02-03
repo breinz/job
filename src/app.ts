@@ -137,12 +137,12 @@ app.use("/work", workController);
 app.get("/", async (req, res) => {
     // Feature travel
     let travels_count = await Travel.estimatedDocumentCount();
-    let index = (dayOfYear() * 13 + 2) % travels_count;
+    let index = (dayOfYear() * 13) % Math.floor(travels_count / 10) * 10;
     let travel = (await Travel.find().skip(index).limit(1).populate("pic"))[0] as TravelModel;
 
     // Feature podcast
     let podcast_count = await Podcast.estimatedDocumentCount();
-    const podcast_index = (dayOfYear() * 3 + 2) % podcast_count;
+    const podcast_index = (dayOfYear() * 8) % Math.floor(podcast_count / 10) * 10;
     let podcast = (await Podcast.find().skip(podcast_index).limit(1).populate("pic"))[0] as PodcastModel;
 
     let users = await User.find();
