@@ -3,8 +3,8 @@ extends /layout/_layout
 block content
     +to_admin("/admin/travels")
     .page-title
-        h1 Travels
-        .sub.show-for-medium My wanderings around the globe
+        h1=t("travels.page-title")
+        .sub.show-for-medium=t("travels.sub-title")
 
     .grid-container.full
         .grid-x.grid-margin-x

@@ -1,0 +1,12 @@
+{
+    "menu": {
+        "home": {
+            "fr": "Accueil",
+            "en": "Home"
+        },
+        "work": {
+            "fr": "Portfolio",
+            "en": "Work"
+        }
+    }
+}

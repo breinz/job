@@ -3,9 +3,6 @@ import * as path from "path";
 import * as cookieParser from "cookie-parser";
 import * as bodyParser from "body-parser";
 import * as session from "express-session"
-//import SApp from "./back/SApp";
-//let flash = require("express-flash")
-//import api from "./api"
 import userController from "./user/controller";
 import gamesController from "./games/controller";
 import travelsController from "./travels/controller";
@@ -18,12 +15,14 @@ import User, { UserModel } from "./user/model";
 import Game from "./games/model";
 import * as fileUpload from "express-fileupload"
 import { getPic, formatText, shuffle, dayOfYear } from "./utils";
-import { resolve } from "url";
 import Citation, { CitationModel } from "./citations/model";
 import Travel, { TravelModel } from "./travels/model";
 import Podcast, { PodcastModel } from "./podcasts/model";
 
 const app = express();
+export default app;
+
+
 
 // The game
 //export const gameServer = new SApp();
@@ -52,6 +51,8 @@ app.use(session({
 // Body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+import langController from "./langController"
 
 // express-fileupload
 app.use(fileUpload());
@@ -88,7 +89,7 @@ app.use((req, res, next) => {
     res.locals.menu = "home";
     res.locals.bc = [[]];
     next();
-})
+});
 
 /**
  * Citation
@@ -122,6 +123,7 @@ app.use((req, res, next) => {
 })
 
 // Sub routes
+app.use("/lang", langController);
 app.use("/users", userController);
 app.use("/admin", adminController);
 app.use("/games", gamesController);
@@ -180,4 +182,4 @@ mongoose.connect(config.mongoUri, { useNewUrlParser: true }).then(db => {
     console.error(err)
 });
 
-export default app;
+//export default app;

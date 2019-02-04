@@ -1,0 +1,62 @@
+{
+    "header": {
+        "subtitle": {
+            "en": "Eclectic Web Developer",
+            "fr": "Développeur Web éclectique"
+        }
+    },
+    "top_menu": {
+        "home": {
+            "en": "Home",
+            "fr": "Accueil"
+        },
+        "work": {
+            "en": "Work",
+            "fr": "Portfolio"
+        },
+        "travels": {
+            "en": "Travels",
+            "fr": "Voyages"
+        },
+        "bazaar": {
+            "en": "Bazaar",
+            "fr": "Bazaar"
+        }
+    },
+    "home": {
+        "wait-message": {
+            "en": "This website is under construction. Some parts (including this one) might be incomplete. <i>Thanks for your comprehension</i>",
+            "fr": "Ce site web est en cours de contruction. Certaines page (celle-ci incluse) peuvent être incomplètes. <i>Merci de votre compréhension</i>"
+        }
+    },
+    "travels": {
+        "page-title": {
+            "en": "Travels",
+            "fr": "Voyages"
+        },
+        "sub-title": {
+            "en": "my wanderings around the globe",
+            "fr": "mes pérégrination autour du monde"
+        }
+    },
+    "footer": {
+        "top_menu": {
+            "home": {
+                "en": "Home",
+                "fr": "Accueil"
+            },
+            "work": {
+                "en": "Work",
+                "fr": "Portfolio"
+            },
+            "travels": {
+                "en": "Travels",
+                "fr": "Voyages"
+            },
+            "bazaar": {
+                "en": "Bazaar",
+                "fr": "Bazaar"
+            }
+        }
+    }
+}

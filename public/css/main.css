@@ -3088,6 +3088,12 @@ a.tag {
     border: 1px solid #666;
     color: #0a0a0a !important; }
 
+.lang-icon {
+  filter: grayscale(100%);
+  transition: filter 1s; }
+  .lang-icon.current, .lang-icon:hover {
+    filter: grayscale(0); }
+
 #citation {
   position: relative; }
   #citation #citation-content {

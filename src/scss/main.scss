@@ -82,6 +82,15 @@ a.tag {
     }
 }
 
+.lang-icon {
+    filter: grayscale(100%);
+    transition: filter 1s;
+
+    &.current, &:hover {
+        filter: grayscale(0);
+    }
+}
+
 #citation {
     position: relative;
 

@@ -29,6 +29,7 @@ const model_3 = require("./citations/model");
 const model_4 = require("./travels/model");
 const model_5 = require("./podcasts/model");
 const app = express();
+exports.default = app;
 app.locals.basedir = path.join(__dirname, '../views');
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, "../public")));
@@ -40,6 +41,7 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+const langController_1 = require("./langController");
 app.use(fileUpload());
 app.use((req, res, next) => {
     res.locals.getImg = utils_1.getPic;
@@ -77,6 +79,7 @@ app.use((req, res, next) => {
     res.locals.format = utils_1.formatText;
     next();
 });
+app.use("/lang", langController_1.default);
 app.use("/users", controller_1.default);
 app.use("/admin", controller_5.default);
 app.use("/games", controller_2.default);
@@ -103,5 +106,4 @@ mongoose.connect(config_1.default.mongoUri, { useNewUrlParser: true }).then(db =
 }).catch(err => {
     console.error(err);
 });
-exports.default = app;
 //# sourceMappingURL=app.js.map

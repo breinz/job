@@ -3,6 +3,12 @@
         .cell         
             nav.user
                 ul
+                    li
+                        a(href="/lang/fr")
+                            img.lang-icon(src="/img/fr.jpg", alt="" data-tooltip title="Français" data-position="bottom"  class=lang=="fr"?"current":"")
+                        |&nbsp;
+                        a( href="/lang/en")
+                            img.lang-icon(src="/img/us.jpg", alt="" data-tooltip title="English" data-position="bottom" class=lang=="en"?"current":"")
                     if !current_user
                         li
                             a(href="/users/signup") Signup

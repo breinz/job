@@ -7,13 +7,13 @@ header
                 nav.main
                     ul
                         li(class=menu=='home'?'active':'')
-                            a(href="/") Home
+                            a(href="/")=t("top_menu.home")
                         li(class=menu=='work'?'active':'')
-                            a(href="/work") Work
+                            a(href="/work")=t("top_menu.work")
                         li(class=menu=='travel'?'active':'')
-                            a(href="/travels") Travels
+                            a(href="/travels")=t("top_menu.travels")
                         li(class=menu=='bazaar'?'active':'')
-                            a(href="/bazaar") Bazaar
+                            a(href="/bazaar")=t("top_menu.bazaar")
 
     include _user_menu
 
