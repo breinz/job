@@ -5,7 +5,8 @@ export interface NewData {
     title: string,
     link: string,
     parent: string,
-    description: string
+    description: string,
+    url: string
 }
 
 export interface NewErrors {
@@ -16,7 +17,8 @@ export interface EditData {
     title: string,
     link: string,
     parent: string,
-    description: string
+    description: string,
+    url: string
 }
 
 export interface EditErrors {

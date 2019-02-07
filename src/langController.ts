@@ -4,7 +4,7 @@ const json = require("./_lang.json") // in /dist
 
 const router = express.Router();
 
-let lang = "en";
+export let lang = "en";
 
 //let json;
 
@@ -20,15 +20,20 @@ app.use((req, res, next) => {
 
 /**
  * Get a translation
- * @param path Path in the json
+ * @param path_or_obj Path in the json OR model object
  */
-let t = (path: string) => {
-    let arp = path.split(".");
-    let phrase = json;
-    arp.forEach(p => {
-        phrase = phrase[p]
-    });
-    return phrase[lang];
+export let t = (path_or_obj: any, field: string = undefined) => {
+    if (typeof path_or_obj == "string") {
+
+        let arp = path_or_obj.split(".");
+        let phrase = json;
+        arp.forEach(p => {
+            phrase = phrase[p]
+        });
+        return phrase[lang];
+    }
+
+    return path_or_obj[`${field}_${lang}`];
 }
 
 router.get("/:lang", (req, res) => {

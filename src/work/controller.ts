@@ -1,5 +1,6 @@
 import express = require("express");
 import Work, { WorkModel } from "./model";
+import { t } from "../langController";
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ const router = express.Router();
  */
 router.use((req, res, next) => {
     res.locals.menu = "work";
-    res.locals.bc = [["Work", "/work"]];
+    res.locals.bc = [[t("work.page-title"), "/work"]];
     next();
 })
 

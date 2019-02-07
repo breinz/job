@@ -1,6 +1,7 @@
 import express = require("express");
 import Travel, { TravelModel } from "./model";
 import { populateChildren } from "../admin/travels/controller";
+import { t } from "../langController";
 //import Game, { GameModel } from "./model";
 
 const router = express.Router();
@@ -11,7 +12,7 @@ const router = express.Router();
  */
 router.use((req, res, next) => {
     res.locals.menu = "travel";
-    res.locals.bc = [["Travels", "/travels"]];
+    res.locals.bc = [[t("travels.page-title"), "/travels"]];
     next();
 })
 

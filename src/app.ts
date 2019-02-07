@@ -4,11 +4,6 @@ import * as cookieParser from "cookie-parser";
 import * as bodyParser from "body-parser";
 import * as session from "express-session"
 import userController from "./user/controller";
-import gamesController from "./games/controller";
-import travelsController from "./travels/controller";
-import bazaarController from "./bazaar/controller";
-import adminController from "./admin/controller";
-import workController from "./work/controller";
 import * as mongoose from "mongoose";
 import config from "./config";
 import User, { UserModel } from "./user/model";
@@ -53,6 +48,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 import langController from "./langController"
+import adminController from "./admin/controller";
+import gamesController from "./games/controller";
+import travelsController from "./travels/controller";
+import bazaarController from "./bazaar/controller";
+import workController from "./work/controller";
 
 // express-fileupload
 app.use(fileUpload());

@@ -14,14 +14,14 @@ mixin line(value, index)
             +line(child, index+1)
 
 form(method="POST")
-    .grid-container
-        .grid-x.grid-padding-x
-            .cel.medium-6.small-12
+    .grid-container.full
+        .grid-x.grid-margin-x
+            .cell.medium-6.small-12
                 div
                     label(for="title") 
                         span Title
                         span.error=errors.title
-                    input(type="text" name="title" id="title" value=data.title autofocus)
+                    input(type="text" name="title" id="title" value=t(data, "title") autofocus)
 
             .cell.medium-6.small-12
                 div
@@ -33,17 +33,24 @@ form(method="POST")
                         for parent in parents
                             +line(parent, 0)
             
-            .cel.medium-6.small-12
+            .cell.medium-6.small-12
                 div
                     label(for="link") 
                         span Link
                         span.error=errors.link
-                    input(type="text" name="link" id="link" value=data.link)
+                    input(type="text" name="link" id="link" value=t(data, "link"))
+            
+            .cell.medium-6.small-12
+                div
+                    label(for="Url") 
+                        span url
+                        span.error=errors.url
+                    input(type="text" name="url" id="url" value=data.url)
 
     div
         label(for="description") 
             span Description
-        +textarea("description")=data.description
+        +textarea("description")=t(data, "description")
 
     div
         input.button(type="submit" value="Save")

@@ -8,6 +8,7 @@ import * as fs from 'fs'
 import { mkdir, mv_pic, rm_pic } from "../../utils";
 import * as changeCase from "change-case"
 import Podcast, { PodcastModel } from "../../podcasts/model";
+import { lang, t } from "../../langController";
 
 const PIC_PATH = "img/podcasts"
 
@@ -84,7 +85,7 @@ router.get("/:id", async (req, res) => {
     }
     if (!podcast) return res.redirect("/");
 
-    res.locals.bc.push([podcast.name]);
+    res.locals.bc.push([t(podcast, "name")]);
 
     res.render(`${url}/edit`, { item: podcast, data: podcast });
 });
@@ -139,11 +140,10 @@ router.get("/:id/delete", async (req, res, next) => {
  */
 const populate = (podcast: PodcastModel, data: NewData | EditData, req: express.Request) => {
     return new Promise(async (resolve, reject) => {
-        podcast.name = data.name;
-        podcast.title = data.title;
+        podcast[`name_${lang}`] = data.name;
         podcast.link = data.link;
         podcast.url = changeCase.paramCase(data.name);
-        podcast.description = data.description
+        podcast[`description_${lang}`] = data.description
 
         if (req.files.pic) {
             let pic = req.files.pic as UploadedFile;

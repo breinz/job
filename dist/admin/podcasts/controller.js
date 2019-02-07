@@ -13,6 +13,7 @@ const validator_1 = require("./validator");
 const utils_1 = require("../../utils");
 const changeCase = require("change-case");
 const model_1 = require("../../podcasts/model");
+const langController_1 = require("../../langController");
 const PIC_PATH = "img/podcasts";
 const url = "admin/bazaar/podcasts";
 let router = express.Router();
@@ -56,7 +57,7 @@ router.get("/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
     }
     if (!podcast)
         return res.redirect("/");
-    res.locals.bc.push([podcast.name]);
+    res.locals.bc.push([langController_1.t(podcast, "name")]);
     res.render(`${url}/edit`, { item: podcast, data: podcast });
 }));
 router.post("/:id", validator_1.default.edit, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
@@ -87,11 +88,10 @@ router.get("/:id/delete", (req, res, next) => __awaiter(this, void 0, void 0, fu
 }));
 const populate = (podcast, data, req) => {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-        podcast.name = data.name;
-        podcast.title = data.title;
+        podcast[`name_${langController_1.lang}`] = data.name;
         podcast.link = data.link;
         podcast.url = changeCase.paramCase(data.name);
-        podcast.description = data.description;
+        podcast[`description_${langController_1.lang}`] = data.description;
         if (req.files.pic) {
             let pic = req.files.pic;
             let pic_id = yield utils_1.mv_pic(`${PIC_PATH}`, pic);

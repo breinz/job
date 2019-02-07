@@ -39,8 +39,8 @@ router.post("/login", (req, res, next) => __awaiter(this, void 0, void 0, functi
         if (match !== true) {
             return res.render("user/login", { error: true });
         }
-        res.cookie("uid", user.id, { maxAge: 1000 * 60 * 60, httpOnly: true });
-        res.cookie("usession", session, { maxAge: 1000 * 60 * 60, httpOnly: true });
+        res.cookie("uid", user.id, { maxAge: 1000 * 60 * 60 * 24 * 30, httpOnly: true });
+        res.cookie("usession", session, { maxAge: 1000 * 60 * 60 * 24 * 30, httpOnly: true });
         return res.redirect("/");
     });
 }));

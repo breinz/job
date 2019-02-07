@@ -5,10 +5,11 @@ import { Document, Schema, model, Model, Types } from "mongoose";
 // --------------------------------------------------
 
 export type BazaarModel = Document & {
+    [index: string]: any,
     /**
      * Title of the page
      */
-    title: string,
+    title: string, title_fr: string, title_en: string,
     /**
      * The text used to form the url in the navigator
      */
@@ -16,9 +17,10 @@ export type BazaarModel = Document & {
     /**
      * The text used for the link
      */
-    link: string,
+    link: string, link_fr: string, link_en: string,
+
     parent?: Types.ObjectId | string,
-    description: string,
+    description: string, description_fr: string, description_en: string,
 
     children?: [BazaarModel]
 };
@@ -28,11 +30,11 @@ export type BazaarModel = Document & {
 // --------------------------------------------------
 
 const bazaarSchema = new Schema({
-    title: String,
+    title: String, title_fr: String, title_en: String,
     url: String,
-    link: String,
+    link: String, link_fr: String, link_en: String,
     parent: { type: Schema.Types.ObjectId, ref: "Bazaar" },
-    description: String
+    description: String, description_fr: String, description_en: String,
 });
 
 export const Bazaar = model("Bazaar", bazaarSchema) as Model<Document> & BazaarModel;

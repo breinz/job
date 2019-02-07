@@ -13,6 +13,7 @@ const validator_1 = require("./validator");
 const changeCase = require("change-case");
 const model_1 = require("../../bazaar/model");
 const controller_1 = require("../podcasts/controller");
+const langController_1 = require("../../langController");
 const PIC_PATH = "img/bazaar";
 exports.getAvailableParents = () => __awaiter(this, void 0, void 0, function* () {
     let items = yield model_1.default.find({ parent: null });
@@ -104,11 +105,16 @@ router.get("/:id/delete", (req, res) => __awaiter(this, void 0, void 0, function
 }));
 const populateModel = (bazaar, data, req) => {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-        bazaar.title = data.title;
-        bazaar.url = changeCase.paramCase(data.title);
-        bazaar.link = data.link;
+        bazaar[`title_${langController_1.lang}`] = data.title;
+        if (bazaar.url) {
+            bazaar.url = data.url;
+        }
+        else {
+            bazaar.url = changeCase.paramCase(data.title);
+        }
+        bazaar[`link_${langController_1.lang}`] = data.link;
         bazaar.parent = data.parent || null;
-        bazaar.description = data.description;
+        bazaar[`description_${langController_1.lang}`] = data.description;
         resolve();
     }));
 };

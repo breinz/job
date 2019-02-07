@@ -3,8 +3,8 @@ extends /layout/_layout
 block content
     +to_admin("/admin/work")
     .page-title
-        h1 Work
-        .sub.show-for-medium=tag || "What I've done"
+        h1=t("work.page-title")
+        .sub.show-for-medium=tag || t("work.sub-title")
 
     .grid-container.full.work-items
         .grid-x.grid-margin-x
@@ -17,9 +17,3 @@ block content
                         img(src=getImg(item.pic, "banner"), alt="")
                         if (index < items.length)
                             hr
-                        //.home-item
-                        //    a(href=`/travels/${travel.url}`)
-                        //        if travel.pic
-                        //            img(src=getImg(travel.pic, "home"), alt="")
-                        //        .title=travel.name
-                        //        .sub=travel.title

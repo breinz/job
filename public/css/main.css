@@ -3075,6 +3075,12 @@ h1 {
   font-family: Cabin;
   font-weight: bold; }
 
+#site-title a {
+  color: #0a0a0a;
+  transition: color 300ms; }
+  #site-title a:hover {
+    color: rgba(10, 10, 10, 0.75); }
+
 a.tag {
   margin-right: 0.5rem;
   background-color: #666;

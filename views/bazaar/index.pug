@@ -10,5 +10,5 @@ block content
             for item in items
                 .cell.medium-3.small-6
                     .bazaar-link-item
-                        a(href=`/bazaar/${item.url}`)=item.link
+                        a(href=`/bazaar/${item.url}`)=t(item, "link")
             

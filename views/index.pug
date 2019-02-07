@@ -7,7 +7,7 @@ block content
                 .grid-container.full
                     .grid-y.grid-padding-x
                         .cell.page
-                            h4 Welcome
+                            h4=t("home.welcome")
                             p.callout.secondary.small!=t("home.wait-message")
                             p Currently looking for a job as a web developer, this website is aimed to show who I am and what I can offer you.
                             p 
@@ -16,12 +16,13 @@ block content
                             p 
                                 i more text to come...
                         .cell#cv-home-box
-                            a(href="/cv") View my CV
+                            a(href="/cv")=t("home.cv")
                         .cell.page
-                            h4 Featured work
+                            h4=t("home.featured.work")
                             .callout 
                                 |To come, 
                                 i probably during next week
+                            a(href="/bazaar/podcasts" style="margin:1rem 0;text-align:right;display:block")=t("home.featured.work.all")
 
 
             .cell.medium-shrink
@@ -29,27 +30,18 @@ block content
                     .grid-y.grid-padding-x
                         .cell.page
                             if travel
-                                h4 Featured travel
+                                h4=t("home.featured.travel")
                                 a(href=`/travels/${travel.url}`)
                                     if travel.pic
                                         img.hide-for-small-only(src=getImg(travel.pic, "home"), alt="")
                                         img.show-for-small-only(src=getImg(travel.pic, "banner"), alt="")
                                     else 
                                         .title(style="font-size:1rem")=travel.name
-
-                                //.home-item
-                                //    a(href=`/travels/${travel.url}`)
-                                //        if travel.pic
-                                //            img.hide-for-small-only(src=getImg(travel.pic, "home"), alt="")
-                                //            img.show-for-small-only(src=getImg(travel.pic, "banner"), alt="")
-                                //        .title(style="font-size:1rem")=travel.name
-                                //        .sub=travel.title
-                                br
-                                a(href="/travels" style="margin:1rem 0;text-align:right;display:block") See all travels
+                                a(href="/travels" style="margin:1rem 0;text-align:right;display:block")=t("home.featured.travel.all")
                         
                         .cell.page.page-y
                             if podcast
-                                h4 Featured podcast
+                                h4=t("home.featured.podcast")
                                 a(href=`bazaar/podcasts`)
                                     if podcast.pic
                                         img.hide-for-small-only(src=getImg(podcast.pic, "home"), alt="")
@@ -64,7 +56,7 @@ block content
                                 //        .title(style="font-size:1rem")=podcast.name
                                 //        .sub=podcast.title
                                 br
-                                a(href="/bazaar/podcasts" style="margin:1rem 0;text-align:right;display:block") See all podcasts
+                                a(href="/bazaar/podcasts" style="margin:1rem 0;text-align:right;display:block")=t("home.featured.podcast.all")
 
 
                 //ul(style="margin:1rem 0;list-style-type:none")

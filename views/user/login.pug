@@ -4,15 +4,12 @@ block content
     .grid-container
         .grid-x
             .cell
-                h1 Login
+                h1=t("user.login.page-title")
                 if error
                     div Error
                 form(method="POST")
-                    div
-                        span Email
+                    label=t("user.email")
                         input(type="text" name="email" autofocus)
-                    div
-                        span Password
+                    label=t("user.password")
                         input(type="password", name="password")
-                    div
-                        input.button(type="submit", value="Submit")
+                    input.button(type="submit", value=t("form.submit"))

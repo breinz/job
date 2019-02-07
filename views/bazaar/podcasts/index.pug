@@ -2,8 +2,8 @@ extends ../../layout/_layout
 
 block content
 
-    h1=item.title
-    p=item.description
+    h1=t(item, "title")
+    p=t(item, "description")
 
     .grid-container.full
         .grid-x
@@ -18,7 +18,7 @@ block content
                             .cell.small-10
                                 if (current_user && current_user.admin)
                                     +to_admin(`/admin/bazaar/podcasts/${podcast.id}`)
-                                h4=podcast.name
-                                p=podcast.description
+                                h4=t(podcast, "name")
+                                p=t(podcast, "description")
                                 if (index<list.length)
                                     hr

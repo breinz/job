@@ -65,6 +65,16 @@ h1 {
     font-weight: bold;
 }
 
+#site-title {
+    a {
+        color: $body-font-color;
+        transition: color 300ms;
+        &:hover {
+            color: rgba($body-font-color, .75)
+        }
+    }
+}
+
 a.tag {
     margin-right: 0.5rem;
     background-color: #666;

@@ -8,6 +8,7 @@ import { mkdir, mv_pic } from "../../utils";
 import * as changeCase from "change-case"
 import Bazaar, { BazaarModel } from "../../bazaar/model";
 import podcastController from "../podcasts/controller"
+import { lang } from "../../langController";
 
 const PIC_PATH = "img/bazaar"
 
@@ -188,12 +189,16 @@ router.get("/:id/delete", async (req, res) => {
  */
 const populateModel = (bazaar: BazaarModel, data: NewData | EditData, req: express.Request) => {
     return new Promise(async (resolve, reject) => {
-        bazaar.title = data.title;
+        bazaar[`title_${lang}`] = data.title;
         // TODO: url unique
-        bazaar.url = changeCase.paramCase(data.title);
-        bazaar.link = data.link;
+        if (bazaar.url) {
+            bazaar.url = data.url;
+        } else {
+            bazaar.url = changeCase.paramCase(data.title);
+        }
+        bazaar[`link_${lang}`] = data.link;
         bazaar.parent = data.parent || null;
-        bazaar.description = data.description
+        bazaar[`description_${lang}`] = data.description
 
         resolve();
     })

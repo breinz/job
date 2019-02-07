@@ -8,11 +8,11 @@ let old_pic: string;
 // --------------------------------------------------
 
 export type PodcastModel = Document & {
-    name: string,
-    title: string,
+    [index: string]: any,
+    name: string, name_fr: string, name_en: string,
     link: string,
     url: string,
-    description: string,
+    description: string, description_fr: string, description_en: string,
     pic?: Types.ObjectId | string,
 };
 
@@ -21,11 +21,10 @@ export type PodcastModel = Document & {
 // --------------------------------------------------
 
 const podcastSchema = new Schema({
-    name: String,
-    title: String,
+    name: String, name_fr: String, name_en: String,
     link: String,
     url: String,
-    description: String,
+    description: String, description_fr: String, description_en: String,
     pic: {
         type: Schema.Types.ObjectId,
         ref: "Image",

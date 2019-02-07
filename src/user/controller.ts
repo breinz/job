@@ -57,8 +57,8 @@ router.post("/login", async (req, res, next) => {
             return res.render("user/login", { error: true });
         }
 
-        res.cookie("uid", user.id, { maxAge: 1000 * 60 * 60, httpOnly: true });
-        res.cookie("usession", session, { maxAge: 1000 * 60 * 60, httpOnly: true });
+        res.cookie("uid", user.id, { maxAge: 1000 * 60 * 60 * 24 * 30, httpOnly: true });
+        res.cookie("usession", session, { maxAge: 1000 * 60 * 60 * 24 * 30, httpOnly: true });
 
         return res.redirect("/");
     });

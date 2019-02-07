@@ -21,12 +21,102 @@
         "bazaar": {
             "en": "Bazaar",
             "fr": "Bazaar"
+        },
+        "login": {
+            "en": "Login",
+            "fr": "Identification"
+        },
+        "signup": {
+            "en": "Signup",
+            "fr": "Inscription"
+        },
+        "logout": {
+            "en": "Logout",
+            "fr": "Se déconnecter"
+        }
+    },
+    "user": {
+        "login": {
+            "en": "Login",
+            "fr": "Pseudo",
+            "page-title": {
+                "en": "Login",
+                "fr": "Identification"
+            }
+        },
+        "signup": {
+            "page-title": {
+                "en": "Signup",
+                "fr": "Inscription"
+            }
+        },
+        "email": {
+            "en": "Email",
+            "fr": "Email"
+        },
+        "password": {
+            "en": "Password",
+            "fr": "Mot de passe",
+            "repeat": {
+                "en": "Retype password",
+                "fr": "Retapez le mot de passe"
+            }
+        }
+    },
+    "form": {
+        "submit": {
+            "en": "Submit",
+            "fr": "Envoyer"
         }
     },
     "home": {
         "wait-message": {
             "en": "This website is under construction. Some parts (including this one) might be incomplete. <i>Thanks for your comprehension</i>",
             "fr": "Ce site web est en cours de contruction. Certaines page (celle-ci incluse) peuvent être incomplètes. <i>Merci de votre compréhension</i>"
+        },
+        "welcome": {
+            "en": "Welcome",
+            "fr": "Bienvenue"
+        },
+        "cv": {
+            "en": "View my CV",
+            "fr": "Consulter mon CV"
+        },
+        "featured": {
+            "work": {
+                "en": "Featured Work",
+                "fr": "Une référence",
+                "all": {
+                    "en": "View all works",
+                    "fr": "Voir toutes les références"
+                }
+            },
+            "travel": {
+                "en": "Featured Travel",
+                "fr": "Un voyage",
+                "all": {
+                    "en": "View all travels",
+                    "fr": "Voir tous les voyages"
+                }
+            },
+            "podcast": {
+                "en": "Featured Podcast",
+                "fr": "Un podcast",
+                "all": {
+                    "en": "View all podcasts",
+                    "fr": "Voir tous les podcasts"
+                }
+            }
+        }
+    },
+    "work": {
+        "page-title": {
+            "en": "Work",
+            "fr": "Portfolio"
+        },
+        "sub-title": {
+            "en": "What I've done",
+            "fr": "Quelques références"
         }
     },
     "travels": {

@@ -8,7 +8,7 @@ form(method="POST" encType="multipart/form-data")
                 label(for="name") 
                     span Name
                     span.error=errors.name
-                input(type="text" name="name" id="name" value=data.name autofocus)
+                input(type="text" name="name" id="name" value=t(data, "name") autofocus)
             .cell.medium-6
                 label(for="link") 
                     span Link
@@ -18,7 +18,7 @@ form(method="POST" encType="multipart/form-data")
     div
         label(for="description") 
             span Description
-        +textarea("description")=data.description
+        +textarea("description")=t(data, "description")
     
     div
         label(for="pic")

@@ -12,11 +12,10 @@ const mongoose_1 = require("mongoose");
 const model_1 = require("../images/model");
 let old_pic;
 const podcastSchema = new mongoose_1.Schema({
-    name: String,
-    title: String,
+    name: String, name_fr: String, name_en: String,
     link: String,
     url: String,
-    description: String,
+    description: String, description_fr: String, description_en: String,
     pic: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: "Image",

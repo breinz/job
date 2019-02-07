@@ -10,10 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const model_1 = require("./model");
+const langController_1 = require("../langController");
 const router = express.Router();
 router.use((req, res, next) => {
     res.locals.menu = "work";
-    res.locals.bc = [["Work", "/work"]];
+    res.locals.bc = [[langController_1.t("work.page-title"), "/work"]];
     next();
 });
 router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {

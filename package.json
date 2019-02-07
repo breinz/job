@@ -13,7 +13,7 @@
     "amaze": "watchify dist/games/amaze/index.js -o public/js/games/amaze.js -v",
     "script": "watchify dist/script/script.js -o public/js/script.js -v",
     "w": "concurrently -k -p '[{name}]' -n 'TypScript,Node,Sass,Js' -c 'yellow.bold,cyan.bold,blue.bold,red.bold' 'npm run watch-ts' 'npm run watch-node' 'npm run watch-sass' 'npm run script'",
-    "watch-save": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node,Sass,Browser,Admin\" -c \"yellow.bold,cyan.bold,blue.bold,green.bold,red.bold\" \"npm run watch-ts\" \"npm run watch-node\" \"npm run watch-sass\" \"npm run watch-browser\" \"npm run watch-admin\""
+    "watch-save": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node,Sass,Browser,Admin\" -c \"yellow.bold,cyan.bold,blue.bold,green.bold,orange.bold\" \"npm run watch-ts\" \"npm run watch-node\" \"npm run watch-sass\" \"npm run watch-browser\" \"npm run watch-admin\""
   },
   "author": "Julien Breiner",
   "license": "ISC",
