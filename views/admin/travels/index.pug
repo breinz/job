@@ -13,7 +13,7 @@ mixin line(travel, index)
                     //img(src=travel.pic.url+travel.pic.file width=20 height=20)
                     img(src=getImg(travel.pic, "nano"))
                     span &nbsp;
-                span=travel.name
+                span=t(travel, "name")
             //span=travel.pic
         td.text-right
             a.admin-link(href=`/admin/travels/${travel.id}/pictures` title="Pictures") &boxbox;

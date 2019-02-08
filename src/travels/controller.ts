@@ -1,7 +1,7 @@
 import express = require("express");
 import Travel, { TravelModel } from "./model";
 import { populateChildren } from "../admin/travels/controller";
-import { t } from "../langController";
+import { t, lang } from "../langController";
 //import Game, { GameModel } from "./model";
 
 const router = express.Router();
@@ -69,13 +69,16 @@ router.get("*", async (req, res) => {
         let url = "/travels";
         for (let i = 0; i < tree.length; i++) {
             url += `/${tree[i].url}`;
-            res.locals.bc.push([tree[i].name, url]);
+            res.locals.bc.push([t(tree[i], "name"), url]);
         }
     }
-    res.locals.bc.push([travel.name]);
+    res.locals.bc.push([t(travel, "name")]);
+
+    let sort: { [index: string]: number } = {};
+    sort[`name_${lang}`] = 1;
 
     // Find the children
-    let children = await Travel.find({ parent: travel.id }).sort({ name: 1 }).populate("pic") as [TravelModel];
+    let children = await Travel.find({ parent: travel.id }).sort(sort).populate("pic") as [TravelModel];
 
     res.render("travels/travel", { travel: travel, travels: children, path: "/travels" + req.path });
 });

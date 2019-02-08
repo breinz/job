@@ -7,7 +7,7 @@ mixin line(value, index)
             while i<index
                 span &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 -i++
-        span=value.name
+        span=t(value, "name")
 
     if (value.children)
         for child in value.children
@@ -21,7 +21,7 @@ form(method="POST" encType="multipart/form-data")
                     label(for="name") 
                         span Name
                         span.error=errors.name
-                    input(type="text" name="name" id="name" value=data.name autofocus)
+                    input(type="text" name="name" id="name" value=t(data, "name") autofocus)
 
             .cell.medium-6.small-12
                 div
@@ -35,12 +35,12 @@ form(method="POST" encType="multipart/form-data")
     div
         label(for="title") 
             span Title
-        input(type="text" name="title" id="title" value=data.title)
+        input(type="text" name="title" id="title" value=t(data, "title"))
 
     div
         label(for="description") 
             span Description
-        +textarea("description")=data.description
+        +textarea("description")=t(data, "description")
         //textarea(name="description" rows="10")=data.description
     
     div
@@ -53,3 +53,13 @@ form(method="POST" encType="multipart/form-data")
 
     div
         input.button(type="submit" value="Save")
+    
+    dl
+        dt Name
+        dd=data.name
+    dl
+        dt Title
+        dd=data.title
+    dl
+        dt Description
+        dd=data.description

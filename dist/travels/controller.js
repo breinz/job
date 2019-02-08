@@ -48,11 +48,13 @@ router.get("*", (req, res) => __awaiter(this, void 0, void 0, function* () {
         let url = "/travels";
         for (let i = 0; i < tree.length; i++) {
             url += `/${tree[i].url}`;
-            res.locals.bc.push([tree[i].name, url]);
+            res.locals.bc.push([langController_1.t(tree[i], "name"), url]);
         }
     }
-    res.locals.bc.push([travel.name]);
-    let children = yield model_1.default.find({ parent: travel.id }).sort({ name: 1 }).populate("pic");
+    res.locals.bc.push([langController_1.t(travel, "name")]);
+    let sort = {};
+    sort[`name_${langController_1.lang}`] = 1;
+    let children = yield model_1.default.find({ parent: travel.id }).sort(sort).populate("pic");
     res.render("travels/travel", { travel: travel, travels: children, path: "/travels" + req.path });
 }));
 const findParents = (travel, tree = null) => {

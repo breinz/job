@@ -14,6 +14,7 @@ const validator_1 = require("./validator");
 const utils_1 = require("../../utils");
 const changeCase = require("change-case");
 const picsController_1 = require("./picsController");
+const langController_1 = require("../../langController");
 const PIC_PATH = "img/travels";
 exports.getAvailableParents = () => __awaiter(this, void 0, void 0, function* () {
     let travels = yield model_1.Travel.find({ parent: null });
@@ -23,7 +24,9 @@ exports.getAvailableParents = () => __awaiter(this, void 0, void 0, function* ()
     return travels;
 });
 exports.populateChildren = (travel) => __awaiter(this, void 0, void 0, function* () {
-    const children = yield model_1.Travel.find({ parent: travel.id }).sort({ name: 1 }).populate('pic');
+    let sort = {};
+    sort[`name_${langController_1.lang}`];
+    const children = yield model_1.Travel.find({ parent: travel.id }).sort(sort).populate('pic');
     travel.children = children;
     for (let i = 0; i < children.length; i++) {
         yield exports.populateChildren(children[i]);
@@ -32,22 +35,37 @@ exports.populateChildren = (travel) => __awaiter(this, void 0, void 0, function*
 let router = express.Router();
 router.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
     res.locals.menu = "travel";
-    res.locals.bc.push(["Travels", "/admin/travels"]);
+    res.locals.bc.push([langController_1.t("travels.page-title"), "/admin/travels"]);
     yield utils_1.mkdir(PIC_PATH);
     next();
 }));
 router.use("/:travel_id/pictures", picsController_1.default);
+router.get("/migrate", (req, res) => __awaiter(this, void 0, void 0, function* () {
+    let travels = yield model_1.Travel.find();
+    for (let i = 0; i < travels.length; i++) {
+        const travel = travels[i];
+        if (travel.name_en && travel.name_en !== "")
+            continue;
+        travel.name_en = travel.name;
+        travel.title_en = travel.title;
+        travel.description_en = travel.description;
+        yield travel.save();
+    }
+    res.redirect("/admin/travels");
+}));
 router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     res.locals.bc.pop();
-    res.locals.bc.push(["Travels"]);
-    const graph = yield model_1.Travel.find({ parent: null }).sort({ name: 1 }).populate('pic');
+    res.locals.bc.push([langController_1.t("travels.page-title")]);
+    let sort = {};
+    sort[`name_${langController_1.lang}`];
+    const graph = yield model_1.Travel.find({ parent: null }).sort(sort).populate('pic');
     for (let i = 0; i < graph.length; i++) {
         yield exports.populateChildren(graph[i]);
     }
     res.render("admin/travels/index", { travels: graph });
 }));
 router.get("/new", (req, res) => __awaiter(this, void 0, void 0, function* () {
-    res.locals.bc.push(["New"]);
+    res.locals.bc.push([langController_1.t("admin.new")]);
     res.render("admin/travels/new", { parents: yield exports.getAvailableParents() });
 }));
 router.post("/new", validator_1.default.new, (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -76,7 +94,7 @@ router.get("/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
     }
     if (!travel)
         return res.redirect("/");
-    res.locals.bc.push([travel.name]);
+    res.locals.bc.push([travel[`name_${langController_1.lang}`]]);
     res.render("admin/travels/edit", { travel: travel, data: travel, parents: yield exports.getAvailableParents() });
 }));
 router.post("/:id", validator_1.default.edit, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
@@ -107,11 +125,13 @@ router.get("/:id/delete", (req, res, next) => __awaiter(this, void 0, void 0, fu
 }));
 const populateTravel = (travel, data, req) => {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-        travel.name = data.name;
-        travel.title = data.title;
-        travel.url = changeCase.paramCase(data.name);
+        travel[`name_${langController_1.lang}`] = data.name;
+        travel[`title_${langController_1.lang}`] = data.title;
+        travel[`description_${langController_1.lang}`] = data.description;
+        if (!travel.url || langController_1.lang == "en") {
+            travel.url = changeCase.paramCase(data.name);
+        }
         travel.parent = data.parent || null;
-        travel.description = data.description;
         if (req.files.pic) {
             let pic = req.files.pic;
             let pic_id = yield utils_1.mv_pic(`${PIC_PATH}`, pic);

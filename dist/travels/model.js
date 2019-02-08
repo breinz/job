@@ -12,8 +12,8 @@ const mongoose_1 = require("mongoose");
 const model_1 = require("../images/model");
 let old_pic;
 const travelSchema = new mongoose_1.Schema({
-    name: String,
-    title: String,
+    name: String, name_fr: String, name_en: String,
+    title: String, title_fr: String, title_en: String,
     url: String,
     parent: { type: mongoose_1.Schema.Types.ObjectId, ref: "Travel" },
     pic: {
@@ -25,7 +25,7 @@ const travelSchema = new mongoose_1.Schema({
         }
     },
     pics: [{ type: mongoose_1.Schema.Types.ObjectId, ref: "Image" }],
-    description: String
+    description: String, description_fr: String, description_en: String
 });
 travelSchema.pre("save", function (next) {
     return __awaiter(this, void 0, void 0, function* () {

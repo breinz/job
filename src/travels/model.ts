@@ -7,11 +7,12 @@ let old_pic: string;
 // --------------------------------------------------
 
 export type TravelModel = Document & {
-    name: string,
-    title: string,
+    [index: string]: any,
+    name: string, name_fr: string, name_en: string,
+    title: string, title_fr: string, title_en: string,
     url: string,
     parent?: Types.ObjectId | string,
-    description: string,
+    description: string, description_fr: string, description_en: string,
     pic?: Types.ObjectId | string,
     pics: Types.Array<Types.ObjectId | string>,
     children?: [TravelModel]
@@ -22,8 +23,8 @@ export type TravelModel = Document & {
 // --------------------------------------------------
 
 const travelSchema = new Schema({
-    name: String,
-    title: String,
+    name: String, name_fr: String, name_en: String,
+    title: String, title_fr: String, title_en: String,
     url: String,
     parent: { type: Schema.Types.ObjectId, ref: "Travel" },
     pic: {
@@ -35,7 +36,7 @@ const travelSchema = new Schema({
         }
     },
     pics: [{ type: Schema.Types.ObjectId, ref: "Image" }],
-    description: String
+    description: String, description_fr: String, description_en: String
 });
 
 /**

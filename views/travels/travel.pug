@@ -2,11 +2,11 @@ extends /layout/_layout
 
 block content
 
-    +to_admin(`/admin/travels/${travel.id}`)
-    .grid-container.full
+    .grid-container.full(style="position:relative")
         .grid-x
             .cell.auto
-                h1=travel.name
+                +to_admin(`/admin/travels/${travel.id}`)
+                h1=t(travel, "name")
             .cell.shrink
                 //img(src="/img/balkans.png", alt="")
 
@@ -14,7 +14,7 @@ block content
         img.article-banner.visionneuse-reveal(src=getImg(travel.pic, "banner") data-src=getImg(travel.pic) data-all="travel-pics" data-index=0)
     
     .justify
-        p!=format(travel.description)
+        p!=format(t(travel, "description"))
     
     -let pics=[getImg(travel.pic)]
 
@@ -40,5 +40,5 @@ block content
                         a(href=path+"/"+child.url)
                             if child.pic
                                 img(src=getImg(child.pic, "home"), alt="")
-                            .title=child.name
-                            .sub=child.title
+                            .title=t(child, "name")
+                            .sub=t(child, "title")

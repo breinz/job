@@ -148,5 +148,11 @@
                 "fr": "Bazaar"
             }
         }
+    },
+    "admin": {
+        "new": {
+            "en": "New",
+            "fr": "Nouveau"
+        }
     }
 }

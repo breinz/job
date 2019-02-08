@@ -1,15 +1,12 @@
-import * as path from "path"
 import express = require("express");
 import { Travel, TravelModel } from "../../travels/model";
 import { NewData, EditData } from ".";
 import validator from "./validator";
 import { UploadedFile } from "express-fileupload";
-import * as fs from 'fs'
 import { mkdir, mv_pic, rm_pic } from "../../utils";
 import * as changeCase from "change-case"
 import picsController from "./picsController";
-import Image, { ImageModel } from "../../images/model";
-import { runInNewContext } from "vm";
+import { lang, t } from "../../langController";
 
 const PIC_PATH = "img/travels"
 
@@ -30,7 +27,10 @@ export const getAvailableParents = async () => {
  * @param travel The travel to populate children
  */
 export const populateChildren = async (travel: TravelModel) => {
-    const children = await Travel.find({ parent: travel.id }).sort({ name: 1 }).populate('pic') as [TravelModel];
+    let sort: { [index: string]: number } = {};
+    sort[`name_${lang}`];
+
+    const children = await Travel.find({ parent: travel.id }).sort(sort).populate('pic') as [TravelModel];
 
     travel.children = children;
 
@@ -48,7 +48,7 @@ let router = express.Router();
  */
 router.use(async (req, res, next) => {
     res.locals.menu = "travel";
-    res.locals.bc.push(["Travels", "/admin/travels"]);
+    res.locals.bc.push([t("travels.page-title"), "/admin/travels"]);
 
     await mkdir(PIC_PATH);
 
@@ -57,6 +57,22 @@ router.use(async (req, res, next) => {
 })
 
 router.use("/:travel_id/pictures", picsController);
+
+router.get("/migrate", async (req, res) => {
+    let travels = await Travel.find() as [TravelModel];
+
+    for (let i = 0; i < travels.length; i++) {
+        const travel = travels[i];
+        if (travel.name_en && travel.name_en !== "") continue;
+        travel.name_en = travel.name
+        travel.title_en = travel.title;
+        travel.description_en = travel.description;
+
+        await travel.save();
+    }
+
+    res.redirect("/admin/travels");
+})
 
 // --------------------------------------------------
 // ROUTES
@@ -67,10 +83,12 @@ router.use("/:travel_id/pictures", picsController);
  */
 router.get("/", async (req, res) => {
     res.locals.bc.pop();
-    res.locals.bc.push(["Travels"]);
+    res.locals.bc.push([t("travels.page-title")]);
 
-    const graph = await Travel.find({ parent: null }).sort({ name: 1 }).populate('pic') as [TravelModel];
+    let sort: { [index: string]: number } = {};
+    sort[`name_${lang}`];
 
+    const graph = await Travel.find({ parent: null }).sort(sort).populate('pic') as [TravelModel];
 
     for (let i = 0; i < graph.length; i++) {
         await populateChildren(graph[i]);
@@ -83,7 +101,7 @@ router.get("/", async (req, res) => {
  * New form
  */
 router.get("/new", async (req, res) => {
-    res.locals.bc.push(["New"]);
+    res.locals.bc.push([t("admin.new")]);
 
     res.render("admin/travels/new", { parents: await getAvailableParents() })
 });
@@ -123,7 +141,7 @@ router.get("/:id", async (req, res) => {
     }
     if (!travel) return res.redirect("/");
 
-    res.locals.bc.push([travel.name]);
+    res.locals.bc.push([travel[`name_${lang}`]]);
 
     res.render("admin/travels/edit", { travel: travel, data: travel, parents: await getAvailableParents() });
 });
@@ -178,11 +196,17 @@ router.get("/:id/delete", async (req, res, next) => {
  */
 const populateTravel = (travel: TravelModel, data: NewData | EditData, req: express.Request) => {
     return new Promise(async (resolve, reject) => {
-        travel.name = data.name;
-        travel.title = data.title;
-        travel.url = changeCase.paramCase(data.name);
+        travel[`name_${lang}`] = data.name;
+        travel[`title_${lang}`] = data.title;
+        travel[`description_${lang}`] = data.description
+
+        //travel.name = data.name;
+        //travel.title = data.title;
+        if (!travel.url || lang == "en") {
+            travel.url = changeCase.paramCase(data.name);
+        }
         travel.parent = data.parent || null;
-        travel.description = data.description
+        //travel.description = data.description
 
         if (req.files.pic) {
             let pic = req.files.pic as UploadedFile;

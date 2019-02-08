@@ -128,6 +128,8 @@ function getPic(file, size) {
 }
 exports.getPic = getPic;
 function formatText(txt) {
+    if (txt === undefined)
+        return "Translation in progress...";
     txt = txt.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
     txt = txt.replace(/__([^_]+)__/g, "<i>$1</i>");
     txt = txt.replace(/\n/g, "</p><p>");

@@ -171,6 +171,8 @@ export function getPic(file: any, size?: string): string {
 
 export function formatText(txt: string): string {
 
+    if (txt === undefined) return "Translation in progress..."
+
     // bold
     txt = txt.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
     // italic
