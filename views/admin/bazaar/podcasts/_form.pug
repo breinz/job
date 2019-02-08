@@ -3,17 +3,15 @@
 
 form(method="POST" encType="multipart/form-data")
     .grid-container.full
-        .grid-x
+        .grid-x.grid-margin-x
             .cell.medium-6
-                label(for="name") 
-                    span Name
+                label Name
                     span.error=errors.name
-                input(type="text" name="name" id="name" value=t(data, "name") autofocus)
+                    input(type="text" name="name" id="name" value=t(data, "name") autofocus)
             .cell.medium-6
-                label(for="link") 
-                    span Link
+                label Link
                     span.error=errors.link
-                input(type="text" name="link" id="link" value=data.link)
+                    input(type="text" name="link" id="link" value=data.link)
 
     div
         label(for="description") 
