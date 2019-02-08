@@ -1,7 +1,7 @@
 import express = require("express");
 import Bazaar, { BazaarModel } from "./model";
 import Podcast, { PodcastModel } from "../podcasts/model";
-import { t } from "../langController";
+import { t, lang } from "../langController";
 
 const router = express.Router();
 
@@ -33,7 +33,9 @@ router.get("/podcasts", async (req, res) => {
 
     res.locals.bc.push([t(item, "title")]);
 
-    let list = await Podcast.find().sort({ name: 1 }).populate("pic") as [PodcastModel];
+    let sort = "name_" + lang;
+
+    let list = await Podcast.find().sort({ sort: 1 }).populate("pic") as [PodcastModel];
 
     res.render("bazaar/podcasts/index", { item: item, list: list });
 });
