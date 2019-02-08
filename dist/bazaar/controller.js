@@ -27,8 +27,9 @@ router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
 router.get("/podcasts", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let item = yield model_1.default.findOne({ url: "podcasts" });
     res.locals.bc.push([langController_1.t(item, "title")]);
-    let sort = "name_" + langController_1.lang;
-    let list = yield model_2.default.find().sort({ sort: 1 }).populate("pic");
+    let sort = {};
+    sort["name_" + langController_1.lang] = 1;
+    let list = yield model_2.default.find().sort(sort).populate("pic");
     res.render("bazaar/podcasts/index", { item: item, list: list });
 }));
 router.get("*", (req, res) => __awaiter(this, void 0, void 0, function* () {

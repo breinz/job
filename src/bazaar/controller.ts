@@ -33,9 +33,10 @@ router.get("/podcasts", async (req, res) => {
 
     res.locals.bc.push([t(item, "title")]);
 
-    let sort = "name_" + lang;
+    let sort: { [index: string]: number } = {};
+    sort["name_" + lang] = 1;
 
-    let list = await Podcast.find().sort({ sort: 1 }).populate("pic") as [PodcastModel];
+    let list = await Podcast.find().sort(sort).populate("pic") as [PodcastModel];
 
     res.render("bazaar/podcasts/index", { item: item, list: list });
 });
