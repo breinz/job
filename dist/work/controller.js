@@ -11,6 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const model_1 = require("./model");
 const langController_1 = require("../langController");
+const utils_1 = require("../utils");
 const router = express.Router();
 router.use((req, res, next) => {
     res.locals.menu = "work";
@@ -19,7 +20,7 @@ router.use((req, res, next) => {
 });
 router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     res.locals.bc = [];
-    let items = yield model_1.default.find().sort({ title: 1 }).populate("pic");
+    let items = yield model_1.default.find().sort(utils_1.sort("title")).populate("pic");
     res.render("work/index", { items: items });
 }));
 router.get("/tag/:tag", (req, res) => __awaiter(this, void 0, void 0, function* () {
