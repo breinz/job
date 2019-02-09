@@ -16,6 +16,12 @@ const uuid = require("uuid/v4");
 exports.D2R = Math.PI / 180;
 exports.R2D = 180 / Math.PI;
 const pic_sizes = ["nano", "mini", "home", "banner"];
+function sort(field, direction = 1) {
+    let s = {};
+    s[field] = direction;
+    return s;
+}
+exports.sort = sort;
 function shuffle(ar) {
     for (let i = ar.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));

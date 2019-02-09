@@ -7,7 +7,7 @@ mixin line(work)
                 if (work.pic)
                     img(src=getImg(work.pic, "nano"))
                     span &nbsp;
-                span=work.title
+                span=t(work, "title")
         td.text-right
             //a.admin-link(href=`/admin/work/${work.id}/pictures` title="Pictures") &boxbox;
             //span &nbsp;
@@ -17,10 +17,10 @@ block content
     .grid-container.full
         .grid-x
             .cell.medium-6
-                h1 Work
+                h1=t("work.page-title")
             .cell.medium-6
                 .admin-right-btn
-                    a.button.success(href="/admin/work/new") New work
+                    a.button.success(href="/admin/work/new")=t("admin.new.work")
 
     table.hover
         for item in items

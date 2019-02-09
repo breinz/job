@@ -13,7 +13,8 @@ block content
                 -index++
                 .cell.work-item
                     a(href=`/work/${item.url}`)
-                        h4=item.title
-                        img(src=getImg(item.pic, "banner"), alt="")
+                        h4=t(item, "title")
+                        if (item.pic)
+                            img(src=getImg(item.pic, "banner"), alt="")
                         if (index < items.length)
                             hr

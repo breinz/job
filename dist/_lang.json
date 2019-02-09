@@ -5,7 +5,7 @@
             "fr": "Développeur Web éclectique"
         }
     },
-    "top_menu": {
+    "top-menu": {
         "home": {
             "en": "Home",
             "fr": "Accueil"
@@ -130,7 +130,7 @@
         }
     },
     "footer": {
-        "top_menu": {
+        "top-menu": {
             "home": {
                 "en": "Home",
                 "fr": "Accueil"
@@ -152,7 +152,11 @@
     "admin": {
         "new": {
             "en": "New",
-            "fr": "Nouveau"
+            "fr": "Nouveau",
+            "work": {
+                "en": "New work",
+                "fr": "Nouvel élément"
+            }
         }
     }
 }

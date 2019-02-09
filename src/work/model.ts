@@ -8,10 +8,11 @@ let old_pic: string;
 // --------------------------------------------------
 
 export type WorkModel = Document & {
-    title: string,
+    [index: string]: any,
+    title: string, title_fr: string, title_en: string,
     url: string,
     tags: string,
-    description: string,
+    description: string, description_fr: string, description_en: string,
     pic?: Types.ObjectId | string,
 };
 
@@ -20,10 +21,10 @@ export type WorkModel = Document & {
 // --------------------------------------------------
 
 const workSchema = new Schema({
-    title: String,
+    title: String, title_fr: String, title_en: String,
     url: String,
     tags: String,
-    description: String,
+    description: String, description_fr: String, description_en: String,
     pic: {
         type: Schema.Types.ObjectId,
         ref: "Image",

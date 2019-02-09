@@ -13,23 +13,24 @@ const validator_1 = require("./validator");
 const utils_1 = require("../../utils");
 const changeCase = require("change-case");
 const model_1 = require("../../work/model");
+const langController_1 = require("../../langController");
 const PIC_PATH = "img/work";
 const url = "admin/work";
 let router = express.Router();
 router.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
     res.locals.menu = "work";
-    res.locals.bc.push(["Work", `/${url}`]);
+    res.locals.bc.push([langController_1.t("work.page-title"), `/${url}`]);
     yield utils_1.mkdir(PIC_PATH);
     next();
 }));
 router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     res.locals.bc.pop();
-    res.locals.bc.push(["Work"]);
-    const items = yield model_1.default.find().sort({ title: 1 }).populate('pic');
+    res.locals.bc.push([langController_1.t("work.page-title")]);
+    const items = yield model_1.default.find().sort(utils_1.sort(`title_${langController_1.lang}`)).populate('pic');
     res.render(`${url}/index`, { items: items });
 }));
 router.get("/new", (req, res) => __awaiter(this, void 0, void 0, function* () {
-    res.locals.bc.push(["New"]);
+    res.locals.bc.push([langController_1.t("admin.new")]);
     res.render(`${url}/new`);
 }));
 router.post("/new", validator_1.default.new, (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -57,7 +58,7 @@ router.get("/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
     }
     if (!work)
         return res.redirect("/");
-    res.locals.bc.push([work.title]);
+    res.locals.bc.push([work[`title_${langController_1.lang}`]]);
     res.render(`${url}/edit`, { item: work, data: work });
 }));
 router.post("/:id", validator_1.default.edit, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
@@ -87,11 +88,13 @@ router.get("/:id/delete", (req, res, next) => __awaiter(this, void 0, void 0, fu
 }));
 const populate = (work, data, req) => {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-        work.title = data.title;
-        work.url = changeCase.paramCase(data.title);
+        work[`title_${langController_1.lang}`] = data.title;
+        if (!work.url || langController_1.lang === "en") {
+            work.url = changeCase.paramCase(data.title);
+        }
         let tags = data.tags.split(",").map(value => { return changeCase.kebab(value); });
         work.tags = tags.join(",");
-        work.description = data.description;
+        work[`description_${langController_1.lang}`] = data.description;
         if (req.files.pic) {
             let pic = req.files.pic;
             let pic_id = yield utils_1.mv_pic(`${PIC_PATH}`, pic);

@@ -2,7 +2,7 @@ extends /layout/_layout
 
 block content
 
-    h1=item.title
+    h1=t(item, "title")
 
     //if travel.pic
     //    img(src=getImg(travel.pic, "banner"))
@@ -11,7 +11,7 @@ block content
         for tag in item.tags.split(",")
             a.tag(href=`/work/tag/${tag}`)=tag
 
-    p!=format(item.description)
+    p!=format(t(item, "description"))
 
 
     //.grid-container.full

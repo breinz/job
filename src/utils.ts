@@ -21,6 +21,17 @@ export const R2D = 180 / Math.PI;
 const pic_sizes = ["nano", "mini", "home", "banner"];
 
 /**
+ * Sorts a mongoose query
+ * @param field The field to sort
+ * @param direction The sorting direction
+ */
+export function sort(field: string, direction: number = 1) {
+    let s: { [index: string]: number } = {};
+    s[field] = direction;
+    return s;
+}
+
+/**
  * Shuffles an array
  * @param ar The array to shuffle
  * @return Array<Object>

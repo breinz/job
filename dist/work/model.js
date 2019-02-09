@@ -12,10 +12,10 @@ const mongoose_1 = require("mongoose");
 const model_1 = require("../images/model");
 let old_pic;
 const workSchema = new mongoose_1.Schema({
-    title: String,
+    title: String, title_fr: String, title_en: String,
     url: String,
     tags: String,
-    description: String,
+    description: String, description_fr: String, description_en: String,
     pic: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: "Image",

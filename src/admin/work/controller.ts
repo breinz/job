@@ -5,11 +5,12 @@ import { NewData, EditData } from ".";
 import validator from "./validator";
 import { UploadedFile } from "express-fileupload";
 import * as fs from 'fs'
-import { mkdir, mv_pic, rm_pic } from "../../utils";
+import { mkdir, mv_pic, sort } from "../../utils";
 import * as changeCase from "change-case"
 import Podcast, { PodcastModel } from "../../podcasts/model";
 import Work, { WorkModel } from "../../work/model";
 import { Types } from "mongoose";
+import { lang, t } from "../../langController";
 
 const PIC_PATH = "img/work"
 
@@ -24,7 +25,7 @@ let router = express.Router();
  */
 router.use(async (req, res, next) => {
     res.locals.menu = "work";
-    res.locals.bc.push(["Work", `/${url}`]);
+    res.locals.bc.push([t("work.page-title"), `/${url}`]);
 
     await mkdir(PIC_PATH);
 
@@ -37,9 +38,9 @@ router.use(async (req, res, next) => {
  */
 router.get("/", async (req, res) => {
     res.locals.bc.pop();
-    res.locals.bc.push(["Work"]);
+    res.locals.bc.push([t("work.page-title")]);
 
-    const items = await Work.find().sort({ title: 1 }).populate('pic') as [WorkModel];
+    const items = await Work.find().sort(sort(`title_${lang}`)).populate('pic') as [WorkModel];
 
     res.render(`${url}/index`, { items: items });
 });
@@ -48,7 +49,7 @@ router.get("/", async (req, res) => {
  * New form
  */
 router.get("/new", async (req, res) => {
-    res.locals.bc.push(["New"]);
+    res.locals.bc.push([t("admin.new")]);
 
     res.render(`${url}/new`)
 });
@@ -87,7 +88,7 @@ router.get("/:id", async (req, res) => {
     }
     if (!work) return res.redirect("/");
 
-    res.locals.bc.push([work.title]);
+    res.locals.bc.push([work[`title_${lang}`]]);
 
     res.render(`${url}/edit`, { item: work, data: work });
 });
@@ -140,11 +141,13 @@ router.get("/:id/delete", async (req, res, next) => {
  */
 const populate = (work: WorkModel, data: NewData | EditData, req: express.Request) => {
     return new Promise(async (resolve, reject) => {
-        work.title = data.title;
-        work.url = changeCase.paramCase(data.title);
+        work[`title_${lang}`] = data.title;
+        if (!work.url || lang === "en") {
+            work.url = changeCase.paramCase(data.title);
+        }
         let tags = data.tags.split(",").map(value => { return changeCase.kebab(value) })
         work.tags = tags.join(",");
-        work.description = data.description
+        work[`description_${lang}`] = data.description;
 
         if (req.files.pic) {
             let pic = req.files.pic as UploadedFile;
