@@ -20,7 +20,7 @@ router.use((req, res, next) => {
 });
 router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     res.locals.bc = [];
-    let items = yield model_1.default.find().sort(utils_1.sort("title")).populate("pic");
+    let items = yield model_1.default.find().sort(utils_1.sort(`title_${langController_1.lang}`)).populate("pic");
     res.render("work/index", { items: items });
 }));
 router.get("/tag/:tag", (req, res) => __awaiter(this, void 0, void 0, function* () {

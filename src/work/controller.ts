@@ -1,6 +1,6 @@
 import express = require("express");
 import Work, { WorkModel } from "./model";
-import { t } from "../langController";
+import { t, lang } from "../langController";
 import { sort } from "../utils";
 
 const router = express.Router();
@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
     //res.locals.bc = [["Travels"]];
     res.locals.bc = [];
 
-    let items = await Work.find().sort(sort("title")).populate("pic") as [WorkModel];
+    let items = await Work.find().sort(sort(`title_${lang}`)).populate("pic") as [WorkModel];
 
     res.render("work/index", { items: items });
 });
