@@ -11,6 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
 const path = require("path");
 const model_1 = require("./images/model");
+const langController_1 = require("./langController");
 const sharp = require("sharp");
 const uuid = require("uuid/v4");
 exports.D2R = Math.PI / 180;
@@ -18,7 +19,7 @@ exports.R2D = 180 / Math.PI;
 const pic_sizes = ["nano", "mini", "home", "banner"];
 function sort(field, direction = 1) {
     let s = {};
-    s[field] = direction;
+    s[`${field}_${langController_1.lang}`] = direction;
     return s;
 }
 exports.sort = sort;

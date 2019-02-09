@@ -2,6 +2,7 @@ import * as fs from "fs"
 import * as path from "path"
 import { UploadedFile } from "express-fileupload";
 import Image, { ImageModel } from "./images/model";
+import { lang } from "./langController";
 const sharp = require("sharp")
 const uuid = require("uuid/v4");
 
@@ -27,7 +28,7 @@ const pic_sizes = ["nano", "mini", "home", "banner"];
  */
 export function sort(field: string, direction: number = 1) {
     let s: { [index: string]: number } = {};
-    s[field] = direction;
+    s[`${field}_${lang}`] = direction;
     return s;
 }
 
