@@ -55,7 +55,7 @@ router.get("*", async (req, res) => {
         return res.redirect("/work");
     }
 
-    res.locals.bc.push([work.title]);
+    res.locals.bc.push([t(work, "title")]);
 
     res.render("work/item", { item: work });
 });

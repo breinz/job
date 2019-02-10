@@ -41,7 +41,7 @@ router.get("*", (req, res) => __awaiter(this, void 0, void 0, function* () {
     if (!work) {
         return res.redirect("/work");
     }
-    res.locals.bc.push([work.title]);
+    res.locals.bc.push([langController_1.t(work, "title")]);
     res.render("work/item", { item: work });
 }));
 exports.default = router;
