@@ -155,6 +155,14 @@ function formatText(txt) {
         rpl += "'/>";
         return rpl;
     });
+    txt = txt.replace(/\[swf>([^\]]+)\]/g, function (str, data) {
+        var [file, width, height] = data.split(">");
+        let rpl = `<object type="application/x-shockwave-flash" data="/swf/${file}" width="${width}" height="${height}">`;
+        rpl += `<param name="movie" value="/swf/${file}" />`;
+        rpl += '<param name="quality" value="high" />';
+        rpl += "</object>";
+        return rpl;
+    });
     txt = txt.replace(/\[([^\].]+)>([^\]]+)\]/g, "<a href='$2'>$1</a>");
     return txt;
 }

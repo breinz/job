@@ -211,29 +211,15 @@ export function formatText(txt: string): string {
         rpl += "'/>";
         return rpl;
     });
-    /*txt = txt.replace(/\[img>([^\]]+?)>([^\>]]+?)(>(\d?))?(>([^|]]+?))?]/g, function (str: string, file: string, size: string, unused, visionneuse, unused2, align): string {
-        console.log("str", str);
-        console.log("file", file);
-        console.log("size", size);
-        console.log("unused", unused);
-        console.log("visionneuse", visionneuse);
-        console.log("unused2", unused2);
-        console.log("align", align);
-        let rpl = `<img class=' in-img-${align}`;
-        if (visionneuse == 1) {
-            rpl += " visionneuse-reveal";
-        }
-        rpl += "' src='";
-        rpl += getPic({
-            url: "/img/vrac/",
-            file: file
-        }, size);
-        rpl += "'";
-        rpl += ` data-src="/img/vrac/${file}"`;
-        rpl += "/>";
-        console.log(rpl);
+    // swf
+    txt = txt.replace(/\[swf>([^\]]+)\]/g, function (str, data) {
+        var [file, width, height] = data.split(">");
+        let rpl: string = `<object type="application/x-shockwave-flash" data="/swf/${file}" width="${width}" height="${height}">`;
+        rpl += `<param name="movie" value="/swf/${file}" />`;
+        rpl += '<param name="quality" value="high" />';
+        rpl += "</object>";
         return rpl;
-    });*/
+    })
     // link
     txt = txt.replace(/\[([^\].]+)>([^\]]+)\]/g, "<a href='$2'>$1</a>");
 
