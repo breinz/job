@@ -30,7 +30,7 @@ router.get("/", async (req, res) => {
 router.get("/tag/:tag", async (req, res) => {
     let tag = req.params.tag;
 
-    res.locals.bc.push([tag]);
+    res.locals.bc.push(["Tags"], [tag]);
 
     let items = await Work.find({ "tags": { "$regex": tag, "$options": "i" } }).sort({ title: 1 }).populate("pic") as [WorkModel];
 

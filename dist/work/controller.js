@@ -25,7 +25,7 @@ router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
 }));
 router.get("/tag/:tag", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let tag = req.params.tag;
-    res.locals.bc.push([tag]);
+    res.locals.bc.push(["Tags"], [tag]);
     let items = yield model_1.default.find({ "tags": { "$regex": tag, "$options": "i" } }).sort({ title: 1 }).populate("pic");
     res.render("work/index", { items: items, tag: tag });
 }));
