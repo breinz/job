@@ -23,6 +23,10 @@ const podcastSchema = new mongoose_1.Schema({
             old_pic = this.pic;
             return value;
         }
+    },
+    stat: {
+        featured: { type: Number, default: 0 },
+        featured_at: Date
     }
 });
 podcastSchema.pre("save", function (next) {
@@ -60,6 +64,19 @@ podcastSchema.pre("remove", function (next) {
         next();
     });
 });
+podcastSchema.methods.featured = function () {
+    return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+        let today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (this.stat.featured_at > today) {
+            return resolve();
+        }
+        this.stat.featured_at = new Date();
+        this.stat.featured++;
+        yield this.save();
+        resolve();
+    }));
+};
 exports.Podcast = mongoose_1.model("Podcast", podcastSchema);
 exports.default = exports.Podcast;
 //# sourceMappingURL=model.js.map

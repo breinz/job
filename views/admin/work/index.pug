@@ -8,6 +8,10 @@ mixin line(work)
                     img(src=getImg(work.pic, "nano"))
                     span &nbsp;
                 span=t(work, "title")
+        td
+            small.has-tip(data-tooltip title=`Viewed ${work.stat.viewed} times`)=work.stat.viewed
+        td
+            small.has-tip(data-tooltip title=`Featured ${work.stat.featured} times`)=work.stat.featured
         td.text-right
             //a.admin-link(href=`/admin/work/${work.id}/pictures` title="Pictures") &boxbox;
             //span &nbsp;

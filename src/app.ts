@@ -141,11 +141,13 @@ app.get("/", async (req, res) => {
     let travels_count = await Travel.estimatedDocumentCount();
     let index = (dayOfYear() * 13) % travels_count;
     let travel = (await Travel.find().skip(index).limit(1).populate("pic"))[0] as TravelModel;
+    await travel.featured();
 
     // Feature podcast
     let podcast_count = await Podcast.estimatedDocumentCount();
     const podcast_index = (dayOfYear() * 8) % podcast_count;
     let podcast = (await Podcast.find().skip(podcast_index).limit(1).populate("pic"))[0] as PodcastModel;
+    await podcast.featured();
 
     let users = await User.find();
 

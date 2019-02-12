@@ -90,9 +90,11 @@ app.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let travels_count = yield model_4.default.estimatedDocumentCount();
     let index = (utils_1.dayOfYear() * 13) % travels_count;
     let travel = (yield model_4.default.find().skip(index).limit(1).populate("pic"))[0];
+    yield travel.featured();
     let podcast_count = yield model_5.default.estimatedDocumentCount();
     const podcast_index = (utils_1.dayOfYear() * 8) % podcast_count;
     let podcast = (yield model_5.default.find().skip(podcast_index).limit(1).populate("pic"))[0];
+    yield podcast.featured();
     let users = yield model_1.default.find();
     const games = yield model_2.default.find().setOptions({ sort: { name: 1 } });
     res.render("index", {

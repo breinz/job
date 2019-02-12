@@ -40,10 +40,10 @@ router.get("/tag/:tag", async (req, res) => {
 /**
  * all
  */
-router.get("*", async (req, res) => {
+router.get("*", async (req, res, next) => {
     let route = req.path.substr(1).split('/');
 
-    // The current travel
+    // The current work
     let work: WorkModel;
     try {
         work = await Work.findOne({ url: route[route.length - 1] }).populate("pic") as WorkModel;
@@ -53,6 +53,12 @@ router.get("*", async (req, res) => {
 
     if (!work) {
         return res.redirect("/work");
+    }
+    work.stat.viewed++;
+    try {
+        await work.save();
+    } catch (err) {
+        next(err);
     }
 
     res.locals.bc.push([t(work, "title")]);

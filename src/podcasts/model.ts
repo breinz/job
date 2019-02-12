@@ -14,6 +14,12 @@ export type PodcastModel = Document & {
     url: string,
     description: string, description_fr: string, description_en: string,
     pic?: Types.ObjectId | string,
+    stat: {
+        featured: number,
+        featured_at: Date
+    },
+
+    featured: () => void
 };
 
 // --------------------------------------------------
@@ -32,6 +38,10 @@ const podcastSchema = new Schema({
             old_pic = this.pic;
             return value;
         }
+    },
+    stat: {
+        featured: { type: Number, default: 0 },
+        featured_at: Date
     }
 });
 
@@ -75,7 +85,28 @@ podcastSchema.pre("remove", async function (next) {
     }
 
     next();
-})
+});
+
+/**
+ * Save this podcast as featured (stats)
+ */
+podcastSchema.methods.featured = function () {
+    return new Promise(async (resolve, reject) => {
+
+        // today midnight
+        let today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (this.stat.featured_at > today) {
+            return resolve();
+        }
+
+        this.stat.featured_at = new Date();
+        this.stat.featured++;
+        await this.save();
+        resolve();
+    });
+};
 
 export const Podcast = model("Podcast", podcastSchema) as Model<Document> & PodcastModel;
 export default Podcast;

@@ -15,7 +15,14 @@ export type TravelModel = Document & {
     description: string, description_fr: string, description_en: string,
     pic?: Types.ObjectId | string,
     pics: Types.Array<Types.ObjectId | string>,
-    children?: [TravelModel]
+    children?: [TravelModel],
+    stat: {
+        viewed: number,
+        featured: number,
+        featured_at: Date
+    },
+
+    featured: () => void
 };
 
 // --------------------------------------------------
@@ -36,7 +43,12 @@ const travelSchema = new Schema({
         }
     },
     pics: [{ type: Schema.Types.ObjectId, ref: "Image" }],
-    description: String, description_fr: String, description_en: String
+    description: String, description_fr: String, description_en: String,
+    stat: {
+        viewed: { type: Number, default: 0 },
+        featured: { type: Number, default: 0 },
+        featured_at: Date
+    }
 });
 
 /**
@@ -94,7 +106,28 @@ travelSchema.pre("remove", async function (next) {
     }
 
     next();
-})
+});
+
+/**
+ * Save this travel as featured (stats)
+ */
+travelSchema.methods.featured = function () {
+    return new Promise(async (resolve, reject) => {
+
+        // today midnight
+        let today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (this.stat.featured_at > today) {
+            return resolve();
+        }
+
+        this.stat.featured_at = new Date();
+        this.stat.featured++;
+        await this.save();
+        resolve();
+    });
+};
 
 export const Travel = model("Travel", travelSchema) as Model<Document> & TravelModel;
 export default Travel;

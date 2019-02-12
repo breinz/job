@@ -31,7 +31,7 @@ router.get("/all", (req, res) => __awaiter(this, void 0, void 0, function* () {
     }
     res.render("travels/all", { items: items });
 }));
-router.get("*", (req, res) => __awaiter(this, void 0, void 0, function* () {
+router.get("*", (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     let route = req.path.substr(1).split('/');
     let travel;
     try {
@@ -42,6 +42,13 @@ router.get("*", (req, res) => __awaiter(this, void 0, void 0, function* () {
     }
     if (travel === null) {
         return res.redirect("/travels");
+    }
+    travel.stat.viewed++;
+    try {
+        yield travel.save();
+    }
+    catch (err) {
+        return next(err);
     }
     let tree = yield findParents(travel);
     if (tree) {

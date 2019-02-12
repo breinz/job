@@ -29,7 +29,7 @@ router.get("/tag/:tag", (req, res) => __awaiter(this, void 0, void 0, function* 
     let items = yield model_1.default.find({ "tags": { "$regex": tag, "$options": "i" } }).sort({ title: 1 }).populate("pic");
     res.render("work/index", { items: items, tag: tag });
 }));
-router.get("*", (req, res) => __awaiter(this, void 0, void 0, function* () {
+router.get("*", (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     let route = req.path.substr(1).split('/');
     let work;
     try {
@@ -40,6 +40,13 @@ router.get("*", (req, res) => __awaiter(this, void 0, void 0, function* () {
     }
     if (!work) {
         return res.redirect("/work");
+    }
+    work.stat.viewed++;
+    try {
+        yield work.save();
+    }
+    catch (err) {
+        next(err);
     }
     res.locals.bc.push([langController_1.t(work, "title")]);
     res.render("work/item", { item: work });

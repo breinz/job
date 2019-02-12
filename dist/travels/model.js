@@ -25,7 +25,12 @@ const travelSchema = new mongoose_1.Schema({
         }
     },
     pics: [{ type: mongoose_1.Schema.Types.ObjectId, ref: "Image" }],
-    description: String, description_fr: String, description_en: String
+    description: String, description_fr: String, description_en: String,
+    stat: {
+        viewed: { type: Number, default: 0 },
+        featured: { type: Number, default: 0 },
+        featured_at: Date
+    }
 });
 travelSchema.pre("save", function (next) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -71,6 +76,19 @@ travelSchema.pre("remove", function (next) {
         next();
     });
 });
+travelSchema.methods.featured = function () {
+    return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+        let today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (this.stat.featured_at > today) {
+            return resolve();
+        }
+        this.stat.featured_at = new Date();
+        this.stat.featured++;
+        yield this.save();
+        resolve();
+    }));
+};
 exports.Travel = mongoose_1.model("Travel", travelSchema);
 exports.default = exports.Travel;
 //# sourceMappingURL=model.js.map

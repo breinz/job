@@ -23,6 +23,11 @@ const workSchema = new mongoose_1.Schema({
             old_pic = this.pic;
             return value;
         }
+    },
+    stat: {
+        viewed: { type: Number, default: 0 },
+        featured: { type: Number, default: 0 },
+        featured_at: Date
     }
 });
 workSchema.pre("save", function (next) {
@@ -60,6 +65,19 @@ workSchema.pre("remove", function (next) {
         next();
     });
 });
+workSchema.methods.featured = function () {
+    return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+        let today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (this.stat.featured_at > today) {
+            return resolve();
+        }
+        this.stat.featured_at = new Date();
+        this.stat.featured++;
+        yield this.save();
+        resolve();
+    }));
+};
 exports.Work = mongoose_1.model("Work", workSchema);
 exports.default = exports.Work;
 //# sourceMappingURL=model.js.map

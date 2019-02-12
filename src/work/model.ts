@@ -14,6 +14,13 @@ export type WorkModel = Document & {
     tags: string,
     description: string, description_fr: string, description_en: string,
     pic?: Types.ObjectId | string,
+    stat: {
+        viewed: number,
+        featured: number,
+        featured_at: Date
+    },
+
+    featured: () => void
 };
 
 // --------------------------------------------------
@@ -32,6 +39,11 @@ const workSchema = new Schema({
             old_pic = this.pic;
             return value;
         }
+    },
+    stat: {
+        viewed: { type: Number, default: 0 },
+        featured: { type: Number, default: 0 },
+        featured_at: Date
     }
 });
 
@@ -76,6 +88,27 @@ workSchema.pre("remove", async function (next) {
 
     next();
 })
+
+/**
+ * Save this work as featured (stats)
+ */
+workSchema.methods.featured = function () {
+    return new Promise(async (resolve, reject) => {
+
+        // today midnight
+        let today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (this.stat.featured_at > today) {
+            return resolve();
+        }
+
+        this.stat.featured_at = new Date();
+        this.stat.featured++;
+        await this.save();
+        resolve();
+    });
+};
 
 export const Work = model("Work", workSchema) as Model<Document> & WorkModel;
 export default Work;

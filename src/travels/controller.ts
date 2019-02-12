@@ -2,6 +2,7 @@ import express = require("express");
 import Travel, { TravelModel } from "./model";
 import { populateChildren } from "../admin/travels/controller";
 import { t, lang } from "../langController";
+import { runInNewContext } from "vm";
 //import Game, { GameModel } from "./model";
 
 const router = express.Router();
@@ -46,7 +47,7 @@ router.get("/all", async (req, res) => {
 /**
  * all
  */
-router.get("*", async (req, res) => {
+router.get("*", async (req, res, next) => {
     let route = req.path.substr(1).split('/');
 
     // The current travel
@@ -59,6 +60,13 @@ router.get("*", async (req, res) => {
 
     if (travel === null) {
         return res.redirect("/travels");
+    }
+
+    travel.stat.viewed++;
+    try {
+        await travel.save();
+    } catch (err) {
+        return next(err);
     }
 
     // Find parents
