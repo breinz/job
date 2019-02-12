@@ -58,6 +58,9 @@ body {
         //position: fixed;
         overflow: hidden;
     }
+
+    background-image: url("/img/bg1.gif");
+    background-repeat: repeat;
 }
 
 h1 {
@@ -65,12 +68,123 @@ h1 {
     font-weight: bold;
 }
 
-#site-title {
+
+
+h1#site-title {
+  
+    padding-top: 1.5rem;
+    line-height: 1;
+
     a {
-        color: $body-font-color;
-        transition: color 300ms;
+        font-family: "Passion One";
+        //color: $body-font-color;
+        color:$pink;
+        text-shadow: 1px 1px 0 #000;
+        transition: color 500ms linear, text-shadow 500ms;
         &:hover {
-            color: rgba($body-font-color, .75)
+            //color: rgba($body-font-color, .75);
+            color:#FFF;
+            //text-shadow: 0 0 1px #FFF;//1px 1px 0 #000;
+        }
+    }
+
+}
+
+#site-subtitle{
+    color:rgba(#CE4199, .5);
+}
+
+header {
+
+    box-shadow: 0 5px 10px #CCC;
+
+    .header-title {
+        background-color: #fff;
+    }
+    .header-title-content {
+        //background-color: rgba($home-color, .1);
+        //background-color: rgba(#776824, .3);
+        background-color: #FFF;//#8D913B;
+    }
+
+    .main-menu {
+        //background-color: $home-color;//rgba(102, 83, 47, 0.719);
+        background-color: $yellow;//#F7C901;
+        //background: linear-gradient(to bottom, #F7C901 0%,#F7C901 87%,#1b1b1b 100%);
+        //border-bottom: 4px solid rgba(#FFF, .7);
+        border-bottom: 5px solid #FFF;
+        border-top: 1px solid #CCC;
+        //border-bottom: 1px solid #000;
+        padding: 0;
+        margin: 0;
+    }
+
+    &.admin .main-menu {
+        background-color: rgb(194, 0, 0);
+    }
+
+    $main-menu-link: #000;
+
+    nav.main {
+        color: #FFF;
+        color:$main-menu-link;
+        font-weight: bold;
+        //padding: 1rem;
+        
+
+        li {
+
+            a {
+                display: block;
+                line-height: 3rem;
+                color:#FFF;
+                color:$main-menu-link;
+                text-decoration: none;
+                &:visited {
+                    color: #FFF;
+                    color:$main-menu-link;
+                }
+            }
+
+            &.active {
+                a {
+                    color: #C4037C;
+                }
+            }
+
+            a:hover{
+                color:#CE4199;
+            }
+
+        }
+    }
+
+    nav.user {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        a {
+            color: $body-font-color;
+            text-decoration: none;
+
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+
+    nav.main, nav.user {
+        ul, li {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        ul {
+            li {
+                display: inline-block;
+                margin-right: 1rem;
+            }
         }
     }
 }
@@ -195,21 +309,6 @@ textarea.with-tools {
     }
 }
 
-.page-title {
-    display: block;
-    h1 {
-        display: inline-block;
-        //padding-bottom: 1rem;
-    }
-    .sub{
-        padding-left: .5rem;
-        font-variant: small-caps;
-        font-size: 1.4rem;
-        color: #999;
-        display: inline-block;
-    }
-}
-
 .bazaar-link-item {
     padding-bottom: 1rem;
 
@@ -320,87 +419,6 @@ textarea.with-tools {
     display: none;
 }
 
-header {
-
-    .header-title {
-        background-color: #fff;
-    }
-    .header-title-content {
-        background-color: rgba($home-color, .1);
-    }
-
-    .main-menu {
-        background-color: $home-color;//rgba(102, 83, 47, 0.719);
-        border-bottom: 4px solid rgba(#FFF, .7);
-        //border-bottom: 1px solid #000;
-        padding: 0;
-        margin: 0;
-    }
-
-    &.admin .main-menu {
-        background-color: rgb(194, 0, 0);
-    }
-
-    nav.main {
-        color: #FFF;
-        font-weight: bold;
-        //padding: 1rem;
-
-        li {
-
-            a {
-                display: block;
-                line-height: 3rem;
-                color:#FFF;
-                text-decoration: none;
-                &:visited {
-                    color: #FFF;
-                }
-            }
-
-            &.active {
-                a {
-                    color: #CCC;
-                }
-            }
-
-            a:hover{
-                color:#000;
-            }
-
-        }
-    }
-
-    nav.user {
-        position: absolute;
-        top: 0;
-        right: 0;
-
-        a {
-            color: $body-font-color;
-            text-decoration: none;
-
-            &:hover{
-                text-decoration: underline;
-            }
-        }
-    }
-
-    nav.main, nav.user {
-        ul, li {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        ul {
-            li {
-                display: inline-block;
-                margin-right: 1rem;
-            }
-        }
-    }
-}
-
 .content {
     //background-color: #fff;
 }
@@ -409,11 +427,14 @@ footer {
 
     padding-top: 2rem;
     padding-bottom: 2rem;
-    background-color: $home-color;
-    border-top: 3px solid rgba(#FFF, .7);
+    background-color: $yellow;// $home-color;
+    color:$black;
+    border-top: 5px solid #FFF;//rgba(#FFF, .7);
+
+    box-shadow: 0 -5px 10px #CCC;
 
     ul {
-        border-left: 3px solid rgba($body-font-color, .25);
+        border-left: 3px solid $pink;//rgba($body-font-color, .25);
         list-style-type: none;
         padding: 0;
         padding-left: 5px;
@@ -421,9 +442,9 @@ footer {
 
         transition: border-left-color 300ms;
 
-        &:hover {
+        /*&:hover {
             border-left-color: $body-font-color;
-        }
+        }*/
 
         li {
             padding: 0;
@@ -431,10 +452,11 @@ footer {
         }
     }
     a {
-        color: $body-font-color !important;
+        color: $pink !important;
+        font-weight: bold;
 
         &:hover{
-            color: $white !important;
+            color: $black !important;
         }
     }
 }
@@ -526,9 +548,40 @@ footer {
 
 #page, .page {
     background-color: #f6f6f6;
+    background-color: #FFF;
     border:1px solid #CCC;
+    border-radius: 8px;
+    box-shadow: 5px 5px 10px #CCC;
     margin-bottom: 1rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
+
+    h1, h2 {
+        font-family: "Passion One";
+        color: #FFF;
+        text-shadow: 1px 1px 0 #333;
+        margin-top: -2rem;
+        margin-left: -1.5rem;
+        font-size: 3rem;
+    }
+
+    h2{
+        font-size: 1.8rem;
+        margin-top: -1rem;
+    }
+
+    .page-title {
+        display: block;
+        h1 {
+            display: inline-block;
+        }
+        .sub{
+            padding-left: .5rem;
+            font-variant: small-caps;
+            font-size: 1.4rem;
+            color: #999;
+            display: inline-block;
+        }
+    }
 }
 
 .page-y {
@@ -561,7 +614,7 @@ footer {
 #breadcrumb {
 
     &+ #page {
-        margin-top: 0;
+        margin-top: 1rem;
     }
     margin-bottom: 5px;
 
