@@ -62,11 +62,13 @@ router.get("*", async (req, res, next) => {
         return res.redirect("/travels");
     }
 
-    travel.stat.viewed++;
-    try {
-        await travel.save();
-    } catch (err) {
-        return next(err);
+    if (!req.current_user || !req.current_user.admin) {
+        travel.stat.viewed++;
+        try {
+            await travel.save();
+        } catch (err) {
+            return next(err);
+        }
     }
 
     // Find parents

@@ -43,12 +43,14 @@ router.get("*", (req, res, next) => __awaiter(this, void 0, void 0, function* ()
     if (travel === null) {
         return res.redirect("/travels");
     }
-    travel.stat.viewed++;
-    try {
-        yield travel.save();
-    }
-    catch (err) {
-        return next(err);
+    if (!req.current_user || !req.current_user.admin) {
+        travel.stat.viewed++;
+        try {
+            yield travel.save();
+        }
+        catch (err) {
+            return next(err);
+        }
     }
     let tree = yield findParents(travel);
     if (tree) {

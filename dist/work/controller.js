@@ -41,12 +41,14 @@ router.get("*", (req, res, next) => __awaiter(this, void 0, void 0, function* ()
     if (!work) {
         return res.redirect("/work");
     }
-    work.stat.viewed++;
-    try {
-        yield work.save();
-    }
-    catch (err) {
-        next(err);
+    if (!req.current_user || !req.current_user.admin) {
+        work.stat.viewed++;
+        try {
+            yield work.save();
+        }
+        catch (err) {
+            next(err);
+        }
     }
     res.locals.bc.push([langController_1.t(work, "title")]);
     res.render("work/item", { item: work });

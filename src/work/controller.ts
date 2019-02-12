@@ -54,11 +54,14 @@ router.get("*", async (req, res, next) => {
     if (!work) {
         return res.redirect("/work");
     }
-    work.stat.viewed++;
-    try {
-        await work.save();
-    } catch (err) {
-        next(err);
+
+    if (!req.current_user || !req.current_user.admin) {
+        work.stat.viewed++;
+        try {
+            await work.save();
+        } catch (err) {
+            next(err);
+        }
     }
 
     res.locals.bc.push([t(work, "title")]);
