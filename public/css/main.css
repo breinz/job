@@ -3099,8 +3099,8 @@ header {
     background-color: #FFF; }
   header .main-menu {
     background-color: #F7C901;
+    background: linear-gradient(to bottom, #E1B702 0%, #F7C901 22%, #F7C901 100%);
     border-bottom: 5px solid #FFF;
-    border-top: 1px solid #CCC;
     padding: 0;
     margin: 0; }
   header.admin .main-menu {
@@ -3122,15 +3122,6 @@ header {
       color: #C4037C; }
     header nav.main li a:hover {
       color: #CE4199; }
-  header nav.user {
-    position: absolute;
-    top: 0;
-    right: 0; }
-    header nav.user a {
-      color: #0a0a0a;
-      text-decoration: none; }
-      header nav.user a:hover {
-        text-decoration: underline; }
   header nav.main ul, header nav.main li, header nav.user ul, header nav.user li {
     list-style-type: none;
     padding: 0;
@@ -3138,6 +3129,17 @@ header {
   header nav.main ul li, header nav.user ul li {
     display: inline-block;
     margin-right: 1rem; }
+  header nav.user {
+    position: absolute;
+    top: 0;
+    right: 0; }
+    header nav.user a {
+      color: #CCC;
+      text-decoration: none; }
+      header nav.user a:hover {
+        color: #0a0a0a; }
+    header nav.user ul li {
+      margin-right: .5rem; }
 
 a.tag {
   margin-right: 0.5rem;
@@ -3163,7 +3165,7 @@ a.tag {
   #citation #citation-content {
     font-family: "Dancing Script";
     font-size: 1rem;
-    color: #666;
+    color: #000;
     text-align: center;
     position: absolute;
     bottom: 1rem;
