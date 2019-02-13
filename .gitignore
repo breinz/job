@@ -3,4 +3,3 @@ node_modules
 dist/config.js
 public/img/*/**
 npm-debug.log
-public/.DS_Store
