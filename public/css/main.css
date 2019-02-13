@@ -3477,8 +3477,9 @@ footer {
     margin-top: 0; } }
 
 #cv-home-box a {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, transparent 22%, transparent 100%);
+  background: linear-gradient(to bottom, transparent 0%, transparent 78%, rgba(0, 0, 0, 0.2) 100%);
   background-color: #F7C901;
+  border: 1px solid #F7C901;
   border-radius: 8px;
   color: #fefefe;
   text-shadow: 1px 1px 0 #333;
@@ -3490,11 +3491,13 @@ footer {
   font-family: "Passion One";
   font-size: 1.8rem;
   margin-bottom: 0 7px;
-  transition: background-color 300ms; }
+  transition: background-color 300ms, border-color 300ms; }
   #cv-home-box a:hover, #cv-home-box a:visited {
-    background-color: #C4037C; }
+    background-color: #C4037C;
+    border-color: #C4037C; }
   #cv-home-box a:active {
-    background-color: #fefefe; }
+    background-color: #fefefe;
+    border-color: #fefefe; }
 
 #breadcrumb {
   margin-bottom: 5px; }

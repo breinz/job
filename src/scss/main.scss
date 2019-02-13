@@ -89,7 +89,7 @@ h1#site-title {
         color:$pink;
         text-shadow: 1px 1px 0 #000;
         transition: color 300ms;
-        
+
         &:hover {
             color:#FFF;
         }
@@ -628,8 +628,10 @@ footer {
 #cv-home-box {
     a {
         
-        background: linear-gradient(to bottom, rgba(#000, .2) 0%, transparent 22%, transparent 100%);
+        background: linear-gradient(to bottom, transparent 0%, transparent 78%, $box-shadow-color 100%);//, transparent 22%, transparent 100%);
         background-color: $yellow;//#666;
+
+        border: 1px solid $yellow;
 
         border-radius: 8px;
         color:$white;
@@ -648,14 +650,16 @@ footer {
 
         margin-bottom: 0 7px;
 
-        transition: background-color 300ms;
+        transition: background-color 300ms, border-color 300ms;
 
         &:hover, &:visited {
             background-color: $pink;//#F6F6F6;
+            border-color: $pink;
         }
 
         &:active{
             background-color: $white;
+            border-color: $white;
         }
     }
 }
