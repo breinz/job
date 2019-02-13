@@ -30,7 +30,7 @@
 //@include foundation-pagination;
 //@include foundation-progress-bar;
 //@include foundation-slider;
-//@include foundation-sticky;
+@include foundation-sticky;
 //@include foundation-reveal;
 //@include foundation-switch;
 @include foundation-table;
@@ -48,6 +48,7 @@ $travel-color: #818f7f;//#618C6D;
 //$travel-color: #00f7ff;
 $bazaar-color: #877f8f;
 $work-color: #877f8f;
+$box-shadow-color:rgba(#000, .2);
 
 body {
     //margin: 0;
@@ -96,9 +97,7 @@ h1#site-title {
 
 header {
 
-    box-shadow: 0 5px 10px #CCC;
-
-    .header-title {
+    #header-title {
         background-color: #fff;
     }
     .header-title-content {
@@ -108,6 +107,8 @@ header {
     }
 
     .main-menu {
+        box-shadow: 0 5px 10px $box-shadow-color;
+
         //background-color: $home-color;//rgba(102, 83, 47, 0.719);
         background-color: $yellow;//#F7C901;
         background: linear-gradient(to bottom, #E1B702 0%, $yellow 22%, $yellow 100%);//,#CAA60A 100%);
@@ -438,7 +439,7 @@ footer {
     color:$black;
     border-top: 5px solid #FFF;//rgba(#FFF, .7);
 
-    box-shadow: 0 -5px 10px #CCC;
+    box-shadow: 0 -5px 10px $box-shadow-color;
 
     ul {
         border-left: 3px solid $pink;//rgba($body-font-color, .25);
@@ -558,7 +559,7 @@ footer {
     background-color: #FFF;
     border:1px solid #CCC;
     border-radius: 8px;
-    box-shadow: 5px 5px 10px #CCC;
+    box-shadow: 5px 5px 10px $box-shadow-color;
     margin-bottom: 1rem;
     margin-top: 2rem;
 

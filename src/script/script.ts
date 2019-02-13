@@ -1,5 +1,5 @@
 import * as $ from "jquery";
-import { Foundation, DropdownMenu, Tooltip } from "foundation-sites"
+import { Foundation, DropdownMenu, Tooltip, Sticky } from "foundation-sites"
 
 //import "foundation-sites/js/foundation.dropdown.js"
 //import dropdown from "foundation-sites/js/dropdown"
