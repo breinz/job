@@ -88,11 +88,15 @@ app.use("/bazaar", controller_5.default);
 app.use("/work", controller_6.default);
 app.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let travels_count = yield model_4.default.estimatedDocumentCount();
-    let index = (utils_1.dayOfYear() * 13) % travels_count;
+    let step = travels_count / 3;
+    step = Math.round(step) == step ? step + 1 : Math.round(step);
+    let index = (utils_1.dayOfYear() * step) % travels_count;
     let travel = (yield model_4.default.find().skip(index).limit(1).populate("pic"))[0];
     yield travel.featured();
     let podcast_count = yield model_5.default.estimatedDocumentCount();
-    const podcast_index = (utils_1.dayOfYear() * 8) % podcast_count;
+    step = podcast_count / 3;
+    step = Math.round(step) == step ? step + 1 : Math.round(step);
+    const podcast_index = (utils_1.dayOfYear() * step) % podcast_count;
     let podcast = (yield model_5.default.find().skip(podcast_index).limit(1).populate("pic"))[0];
     yield podcast.featured();
     let users = yield model_1.default.find();
