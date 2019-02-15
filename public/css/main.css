@@ -3499,7 +3499,7 @@ footer {
   font-size: 1.8rem;
   margin-bottom: 0 7px;
   transition: background-color 300ms, border-color 300ms; }
-  #cv-home-box a:hover, #cv-home-box a:visited {
+  #cv-home-box a:hover {
     background-color: #C4037C;
     border-color: #C4037C; }
   #cv-home-box a:active {

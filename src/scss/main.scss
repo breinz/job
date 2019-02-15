@@ -685,7 +685,7 @@ footer {
 
         transition: background-color 300ms, border-color 300ms;
 
-        &:hover, &:visited {
+        &:hover {
             background-color: $pink;//#F6F6F6;
             border-color: $pink;
         }
