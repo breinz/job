@@ -184,6 +184,7 @@ export function formatText(txt: string): string {
 
     if (txt === undefined) return "<p>Translation in progress...</p>"
 
+    let add: string = "";
 
     // headers at beginning
     txt = txt.replace(/^##([^#]+?)\n/g, "<h4>$1</h4><p>");
@@ -230,12 +231,13 @@ export function formatText(txt: string): string {
         if (visionneuse === "1") {
             rpl += ` data-all="txt-pics-all" data-index=${index++}`;
             all.push(`/img/vrac/${file}`);
+            add += `<img class="hidden" src="/img/vrac/${file}" alt=""/>`; // preload
         }
         rpl += "'/>";
         return rpl;
     });
     if (all.length > 0) {
-        txt += `<div class="hidden" id="txt-pics-all" data-src="${all.join(',')}">`;
+        add += `<div class="hidden" id="txt-pics-all" data-src="${all.join(',')}"></div>`;
     }
 
     // swf
@@ -251,5 +253,5 @@ export function formatText(txt: string): string {
     // link
     txt = txt.replace(/\[([^\].]+)>([^\]]+)\]/g, "<a href='$2'>$1</a>");
 
-    return txt + "</p>";
+    return txt + "</p>" + add;
 }
