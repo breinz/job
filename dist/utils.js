@@ -135,10 +135,19 @@ function getPic(file, size) {
 exports.getPic = getPic;
 function formatText(txt) {
     if (txt === undefined)
-        return "Translation in progress...";
+        return "<p>Translation in progress...</p>";
+    txt = txt.replace(/^##([^#]+?)\n/g, "<h4>$1</h4><p>");
+    txt = txt.replace(/^#([^#]+?)\n/g, "<h3>$1</h3><p>");
+    if (txt.substr(0, 2) !== "<h") {
+        txt = "<p>" + txt;
+    }
     txt = txt.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
     txt = txt.replace(/__([^_]+)__/g, "<i>$1</i>");
+    txt = txt.replace(/##([^#]+?)\n/g, "</p><h4>$1</h4><p>");
+    txt = txt.replace(/#([^#]+?)\n/g, "</p><h3>$1</h3><p>");
     txt = txt.replace(/\n/g, "</p><p>");
+    let index = 0;
+    let all = [];
     txt = txt.replace(/\[img>([^\]]+)\]/g, function (str, data) {
         var [file, size, visionneuse, align] = data.split(">");
         align = align || "left";
@@ -152,9 +161,16 @@ function formatText(txt) {
         }, size || "mini");
         rpl += "'";
         rpl += ` data-src="/img/vrac/${file}"`;
+        if (visionneuse === "1") {
+            rpl += ` data-all="txt-pics-all" data-index=${index++}`;
+            all.push(`/img/vrac/${file}`);
+        }
         rpl += "'/>";
         return rpl;
     });
+    if (all.length > 0) {
+        txt += `<div class="hidden" id="txt-pics-all" data-src="${all.join(',')}">`;
+    }
     txt = txt.replace(/\[swf>([^\]]+)\]/g, function (str, data) {
         var [file, width, height] = data.split(">");
         let rpl = `<object type="application/x-shockwave-flash" data="/swf/${file}" width="${width}" height="${height}">`;
@@ -165,7 +181,7 @@ function formatText(txt) {
         return rpl;
     });
     txt = txt.replace(/\[([^\].]+)>([^\]]+)\]/g, "<a href='$2'>$1</a>");
-    return txt;
+    return txt + "</p>";
 }
 exports.formatText = formatText;
 //# sourceMappingURL=utils.js.map

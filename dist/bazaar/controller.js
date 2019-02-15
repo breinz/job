@@ -49,10 +49,10 @@ router.get("*", (req, res) => __awaiter(this, void 0, void 0, function* () {
         let url = "/bazaar";
         for (let i = 0; i < tree.length; i++) {
             url += `/${tree[i].url}`;
-            res.locals.bc.push([tree[i].title, url]);
+            res.locals.bc.push([langController_1.t(tree[i], "link"), url]);
         }
     }
-    res.locals.bc.push([item.title]);
+    res.locals.bc.push([langController_1.t(item, "link")]);
     let children = yield model_1.default.find({ parent: item.id }).sort({ name: 1 });
     res.render("bazaar/item", { item: item, children: children, path: "/bazaar" + req.path });
 }));

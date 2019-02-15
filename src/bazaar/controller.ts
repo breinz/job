@@ -67,10 +67,10 @@ router.get("*", async (req, res) => {
         let url = "/bazaar";
         for (let i = 0; i < tree.length; i++) {
             url += `/${tree[i].url}`;
-            res.locals.bc.push([tree[i].title, url]);
+            res.locals.bc.push([t(tree[i], "link"), url]);
         }
     }
-    res.locals.bc.push([item.title]);
+    res.locals.bc.push([t(item, "link")]);
 
     // Find the children
     let children = await Bazaar.find({ parent: item.id }).sort({ name: 1 }) as [BazaarModel];

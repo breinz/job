@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const validator_1 = require("./validator");
+const utils_1 = require("../../utils");
 const changeCase = require("change-case");
 const model_1 = require("../../bazaar/model");
 const controller_1 = require("../podcasts/controller");
@@ -39,7 +40,7 @@ router.use("/podcasts", controller_1.default);
 router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     res.locals.bc.pop();
     res.locals.bc.push(["Bazaar"]);
-    const items = yield model_1.default.find({ parent: null }).sort({ title: 1 });
+    const items = yield model_1.default.find({ parent: null }).sort(utils_1.sort("title"));
     for (let i = 0; i < items.length; i++) {
         yield populateChildren(items[i]);
     }
@@ -75,7 +76,7 @@ router.get("/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
     }
     if (!item)
         return res.redirect("/");
-    res.locals.bc.push([item.title]);
+    res.locals.bc.push([langController_1.t(item, "title")]);
     res.render("admin/bazaar/edit", { item: item, data: item, parents: yield exports.getAvailableParents() });
 }));
 router.post("/:id", validator_1.default.edit, (req, res, next) => __awaiter(this, void 0, void 0, function* () {

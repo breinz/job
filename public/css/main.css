@@ -2827,7 +2827,7 @@ table {
   thead,
   tbody,
   tfoot {
-    border: 1px solid #f1f1f1;
+    border: none;
     background-color: #fefefe; }
   caption {
     padding: 0.5rem 0.625rem 0.625rem;
@@ -2858,7 +2858,7 @@ table {
     background-color: #fefefe; }
     table.unstriped tbody tr {
       border-bottom: 0;
-      border-bottom: 1px solid #f1f1f1;
+      border-bottom: none;
       background-color: #fefefe; }
 
 @media screen and (max-width: 63.99875em) {

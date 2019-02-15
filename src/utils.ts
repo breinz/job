@@ -182,15 +182,34 @@ export function getPic(file: any, size?: string): string {
 
 export function formatText(txt: string): string {
 
-    if (txt === undefined) return "Translation in progress..."
+    if (txt === undefined) return "<p>Translation in progress...</p>"
+
+
+    // headers at beginning
+    txt = txt.replace(/^##([^#]+?)\n/g, "<h4>$1</h4><p>");
+    txt = txt.replace(/^#([^#]+?)\n/g, "<h3>$1</h3><p>");
+
+    // If the string doesn't start with a #, start a paragraph
+    if (txt.substr(0, 2) !== "<h") {
+        txt = "<p>" + txt;
+    }
 
     // bold
     txt = txt.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
+
     // italic
     txt = txt.replace(/__([^_]+)__/g, "<i>$1</i>");
+
+    // headers in text
+    txt = txt.replace(/##([^#]+?)\n/g, "</p><h4>$1</h4><p>");
+    txt = txt.replace(/#([^#]+?)\n/g, "</p><h3>$1</h3><p>");
+
     // new paragraph
     txt = txt.replace(/\n/g, "</p><p>");
+
     // img
+    let index = 0;
+    let all: string[] = [];
     txt = txt.replace(/\[img>([^\]]+)\]/g, function (str, data) {
         var [file, size, visionneuse, align] = data.split(">");
 
@@ -208,9 +227,17 @@ export function formatText(txt: string): string {
         rpl += "'";
         // data-src
         rpl += ` data-src="/img/vrac/${file}"`;
+        if (visionneuse === "1") {
+            rpl += ` data-all="txt-pics-all" data-index=${index++}`;
+            all.push(`/img/vrac/${file}`);
+        }
         rpl += "'/>";
         return rpl;
     });
+    if (all.length > 0) {
+        txt += `<div class="hidden" id="txt-pics-all" data-src="${all.join(',')}">`;
+    }
+
     // swf
     txt = txt.replace(/\[swf>([^\]]+)\]/g, function (str, data) {
         var [file, width, height] = data.split(">");
@@ -224,5 +251,5 @@ export function formatText(txt: string): string {
     // link
     txt = txt.replace(/\[([^\].]+)>([^\]]+)\]/g, "<a href='$2'>$1</a>");
 
-    return txt;
+    return txt + "</p>";
 }

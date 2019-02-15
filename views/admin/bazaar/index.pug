@@ -15,7 +15,7 @@ mixin line(item, index)
                     //img(src=travel.pic.url+travel.pic.file width=20 height=20)
                     img(src=getImg(item.pic, "nano"))
                     span &nbsp;
-                span=item.title
+                span=t(item, "title")
         td.text-right
             +delete(href=`/admin/bazaar/${item.id}/delete`)
     if item.children

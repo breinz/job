@@ -1,14 +1,11 @@
-import * as path from "path"
 import express = require("express");
 import { NewData, EditData } from ".";
 import validator from "./validator";
-import { UploadedFile } from "express-fileupload";
-import * as fs from 'fs'
-import { mkdir, mv_pic } from "../../utils";
+import { sort } from "../../utils";
 import * as changeCase from "change-case"
 import Bazaar, { BazaarModel } from "../../bazaar/model";
 import podcastController from "../podcasts/controller"
-import { lang } from "../../langController";
+import { lang, t } from "../../langController";
 
 const PIC_PATH = "img/bazaar"
 
@@ -68,7 +65,7 @@ router.get("/", async (req, res) => {
     res.locals.bc.pop();
     res.locals.bc.push(["Bazaar"]);
 
-    const items = await Bazaar.find({ parent: null }).sort({ title: 1 }) as [BazaarModel];
+    const items = await Bazaar.find({ parent: null }).sort(sort("title")) as [BazaarModel];
 
     for (let i = 0; i < items.length; i++) {
         await populateChildren(items[i]);
@@ -131,7 +128,7 @@ router.get("/:id", async (req, res) => {
     }
     if (!item) return res.redirect("/");
 
-    res.locals.bc.push([item.title]);
+    res.locals.bc.push([t(item, "title")]);
 
     res.render("admin/bazaar/edit", { item: item, data: item, parents: await getAvailableParents() });
 });
