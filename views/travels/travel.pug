@@ -28,7 +28,9 @@ block content
                     for pic in travel.pics
                         -pics.push(getImg(pic))
                         .cell.small-3.medium-2
-                            img.visionneuse-reveal(src=getImg(pic, "mini") data-src=getImg(pic) data-all="travel-pics" data-index=index++)
+                            img.visionneuse-reveal(src=getImg(pic, "mini") data-src=getImg(pic) data-all="travel-pics" data-index=index++ alt="")
+                            #preload
+                            img.hidden(src=getImg(pic) alt="")
     
     .hidden#travel-pics(data-src=pics.join(','))
 
