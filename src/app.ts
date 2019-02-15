@@ -53,6 +53,7 @@ import gamesController from "./games/controller";
 import travelsController from "./travels/controller";
 import bazaarController from "./bazaar/controller";
 import workController from "./work/controller";
+import Work, { WorkModel } from "./work/model";
 
 // express-fileupload
 app.use(fileUpload());
@@ -137,11 +138,13 @@ app.use("/work", workController);
 
 /** Index */
 app.get("/", async (req, res) => {
+    const doy = dayOfYear();
+
     // Feature travel
     let travels_count = await Travel.estimatedDocumentCount();
     let step = travels_count / 3;
     step = Math.round(step) == step ? step + 1 : Math.round(step);
-    let index = (dayOfYear() * step) % travels_count;
+    let index = (doy * step) % travels_count;
     let travel = (await Travel.find().skip(index).limit(1).populate("pic"))[0] as TravelModel;
     await travel.featured();
 
@@ -149,9 +152,17 @@ app.get("/", async (req, res) => {
     let podcast_count = await Podcast.estimatedDocumentCount();
     step = podcast_count / 3;
     step = Math.round(step) == step ? step + 1 : Math.round(step);
-    const podcast_index = (dayOfYear() * step) % podcast_count;
+    const podcast_index = (doy * step) % podcast_count;
     let podcast = (await Podcast.find().skip(podcast_index).limit(1).populate("pic"))[0] as PodcastModel;
     await podcast.featured();
+
+    // Feature work
+    let work_count = await Work.estimatedDocumentCount();
+    step = work_count / 3;
+    step = Math.round(step) == step ? step + 1 : Math.round(step);
+    const work_index = (doy * step) % work_count;
+    let work = (await Work.find().skip(work_index).limit(1).populate("pic"))[0] as WorkModel;
+    await work.featured();
 
     let users = await User.find();
 
@@ -161,7 +172,8 @@ app.get("/", async (req, res) => {
         users: users,
         games: games,
         travel: travel,
-        podcast: podcast
+        podcast: podcast,
+        work: work
     });
 });
 

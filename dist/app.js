@@ -42,6 +42,7 @@ const controller_3 = require("./games/controller");
 const controller_4 = require("./travels/controller");
 const controller_5 = require("./bazaar/controller");
 const controller_6 = require("./work/controller");
+const model_6 = require("./work/model");
 app.use(fileUpload());
 app.use((req, res, next) => {
     res.locals.getImg = utils_1.getPic;
@@ -87,25 +88,33 @@ app.use("/travels", controller_4.default);
 app.use("/bazaar", controller_5.default);
 app.use("/work", controller_6.default);
 app.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
+    const doy = utils_1.dayOfYear();
     let travels_count = yield model_4.default.estimatedDocumentCount();
     let step = travels_count / 3;
     step = Math.round(step) == step ? step + 1 : Math.round(step);
-    let index = (utils_1.dayOfYear() * step) % travels_count;
+    let index = (doy * step) % travels_count;
     let travel = (yield model_4.default.find().skip(index).limit(1).populate("pic"))[0];
     yield travel.featured();
     let podcast_count = yield model_5.default.estimatedDocumentCount();
     step = podcast_count / 3;
     step = Math.round(step) == step ? step + 1 : Math.round(step);
-    const podcast_index = (utils_1.dayOfYear() * step) % podcast_count;
+    const podcast_index = (doy * step) % podcast_count;
     let podcast = (yield model_5.default.find().skip(podcast_index).limit(1).populate("pic"))[0];
     yield podcast.featured();
+    let work_count = yield model_6.default.estimatedDocumentCount();
+    step = work_count / 3;
+    step = Math.round(step) == step ? step + 1 : Math.round(step);
+    const work_index = (doy * step) % work_count;
+    let work = (yield model_6.default.find().skip(work_index).limit(1).populate("pic"))[0];
+    yield work.featured();
     let users = yield model_1.default.find();
     const games = yield model_2.default.find().setOptions({ sort: { name: 1 } });
     res.render("index", {
         users: users,
         games: games,
         travel: travel,
-        podcast: podcast
+        podcast: podcast,
+        work: work
     });
 }));
 app.get("/cv", (req, res) => {

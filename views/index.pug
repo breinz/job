@@ -16,9 +16,11 @@ block content
                             a(href="/cv")=t("home.cv")
                         .cell.page
                             h1=t("home.featured.work")
-                            .callout 
-                                |To come, 
-                                i probably during next week
+                            a(href=`/work/${work.url}`)
+                                if work.pic
+                                    img(src=getImg(work.pic, "banner"), alt="")
+                                else 
+                                    .title(style="font-size:1rem")=work.title
                             a(href="/work" style="margin:1rem 0;text-align:right;display:block")=t("home.featured.work.all")
 
 
