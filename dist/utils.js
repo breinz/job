@@ -165,7 +165,6 @@ function formatText(txt) {
         if (visionneuse === "1") {
             rpl += ` data-all="txt-pics-all" data-index=${index++}`;
             all.push(`/img/vrac/${file}`);
-            add += `<img class="hidden" src="/img/vrac/${file}" alt=""/>`;
         }
         rpl += "'/>";
         return rpl;

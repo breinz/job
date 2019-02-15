@@ -231,7 +231,7 @@ export function formatText(txt: string): string {
         if (visionneuse === "1") {
             rpl += ` data-all="txt-pics-all" data-index=${index++}`;
             all.push(`/img/vrac/${file}`);
-            add += `<img class="hidden" src="/img/vrac/${file}" alt=""/>`; // preload
+            //add += `<img class="hidden" src="/img/vrac/${file}" alt=""/>`; // preload
         }
         rpl += "'/>";
         return rpl;

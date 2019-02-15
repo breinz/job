@@ -40,10 +40,10 @@ $(function () {
             all = $("#" + $(this).attr("data-all")).attr("data-src").split(',');
         }
 
-        visionneuse($(this).attr("data-src"));
+        visionneuse($(this).attr("data-src"), index);
     });
 
-    function visionneuse(src: string) {
+    function visionneuse(src: string, index: number) {
         img.attr("src", src);
 
         $("#visionneuse").fadeIn(500);
@@ -75,6 +75,10 @@ $(function () {
             } else {
                 $("#visionneuse-next,#visionneuse-prev").show();
                 $("#visionneuse-next,#visionneuse-prev").css('top', content.height() / 3);
+
+                $("#visionneuse-preload").empty();
+                $("#visionneuse-preload").append(`<img src="${all[index == all.length - 1 ? 0 : index + 1]}"/>`);
+                $("#visionneuse-preload").append(`<img src="${all[index === 0 ? all.length - 1 : index - 1]}"/>`);
             }
 
             content.css("visibility", "visible");
@@ -89,7 +93,7 @@ $(function () {
     $("#visionneuse-next").click(function () {
         if (index === all.length - 1) index = -1;
 
-        visionneuse(all[++index]);
+        visionneuse(all[++index], index);
     });
 
     /**
@@ -98,6 +102,6 @@ $(function () {
     $("#visionneuse-prev").click(function () {
         if (index === 0) index = all.length;
 
-        visionneuse(all[--index]);
+        visionneuse(all[--index], index);
     });
 })
