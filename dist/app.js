@@ -104,6 +104,9 @@ app.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
         podcast: podcast
     });
 }));
+app.get("/cv", (req, res) => {
+    res.render("cv");
+});
 mongoose.connect(config_1.default.mongoUri, { useNewUrlParser: true }).then(db => {
 }).catch(err => {
     console.error(err);

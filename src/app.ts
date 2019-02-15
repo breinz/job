@@ -162,6 +162,13 @@ app.get("/", async (req, res) => {
 });
 
 /**
+ * CV
+ */
+app.get("/cv", (req, res) => {
+    res.render("cv");
+})
+
+/**
  * Join a game
  */
 /*app.post("/join", (req, res) => {

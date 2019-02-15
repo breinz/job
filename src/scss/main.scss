@@ -67,7 +67,7 @@ body {
 }
 
 h1 {
-    font-family: Cabin;
+    //font-family: Cabin;
     font-weight: bold;
 }
 
@@ -126,15 +126,15 @@ header {
         margin: 0;
     }
 
-    &.admin .main-menu {
+    /*&.admin .main-menu {
         background-color: rgb(194, 0, 0);
-    }
+    }*/
 
     $main-menu-link: #000;
 
     nav.main {
-        color: #FFF;
-        color:$main-menu-link;
+        //color: #FFF;
+        //color:$main-menu-link;
         font-weight: bold;
         //padding: 1rem;
         
@@ -144,11 +144,11 @@ header {
             a {
                 display: block;
                 line-height: 3rem;
-                color:#FFF;
+                //color:#FFF;
                 color:$main-menu-link;
                 text-decoration: none;
                 &:visited {
-                    color: #FFF;
+                    //color: #FFF;
                     color:$main-menu-link;
                 }
             }
@@ -198,6 +198,36 @@ header {
         ul{
             li{
                 margin-right: .5rem;
+            }
+        }
+    }
+}
+
+.admin header {
+
+    .main-menu {
+        background: none;
+        background-color: $admin-main-color;
+    }
+
+    nav.main {
+        li {
+            a {
+                color:#FFF;
+
+                &:visited {
+                    color: #FFF;
+                }
+                
+                &:hover, &:active {
+                    color:black;
+                }
+            }
+
+            &.active{
+                a{
+                    color: #000;
+                }
             }
         }
     }
@@ -270,16 +300,19 @@ textarea.with-tools {
 .img-in-text-align-left {
     float: left;
     padding-right: .5rem;
+    margin-bottom: 1rem;
 }
 .img-in-text-align-right {
     float: right;
     padding-left: .5rem;
+    margin-bottom: 1rem;
 }
 .img-in-text-align-center {
     display: block;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 1rem;
 }
 
 .error {
@@ -664,12 +697,41 @@ footer {
     }
 }
 
+.cv {
+    .cv-right {
+        @media #{$medium-up} {
+            margin-right: 0.5rem;
+        }
+    }
+    .cv-left {
+        @media #{$medium-up} {
+            margin-left: 0.5rem;
+        }
+    }
+
+    dt {
+        margin-bottom: -.3rem;
+    }
+
+    dd {
+        color: #666;
+        text-align: right;
+        font-size: .9rem;
+    }
+
+    .grey {
+        color: #666;
+        font-size: .9rem;
+    }
+}
+
 #breadcrumb {
 
+    margin-top: .3rem;
     &+ #page {
-        margin-top: 1rem;
+        margin-top: 1.3rem;
     }
-    margin-bottom: 5px;
+    //margin-bottom: 10rem;//5px;
 
     //background-color: #f6f6f6;
     //border:1px solid #CCC;

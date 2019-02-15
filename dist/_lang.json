@@ -109,6 +109,182 @@
             }
         }
     },
+    "cv": {
+        "education": {
+            "en": "Education",
+            "fr": "Formation",
+            "data": {
+                "en": [
+                    {
+                        "title": "Universite Degree - Innovation Entrepreneurship",
+                        "location": "2008 - Besançon (25)"
+                    },
+                    {
+                        "title": "Master Degree - Multimedia Products and Services",
+                        "location": "2008 - Montbéliard (25)"
+                    },
+                    {
+                        "title": "Bachelor - Multimedia Products and Services",
+                        "location": "2006 - Montbéliard (25)"
+                    },
+                    {
+                        "title": "Bachelor - Communication Services and Network",
+                        "location": "2005 - Montbéliard (25)"
+                    }
+                ],
+                "fr": [
+                    {
+                        "title": "DU Entrepreneuriat de l'Innovation",
+                        "location": "2008 - Besançon (25)"
+                    },
+                    {
+                        "title": "Master 2 Produits et Services Multimédia",
+                        "location": "2008 - Montbéliard (25)"
+                    },
+                    {
+                        "title": "Licence Produits et Services Multimédia",
+                        "location": "2006 - Montbéliard (25)"
+                    },
+                    {
+                        "title": "DUT Services et Réseaux de Communication",
+                        "location": "2005 - Montbéliard (25)"
+                    }
+                ]
+            }
+        },
+        "skills": {
+            "en": "Skills",
+            "fr": "Compétences",
+            "data": {
+                "en": [
+                    {
+                        "title": "JavaScript",
+                        "description": "TypeScript, nodeJS, React, jQuery"
+                    },
+                    {
+                        "title": "Databases",
+                        "description": "MyQSL, PostgreSQL, MongoDB"
+                    },
+                    {
+                        "title": "Front End",
+                        "description": "HTML5, CSS3 (sass), Templating engines (erb, pug, jade...), responsive, pixel perfect"
+                    },
+                    {
+                        "title": "Back end",
+                        "description": "PHP, Ruby On Rails, Java, nodeJS"
+                    },
+                    {
+                        "title": "Animation",
+                        "description": "ActionScript 3, PIXI"
+                    },
+                    {
+                        "title": "Project management",
+                        "description": "SCRUM, UML, Podio, Git, SVN, Lean Manufacturing"
+                    },
+                    {
+                        "title": "CMS",
+                        "description": "Craft, Wordpress"
+                    },
+                    {
+                        "title": "Teaching",
+                        "description": "Photoshop, Flash, ActionScript"
+                    },
+                    {
+                        "title": "Design",
+                        "description": "Photoshop, Illustrator"
+                    },
+                    {
+                        "title": "Various",
+                        "description": "Bendex, Clipper"
+                    }
+                ],
+                "fr": [
+                    {
+                        "title": "JavaScript",
+                        "description": "TypeScript, nodeJS, React, jQuery"
+                    },
+                    {
+                        "title": "Bases de données",
+                        "description": "MyQSL, PostgreSQL, MongoDB"
+                    },
+                    {
+                        "title": "Front End",
+                        "description": "HTML5, CSS3 (sass), Templating engines (erb, pug, jade...), responsive, pixel perfect"
+                    },
+                    {
+                        "title": "Back end",
+                        "description": "PHP, Ruby On Rails, Java, nodeJS"
+                    },
+                    {
+                        "title": "Animation",
+                        "description": "ActionScript 3, PIXI"
+                    },
+                    {
+                        "title": "Management de projet",
+                        "description": "SCRUM, UML, Podio, Git, SVN, Lean Manufacturing"
+                    },
+                    {
+                        "title": "CMS",
+                        "description": "Craft, Wordpress"
+                    },
+                    {
+                        "title": "Enseignement",
+                        "description": "Photoshop, Flash, ActionScript"
+                    },
+                    {
+                        "title": "Design",
+                        "description": "Photoshop, Illustrator"
+                    },
+                    {
+                        "title": "Divers",
+                        "description": "Bendex, Clipper"
+                    }
+                ]
+            }
+        },
+        "lang": {
+            "en": "Languages",
+            "fr": "Langues",
+            "data": {
+                "en": [
+                    {
+                        "title": "French",
+                        "description": "Native"
+                    },
+                    {
+                        "title": "English",
+                        "description": "Fluent"
+                    },
+                    {
+                        "title": "German",
+                        "description": "Notions"
+                    }
+                ],
+                "fr": [
+                    {
+                        "title": "Français",
+                        "description": "Langue maternelle"
+                    },
+                    {
+                        "title": "Anglais",
+                        "description": "Bilingue"
+                    },
+                    {
+                        "title": "Allemand",
+                        "description": "Notions"
+                    }
+                ]
+            }
+        },
+        "hobbies": {
+            "en": "Hobbies",
+            "fr": "Loisirs",
+            "data": {
+                "en": "Running, swimming, Chess, Drums, Travels",
+                "fr": "Course à pied, natation, echecs, percussions, voyages"
+            }
+        }
+    },
     "work": {
         "page-title": {
             "en": "Work",

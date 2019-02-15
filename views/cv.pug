@@ -1,0 +1,32 @@
+extends layout/_layout
+
+block content
+    .grid-container.cv
+        .grid-x.grid-padding-x
+            .cell.medium-6.cv-right
+                .grid-container.full
+                    .grid-y.grid-padding-x
+                        .cell.page
+                            h1=t("cv.education")
+                            for data in t("cv.education.data")
+                                dl
+                                    dt=data.title
+                                    dd=data.location
+                        .cell.page
+                            h1=t("cv.lang")
+                            for data in t("cv.lang.data")
+                                p
+                                    b=data.title 
+                                    span.grey=` ${data.description}`
+            .cell.medium-auto.cv-left
+                .grid-container.full
+                    .grid-y.grid-padding-x
+                        .cell.page
+                            h1=t("cv.skills")
+                            for data in t("cv.skills.data")
+                                p 
+                                    b=data.title
+                                    span.grey=` ${data.description}`
+                        .cell.page
+                            h1=t("cv.hobbies")
+                            p=t("cv.hobbies.data")

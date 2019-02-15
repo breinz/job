@@ -1,5 +1,6 @@
 $pink: #C4037C;
 $yellow: #F7C901;
+$admin-main-color:#ca1e1e;
 //  Foundation for Sites Settings
 //  -----------------------------
 //
@@ -73,7 +74,7 @@ $global-lineheight: 1;
 $foundation-palette: (
   primary: #1779ba,
   secondary: #767676,
-  success: #7CB981,//#3adb76,
+  success: $admin-main-color,// #7CB981,//#3adb76,
   warning: #ffae00,
   alert: #cc4b37,
 );
