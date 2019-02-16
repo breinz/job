@@ -4,7 +4,7 @@ import { t, lang } from "../langController";
 import { sort } from "../utils";
 
 const router = express.Router();
-const PER_PAGE = 5;
+const PER_PAGE = 1;
 
 /**
  * Menu item

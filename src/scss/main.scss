@@ -262,6 +262,7 @@ a.tag {
     margin-top: 1rem;
     a{
         background-color: $yellow;
+        box-shadow: 1px 1px 1px $box-shadow-color;
         border-radius: 5px;
         color:#FFF;
         font-weight: bold;
@@ -272,6 +273,7 @@ a.tag {
 
         &:hover, &.current {
             background-color: $pink;
+            box-shadow: none;
         }
     }
 }
@@ -571,14 +573,18 @@ footer {
     a {
         display: inline-block;
         padding: 5px;
-        //border-radius: 8px;
         
         transition: background-color 500ms, box-shadow 500ms;
-        box-shadow: 0px 0px 3px #999;
-        
+
+        img {
+            box-shadow: 0 0 10px #999;
+            transition: box-shadow 300ms;
+        }
+
         &:hover {
-            box-shadow: 0px 0px 8px #999;
-            background-color: #fff;
+            img {
+                box-shadow: 0 0 15px #333;
+            }
         }
     }
     .title {
