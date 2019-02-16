@@ -3306,6 +3306,11 @@ textarea.with-tools {
     transition: box-shadow 300ms; }
   .work-item a:hover img {
     box-shadow: 0 0 15px #333; }
+  .work-item a .title {
+    color: #0a0a0a;
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding-bottom: 0.5rem; }
 
 .user-menu #user-link {
   font-weight: bold; }
@@ -3502,6 +3507,9 @@ footer {
   .page-y {
     margin-top: 0; } }
 
+/* *************************************************************
+    CV
+************************************************************* */
 #cv-home-box a {
   background: linear-gradient(to bottom, transparent 0%, transparent 78%, rgba(0, 0, 0, 0.2) 100%);
   background-color: #F7C901;
@@ -3545,6 +3553,9 @@ footer {
   color: #666;
   font-size: .9rem; }
 
+/* *************************************************************
+    Breadcrumb
+************************************************************* */
 #breadcrumb {
   margin-top: .3rem; }
   #breadcrumb + #page {
