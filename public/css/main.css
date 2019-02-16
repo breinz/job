@@ -3198,6 +3198,21 @@ a.tag {
   .lang-icon.current, .lang-icon:hover {
     filter: grayscale(0); }
 
+#pagination {
+  text-align: center;
+  margin-top: 1rem; }
+  #pagination a {
+    background-color: #F7C901;
+    border-radius: 5px;
+    color: #FFF;
+    font-weight: bold;
+    padding: 5px 0;
+    margin: 0 5px;
+    min-width: 2.5rem;
+    display: inline-block; }
+    #pagination a:hover, #pagination a.current {
+      background-color: #C4037C; }
+
 #citation {
   position: relative; }
   #citation #citation-content {

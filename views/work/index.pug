@@ -18,3 +18,11 @@ block content
                             img(src=getImg(item.pic, "banner"), alt="")
                         if (index < items.length)
                             hr
+            if total > PER_PAGE
+                .cell#pagination
+                    a(href="/work") <<
+                    -let p=1
+                    while p < Math.ceil(total/PER_PAGE)+1
+                        a(href=`/work/page:${p}` class=page==p-1?"current":"")=p
+                        -p++
+                    a(href=`/work/page:${Math.ceil(total/PER_PAGE)}`) >>

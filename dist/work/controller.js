@@ -13,6 +13,7 @@ const model_1 = require("./model");
 const langController_1 = require("../langController");
 const utils_1 = require("../utils");
 const router = express.Router();
+const PER_PAGE = 5;
 router.use((req, res, next) => {
     res.locals.menu = "work";
     res.locals.bc = [[langController_1.t("work.page-title"), "/work"]];
@@ -20,8 +21,19 @@ router.use((req, res, next) => {
 });
 router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     res.locals.bc = [];
-    let items = yield model_1.default.find().sort(utils_1.sort(`title_${langController_1.lang}`)).populate("pic");
-    res.render("work/index", { items: items });
+    let total = yield model_1.default.estimatedDocumentCount();
+    let items = yield model_1.default.find().sort(utils_1.sort(`title_${langController_1.lang}`)).limit(PER_PAGE).populate("pic");
+    res.render("work/index", { items: items, total: total, page: 0, PER_PAGE: PER_PAGE });
+}));
+router.get(/page:(\d+)/, (req, res) => __awaiter(this, void 0, void 0, function* () {
+    res.locals.bc = [];
+    let page = req.params[0] - 1;
+    let total = yield model_1.default.estimatedDocumentCount();
+    if (page <= 0 || page * PER_PAGE > total) {
+        return res.redirect("/work");
+    }
+    let items = yield model_1.default.find().sort(utils_1.sort(`title_${langController_1.lang}`)).skip(page * PER_PAGE).limit(PER_PAGE).populate("pic");
+    res.render("work/index", { items: items, total: total, page: page, PER_PAGE: PER_PAGE });
 }));
 router.get("/tag/:tag", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let tag = req.params.tag;

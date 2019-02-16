@@ -4,6 +4,7 @@ import { t, lang } from "../langController";
 import { sort } from "../utils";
 
 const router = express.Router();
+const PER_PAGE = 5;
 
 /**
  * Menu item
@@ -19,13 +20,33 @@ router.use((req, res, next) => {
  * Home
  */
 router.get("/", async (req, res) => {
-    //res.locals.bc = [["Travels"]];
     res.locals.bc = [];
 
-    let items = await Work.find().sort(sort(`title_${lang}`)).populate("pic") as [WorkModel];
+    let total = await Work.estimatedDocumentCount();
 
-    res.render("work/index", { items: items });
+    let items = await Work.find().sort(sort(`title_${lang}`)).limit(PER_PAGE).populate("pic") as [WorkModel];
+
+    res.render("work/index", { items: items, total: total, page: 0, PER_PAGE: PER_PAGE });
 });
+
+/**
+ * Page
+ */
+router.get(/page:(\d+)/, async (req, res) => {
+    res.locals.bc = [];
+
+    let page: number = req.params[0] - 1;
+
+    let total = await Work.estimatedDocumentCount();
+
+    if (page <= 0 || page * PER_PAGE > total) {
+        return res.redirect("/work");
+    }
+
+    let items = await Work.find().sort(sort(`title_${lang}`)).skip(page * PER_PAGE).limit(PER_PAGE).populate("pic") as [WorkModel];
+
+    res.render("work/index", { items: items, total: total, page: page, PER_PAGE: PER_PAGE });
+})
 
 router.get("/tag/:tag", async (req, res) => {
     let tag = req.params.tag;
