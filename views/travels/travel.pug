@@ -13,8 +13,9 @@ block content
     if travel.pic && t(travel, "description")!==""
         img.article-banner.visionneuse-reveal(src=getImg(travel.pic, "banner") data-src=getImg(travel.pic) data-all="travel-pics" data-index=0)
     
-    .justify
-        p!=format(t(travel, "description"))
+    if t(travel, "description")!==""
+        .justify
+            p!=format(t(travel, "description"))
     
     -let pics=[getImg(travel.pic)]
 
