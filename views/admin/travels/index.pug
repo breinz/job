@@ -23,8 +23,10 @@ mixin line(travel, index)
             small(style="color:"+((!t(travel.seo, "title") || t(travel.seo, "title")=="")?"#A00":"#0A0"))
                 small seo
         td.text-right
+            a.admin-link(href=`/travels/${travel.url}` title="View") &copysr;
+            |&nbsp;
             a.admin-link(href=`/admin/travels/${travel.id}/pictures` title="Pictures") &boxbox;
-            span &nbsp;
+            |&nbsp;
             if travel.children && travel.children.length==0
                 +delete(href=`/admin/travels/${travel.id}/delete`)
             else

@@ -16,6 +16,8 @@ mixin line(work)
             small(style="color:"+((!t(work.seo, "title") || t(work.seo, "title")=="")?"#A00":"#0A0"))
                 small seo
         td.text-right
+            a.admin-link(href=`/work/${work.url}`) &copysr;
+            |&nbsp;
             //a.admin-link(href=`/admin/work/${work.id}/pictures` title="Pictures") &boxbox;
             //span &nbsp;
             +delete(href=`/admin/work/${work.id}/delete`)

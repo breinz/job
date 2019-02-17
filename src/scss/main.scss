@@ -145,8 +145,8 @@ header {
     .main-menu {
         box-shadow: 0 5px 10px $box-shadow-color;
 
-        background-color: $yellow;//#F7C901;
-        background: linear-gradient(to bottom, smart-scale($yellow, 5%) 0%, $yellow 22%, $yellow 100%, smart-scale($yellow, 10%) 100%);//,#CAA60A 100%);
+        background-color: rgba($yellow, .97);//#F7C901;
+        background: linear-gradient(to bottom, smart-scale($yellow, 5%) 0%, rgba($yellow, .97) 22%, rgba($yellow, .97) 100%, smart-scale($yellow, 10%) 100%);//,#CAA60A 100%);
         border-bottom: 5px solid #FFF;
         padding: 0;
         margin: 0;
@@ -234,27 +234,29 @@ header {
 .admin header {
 
     .main-menu {
-        background: none;
-        background-color: $admin-main-color;
+        background: url("/img/bg1.gif");
+        //background-color: $admin-main-color;
     }
 
     nav.main {
         li {
             a {
                 color:#FFF;
+                color:$black;
 
                 &:visited {
                     color: #FFF;
+                    color:$black;
                 }
                 
                 &:hover, &:active {
-                    color:black;
+                    color:$admin-main-color;
                 }
             }
 
             &.active{
                 a{
-                    color: #000;
+                    color: $admin-main-color;
                 }
             }
         }
@@ -372,6 +374,7 @@ textarea.with-tools {
 
 .admin-link {
     font-weight: bold;
+    color:$admin-main-color;
     //font-size: 1.5rem;
     //line-height: 1rem;
 }
@@ -519,7 +522,8 @@ footer {
 
     padding-top: 2rem;
     padding-bottom: 2rem;
-    background-color: $yellow;// $home-color;
+    background-color: rgba($yellow, .96);// $home-color;
+    background: linear-gradient(to bottom, rgba($yellow, 1) 0%, rgba($yellow, .86) 100%);// $home-color;
     color:$black;
     border-top: 5px solid #FFF;//rgba(#FFF, .7);
 
