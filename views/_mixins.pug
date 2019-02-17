@@ -33,3 +33,13 @@ mixin textarea(name, rows=10)
 mixin to_admin(link)
     if current_user && current_user.admin
         a(href=link style="position:absolute;right:0;color:red;font-size:1.5rem" title="Edit") &ofcir;
+
+mixin seo_form(data)
+    fieldset
+        legend SEO
+        label Title
+            input(type="text" name="seo_title" value=t(data.seo, "title"))
+        label Keywords
+            input(type="text" name="seo_keywords" value=t(data.seo, "keywords"))
+        label Description
+            input(type="text" name="seo_description" value=t(data.seo, "description"))

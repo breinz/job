@@ -5,7 +5,8 @@ export interface NewData {
     name: string,
     title: string,
     parent: string,
-    description: string
+    description: string,
+    seo_title: string, seo_keywords: string, seo_description: string,
 }
 
 export interface NewErrors {
@@ -22,7 +23,8 @@ export interface EditData {
     name: string,
     title: string,
     parent: string,
-    description: string
+    description: string,
+    seo_title: string, seo_keywords: string, seo_description: string,
 }
 
 export interface EditErrors {

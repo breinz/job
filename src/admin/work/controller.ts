@@ -142,6 +142,10 @@ router.get("/:id/delete", async (req, res, next) => {
 const populate = (work: WorkModel, data: NewData | EditData, req: express.Request) => {
     return new Promise(async (resolve, reject) => {
         work[`title_${lang}`] = data.title;
+        work.seo[`title_${lang}`] = data.seo_title;
+        work.seo[`description_${lang}`] = data.seo_description;
+        work.seo[`keywords_${lang}`] = data.seo_keywords;
+
         if (!work.url || lang === "en") {
             work.url = changeCase.paramCase(data.title);
         }

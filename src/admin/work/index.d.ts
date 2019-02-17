@@ -1,11 +1,12 @@
 import { Response, Request, NextFunction } from "express";
 import { json } from "body-parser";
+import { SEO } from "..";
 
-export interface NewData {
+export interface NewData extends SEO {
     title: string,
     tags: string,
     description: string,
-    pic: string
+    pic: string,
 }
 
 export interface NewErrors {
@@ -18,7 +19,7 @@ export interface NewErrors {
     description: string
 }*/
 
-export interface EditData {
+export interface EditData extends SEO {
     title: string,
     tags: string,
     description: string

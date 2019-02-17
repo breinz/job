@@ -21,6 +21,12 @@ export type TravelModel = Document & {
         featured: number,
         featured_at: Date
     },
+    seo: {
+        [index: string]: string,
+        title_fr: string, title_en: string,
+        description_fr: string, description_en: string,
+        keywords_fr: string, keywords_en: string,
+    }
 
     featured: () => void
 };
@@ -48,6 +54,11 @@ const travelSchema = new Schema({
         viewed: { type: Number, default: 0 },
         featured: { type: Number, default: 0 },
         featured_at: Date
+    },
+    seo: {
+        title_fr: String, title_en: String,
+        description_fr: String, description_en: String,
+        keywords_fr: String, keywords_en: String,
     }
 });
 

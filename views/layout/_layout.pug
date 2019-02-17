@@ -3,19 +3,21 @@ doctype html
 html(lang=lang)
   head
     meta(charset='utf-8')
+    meta(http-equiv="Content-Type" content="text/html; charset=ISO-8859-1")
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    
-    //meta(name='theme-color' content='#4DA5F4')
-    //meta(name='csrf-token', content=_csrf)
-    //title #{__(title)} - Game
-    //link(rel='shortcut icon', href='/images/favicon.png')
     link( rel="icon" href="/img/favicon.ico")
     link(rel='stylesheet', href='/css/main.css')
-    title Julien Breiner
-  body(class=menu)
-    
+    title 
+      if seo && t(seo, "title")
+        =`${t(seo, "title")} | `
+      |Julien Breiner
+    if seo && t(seo, "description")
+      meta(name="description" content=t(seo, "description"))
+    if seo && t(seo, "keywords")
+      meta(name="keywords" content=t(seo, "keywords"))
 
+  body(class=menu)
     //include flash_message
     include _header
     //include _flash
@@ -44,5 +46,4 @@ html(lang=lang)
 
     link(href="https://fonts.googleapis.com/css?family=Passion+One:900|Advent+Pro:100" rel="stylesheet")
 
-      
     script(src="/js/script.js")

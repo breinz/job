@@ -87,7 +87,10 @@ router.get("*", async (req, res, next) => {
 
     res.locals.bc.push([t(work, "title")]);
 
-    res.render("work/item", { item: work });
+    res.render("work/item", {
+        item: work,
+        seo: work.seo
+    });
 });
 
 export default router;

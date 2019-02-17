@@ -75,6 +75,16 @@ h1 {
     font-weight: bold;
 }
 
+fieldset {
+    border:1px solid #CCC;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+
+    legend{
+        padding: 0 .5rem;
+    }
+}
+
 .site-title {
     
     padding-bottom: 1rem;
@@ -658,6 +668,14 @@ footer {
         text-shadow: $text-shadow;
         margin-top: -2rem;
         font-size: 3rem;//2.5rem;
+
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently
+                            supported by Chrome and Opera */
         
         @media #{$large-up} {
             margin-left: -1.5rem;

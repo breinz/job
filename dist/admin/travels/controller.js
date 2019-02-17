@@ -128,6 +128,9 @@ const populateTravel = (travel, data, req) => {
         travel[`name_${langController_1.lang}`] = data.name;
         travel[`title_${langController_1.lang}`] = data.title;
         travel[`description_${langController_1.lang}`] = data.description;
+        travel.seo[`title_${langController_1.lang}`] = data.seo_title;
+        travel.seo[`keywords_${langController_1.lang}`] = data.seo_keywords;
+        travel.seo[`description_${langController_1.lang}`] = data.seo_description;
         if (!travel.url || langController_1.lang == "en") {
             travel.url = changeCase.paramCase(data.name);
         }

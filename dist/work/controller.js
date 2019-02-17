@@ -63,7 +63,10 @@ router.get("*", (req, res, next) => __awaiter(this, void 0, void 0, function* ()
         }
     }
     res.locals.bc.push([langController_1.t(work, "title")]);
-    res.render("work/item", { item: work });
+    res.render("work/item", {
+        item: work,
+        seo: work.seo
+    });
 }));
 exports.default = router;
 //# sourceMappingURL=controller.js.map

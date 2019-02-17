@@ -90,7 +90,12 @@ router.get("*", async (req, res, next) => {
     // Find the children
     let children = await Travel.find({ parent: travel.id }).sort(sort).populate("pic") as [TravelModel];
 
-    res.render("travels/travel", { travel: travel, travels: children, path: "/travels" + req.path });
+    res.render("travels/travel", {
+        travel: travel,
+        travels: children,
+        path: "/travels" + req.path,
+        seo: travel.seo
+    });
 });
 
 /**

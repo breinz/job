@@ -50,16 +50,9 @@ form(method="POST" encType="multipart/form-data")
             img(src=getImg(data.pic, "nano"))
         input(type="file", name="pic")
 
+    +seo_form(data)
+    
 
     div
         input.button(type="submit" value="Save")
     
-    dl
-        dt Name
-        dd=data.name
-    dl
-        dt Title
-        dd=data.title
-    dl
-        dt Description
-        dd=data.description

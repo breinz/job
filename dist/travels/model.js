@@ -30,6 +30,11 @@ const travelSchema = new mongoose_1.Schema({
         viewed: { type: Number, default: 0 },
         featured: { type: Number, default: 0 },
         featured_at: Date
+    },
+    seo: {
+        title_fr: String, title_en: String,
+        description_fr: String, description_en: String,
+        keywords_fr: String, keywords_en: String,
     }
 });
 travelSchema.pre("save", function (next) {

@@ -198,7 +198,10 @@ const populateTravel = (travel: TravelModel, data: NewData | EditData, req: expr
     return new Promise(async (resolve, reject) => {
         travel[`name_${lang}`] = data.name;
         travel[`title_${lang}`] = data.title;
-        travel[`description_${lang}`] = data.description
+        travel[`description_${lang}`] = data.description;
+        travel.seo[`title_${lang}`] = data.seo_title;
+        travel.seo[`keywords_${lang}`] = data.seo_keywords;
+        travel.seo[`description_${lang}`] = data.seo_description;
 
         //travel.name = data.name;
         //travel.title = data.title;

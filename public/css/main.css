@@ -2121,7 +2121,7 @@ legend {
 .fieldset {
   margin: 1.125rem 0;
   padding: 1.25rem;
-  border: 1px solid #cacaca; }
+  border: 1px solid #F00; }
   .fieldset legend {
     margin: 0;
     margin-left: -0.1875rem;
@@ -3103,6 +3103,13 @@ body {
 h1 {
   font-weight: bold; }
 
+fieldset {
+  border: 1px solid #CCC;
+  padding: 0 1rem;
+  margin-bottom: 1rem; }
+  fieldset legend {
+    padding: 0 .5rem; }
+
 .site-title {
   padding-bottom: 1rem; }
   .site-title #site-subtitle {
@@ -3479,7 +3486,20 @@ footer {
     color: #FFF;
     text-shadow: 1px 1px 0 #333;
     margin-top: -2rem;
-    font-size: 3rem; }
+    font-size: 3rem;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                            supported by Chrome and Opera */ }
     @media screen and (min-width: 64em) {
       #page h1, #page h2, .page h1, .page h2 {
         margin-left: -1.5rem; } }

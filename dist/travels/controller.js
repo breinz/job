@@ -64,7 +64,12 @@ router.get("*", (req, res, next) => __awaiter(this, void 0, void 0, function* ()
     let sort = {};
     sort[`name_${langController_1.lang}`] = 1;
     let children = yield model_1.default.find({ parent: travel.id }).sort(sort).populate("pic");
-    res.render("travels/travel", { travel: travel, travels: children, path: "/travels" + req.path });
+    res.render("travels/travel", {
+        travel: travel,
+        travels: children,
+        path: "/travels" + req.path,
+        seo: travel.seo
+    });
 }));
 const findParents = (travel, tree = null) => {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {

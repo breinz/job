@@ -89,6 +89,9 @@ router.get("/:id/delete", (req, res, next) => __awaiter(this, void 0, void 0, fu
 const populate = (work, data, req) => {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         work[`title_${langController_1.lang}`] = data.title;
+        work.seo[`title_${langController_1.lang}`] = data.seo_title;
+        work.seo[`description_${langController_1.lang}`] = data.seo_description;
+        work.seo[`keywords_${langController_1.lang}`] = data.seo_keywords;
         if (!work.url || langController_1.lang === "en") {
             work.url = changeCase.paramCase(data.title);
         }
