@@ -19,6 +19,9 @@ mixin line(travel, index)
             small.has-tip(data-tooltip title=`Viewed ${travel.stat.viewed || 0} times`)=travel.stat.viewed || 0
         td
             small.has-tip(data-tooltip title=`Featured ${travel.stat.featured || 0} times`)=travel.stat.featured || 0
+        td
+            small(style="color:"+((!t(travel.seo, "title") || t(travel.seo, "title")=="")?"#A00":"#0A0"))
+                small seo
         td.text-right
             a.admin-link(href=`/admin/travels/${travel.id}/pictures` title="Pictures") &boxbox;
             span &nbsp;

@@ -12,6 +12,9 @@ mixin line(work)
             small.has-tip(data-tooltip title=`Viewed ${work.stat.viewed} times`)=work.stat.viewed
         td
             small.has-tip(data-tooltip title=`Featured ${work.stat.featured} times`)=work.stat.featured
+        td
+            small(style="color:"+((!t(work.seo, "title") || t(work.seo, "title")=="")?"#A00":"#0A0"))
+                small seo
         td.text-right
             //a.admin-link(href=`/admin/work/${work.id}/pictures` title="Pictures") &boxbox;
             //span &nbsp;
