@@ -227,7 +227,7 @@ textarea {
 .grid-container {
   padding-right: 0.625rem;
   padding-left: 0.625rem;
-  max-width: 50rem;
+  max-width: 56.25rem;
   margin: 0 auto; }
   @media print, screen and (min-width: 40em) {
     .grid-container {
@@ -1781,7 +1781,7 @@ a {
 
 hr {
   clear: both;
-  max-width: 50rem;
+  max-width: 56.25rem;
   height: 0;
   margin: 1.25rem auto;
   border-top: 0;
@@ -3140,8 +3140,6 @@ header {
     }*/ }
   header #header-title {
     background-color: #fff; }
-  header .header-title-content {
-    background-color: #FFF; }
   header .main-menu {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     background-color: rgba(247, 201, 1, 0.97);
