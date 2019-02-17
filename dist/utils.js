@@ -177,7 +177,7 @@ function formatText(txt) {
         let rpl = `<object type="application/x-shockwave-flash" data="/swf/${file}" width="${width}" height="${height}">`;
         rpl += `<param name="movie" value="/swf/${file}" />`;
         rpl += '<param name="quality" value="high" />';
-        rpl += '<div class="text-center callout" style="margin:0 5rem">Here is supposed to lay a swf object, if you see this message, it means you are in a context that doesn\'t support it, or that you blocked it.<br>That\'s why I don\'t make swf for the web anymore :(<br>Try on a computer and allow Flash';
+        rpl += '<div class="text-center callout" style="margin:0 5rem">This is a swf object.  If you see this message, you are viewing this site in a context that doesn\'t support swf or where swf has been blocked.';
         rpl += "</object>";
         return rpl;
     });

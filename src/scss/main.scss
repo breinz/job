@@ -56,6 +56,7 @@ body {
     //margin: 0;
     //background-color: $home-color;
     background-color: #EEE;
+    font-weight: 200;
 
     &.modal-open {
         //position: fixed;
@@ -64,6 +65,9 @@ body {
 
     background-image: url("/img/bg1.gif");
     background-repeat: repeat;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 h1 {
@@ -71,32 +75,50 @@ h1 {
     font-weight: bold;
 }
 
-h1#site-title {
-  
-    padding-top: 1.5rem;
-    line-height: 1;
+.site-title {
+    
+    padding-bottom: 1rem;
 
-    font-size: 3.5rem;
+    #site-subtitle{
+        color:#666;//$pink;//smart-scale($pink, 20%);//rgba(#CE4199, .5);
+        font-weight: lighter;
+        font-family: "Advent Pro";
 
-    @media #{$small-only} {
-        font-size: 2.5rem;
     }
 
-    a {
-        font-family: "Passion One";
-        color:$pink;
-        text-shadow: 1px 1px 0 #000;
-        transition: color 300ms;
+    h1#site-title {
+    
+        padding-top: 1.5rem;
+        line-height: 1;
+        margin: 0;
 
-        &:hover {
-            color:#FFF;
+        font-weight: normal;
+        font-size: 3.5rem;
+
+        @media #{$small-only} {
+            font-size: 2.5rem;
         }
+
+        a {
+            font-family: "Advent Pro";
+            //font-family: "Passion One";
+            //font-variant: small-caps;
+
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            //-webkit-text-stroke: 3px #FFF;
+            //text-shadow: #000 0px 2px 1px;
+
+            color:$pink;
+            //text-shadow: 1px 1px 0 #000;
+            transition: color 300ms;
+
+            &:hover {
+                color:smart-scale($pink, 20%);//#FFF;
+            }
+        }
+
     }
-
-}
-
-#site-subtitle{
-    color:rgba(#CE4199, .5);
 }
 
 header {
@@ -113,13 +135,9 @@ header {
     .main-menu {
         box-shadow: 0 5px 10px $box-shadow-color;
 
-        //background-color: $home-color;//rgba(102, 83, 47, 0.719);
         background-color: $yellow;//#F7C901;
-        background: linear-gradient(to bottom, #E1B702 0%, $yellow 22%, $yellow 100%);//,#CAA60A 100%);
-        //border-bottom: 4px solid rgba(#FFF, .7);
+        background: linear-gradient(to bottom, smart-scale($yellow, 5%) 0%, $yellow 22%, $yellow 100%, smart-scale($yellow, 10%) 100%);//,#CAA60A 100%);
         border-bottom: 5px solid #FFF;
-        //border-top: 1px solid #CCC;
-        //border-bottom: 1px solid #000;
         padding: 0;
         margin: 0;
     }
@@ -128,7 +146,7 @@ header {
         background-color: rgb(194, 0, 0);
     }*/
 
-    $main-menu-link: #000;
+    $main-menu-link: smart-scale($yellow, 60%, 80%);//#000;
 
     nav.main {
         //color: #FFF;
@@ -145,6 +163,8 @@ header {
                 //color:#FFF;
                 color:$main-menu-link;
                 text-decoration: none;
+
+                transition: color 300ms;
                 &:visited {
                     //color: #FFF;
                     color:$main-menu-link;
@@ -153,12 +173,12 @@ header {
 
             &.active {
                 a {
-                    color: #C4037C;
+                    color: smart-scale($yellow, 100%, 80%);//#C4037C;
                 }
             }
 
             a:hover{
-                color:#CE4199;
+                color:smart-scale($yellow, 90%, 80%);//#CE4199;
             }
 
         }
@@ -282,7 +302,9 @@ a.tag {
     position: relative;
 
     #citation-content {
-        font-family: "Dancing Script";
+        //font-family: "Dancing Script";
+        //font-family: "Charm";
+        font-family: "Advent Pro";
         //font-style: italic;
         font-size: 1rem;
         color: #666;
@@ -359,19 +381,6 @@ textarea.with-tools {
 
     &.disabled {
         color: lighten($alert-color, 40%)
-    }
-}
-
-.site-title {
-    h1 {
-        margin:0;
-        padding-top: 1rem;
-        font-weight: bold;
-    }
-
-    div{
-        color: #999;
-        padding-bottom: 1rem;
     }
 }
 
@@ -634,15 +643,21 @@ footer {
     margin-top: 2rem;
     
     @media #{$medium-up} {
-        border-radius: 8px;
+        border-radius: 3px;
     }
 
     h1, h2 {
         font-family: "Passion One";
+        font-variant: all-small-caps;
+        //font-family: "Erica One";
+        font-weight: bolder;
+        //font-variant: small-caps;
+        //font-family: "Work Sans";
         color: #FFF;
+        //color:$yellow;
         text-shadow: $text-shadow;
         margin-top: -2rem;
-        font-size: 2.5rem;
+        font-size: 3rem;//2.5rem;
         
         @media #{$large-up} {
             margin-left: -1.5rem;
@@ -650,18 +665,19 @@ footer {
         }
         
         @media #{$medium-up} {
-            font-size: 3rem;
+            font-size: 3.5rem;//3rem;
+            margin-top: -2.5rem;
         }
     }
 
     h2{
-        font-size: 2.5rem;
+        font-size: 3rem;//2.5rem;
         margin-top: -2rem;
         margin-left: 0;
         
         @media #{$medium-up} {
-            margin-top: -1rem;
-            font-size: 1.8rem;
+            margin-top: -1.5rem;
+            font-size: 2.1rem;//1.8rem;
             margin-left: -1.5rem;
         }
     }
@@ -673,7 +689,7 @@ footer {
         }
         .sub{
             padding-left: .5rem;
-            font-variant: small-caps;
+            //font-variant: small-caps;
             font-size: 1.4rem;
             color: #999;
             display: inline-block;
