@@ -215,7 +215,7 @@ const populateTravel = (travel: TravelModel, data: NewData | EditData, req: expr
             let pic = req.files.pic as UploadedFile;
 
             //await mkdir(`${PIC_PATH}/${travel.id}`);
-            let pic_id = await mv_pic(`${PIC_PATH}`, pic);
+            let pic_id = (await mv_pic(`${PIC_PATH}`, pic)).id;
 
             travel.pic = pic_id;
 

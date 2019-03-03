@@ -24,6 +24,7 @@ const workSchema = new mongoose_1.Schema({
             return value;
         }
     },
+    pics: [{ type: mongoose_1.Schema.Types.ObjectId, ref: "Image" }],
     stat: {
         viewed: { type: Number, default: 0 },
         featured: { type: Number, default: 0 },

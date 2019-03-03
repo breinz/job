@@ -57,7 +57,7 @@ router.post("/new", /*validator.new,*/ async (req, res) => {
 
     try {
         let pic = req.files.pic as UploadedFile;
-        let pic_id = await mv_pic(`${PIC_PATH}`, pic, data.name, data.description);
+        let pic_id = (await mv_pic(`${PIC_PATH}`, pic, data.name, data.description)).id;
     } catch (err) {
         return res.render(`admin/images/new`, {
             data: data,
@@ -155,7 +155,7 @@ const populate = (image: ImageModel, data: NewData, req: express.Request) => {
         if (req.files.pic) {
             let pic = req.files.pic as UploadedFile;
 
-            let pic_id = await mv_pic(`${PIC_PATH}`, pic);
+            let pic_id = (await mv_pic(`${PIC_PATH}`, pic)).id;
 
             resolve();
         } else {

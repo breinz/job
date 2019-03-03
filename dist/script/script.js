@@ -70,5 +70,82 @@ $(function () {
             index = all.length;
         visionneuse(all[--index], index);
     });
+    if ($(".ajax-pic")) {
+        $('.ajax-pic').on("dragenter dragstart dragend dragleave dragover drag drop", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+        $(".ajax-pic").on({
+            dragenter: function (e) {
+                $(this).addClass("over");
+            },
+            dragleave: function (e) {
+                $(this).removeClass("over");
+            },
+            drop: function (e) {
+                let that = $(this);
+                $(this).removeClass("over");
+                let file;
+                let event = e.originalEvent;
+                if (event && event.dataTransfer) {
+                    file = event.dataTransfer.files[0];
+                }
+                if (!file) {
+                    return console.log("ERROR!");
+                }
+                let formData = new FormData();
+                formData.append("file", file, file.name);
+                formData.append("upload_file", "true");
+                const url = $(this).data("model");
+                const item_id = $(this).data("id");
+                $.post({
+                    url: `/${url}/${item_id}/add_inline_pic`,
+                    success: (data) => {
+                        let item = $("<div class='in-pic-item'>").appendTo(".in-pics");
+                        $(`<span>${$(".in-pics").children.length - 1}</span>`).appendTo(item);
+                        $("<img>", { src: data, style: "max-width:100;max-height:100" }).appendTo(item);
+                        $(".ajax-pic").appendTo(".in-pics");
+                    },
+                    error: (err) => {
+                        console.log(err);
+                        alert(`error`);
+                    },
+                    async: true,
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    timeout: 6000
+                });
+            }
+        });
+    }
+    $("#in-pic").on("change", () => {
+        console.log("try load");
+        let element = $(this)[0].activeElement;
+        let that = $(this);
+        let file = element.files[0];
+        console.log(file);
+        let formData = new FormData();
+        formData.append("file", file, file.name);
+        formData.append("upload_file", "true");
+        $.post({
+            url: "/in-pic",
+            success: (data) => {
+                console.log(that.siblings(".in-pics"));
+                $(".in-pics").append(data);
+            },
+            error: (err) => {
+                console.log(err);
+                alert(`error`);
+            },
+            async: true,
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            timeout: 6000
+        });
+    });
 });
 //# sourceMappingURL=script.js.map

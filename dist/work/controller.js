@@ -45,7 +45,7 @@ router.get("*", (req, res, next) => __awaiter(this, void 0, void 0, function* ()
     let route = req.path.substr(1).split('/');
     let work;
     try {
-        work = (yield model_1.default.findOne({ url: route[route.length - 1] }).populate("pic"));
+        work = (yield model_1.default.findOne({ url: route[route.length - 1] }).populate("pic").populate("pics"));
     }
     catch (err) {
         return res.redirect("/work");
@@ -62,6 +62,7 @@ router.get("*", (req, res, next) => __awaiter(this, void 0, void 0, function* ()
             next(err);
         }
     }
+    work[`description_${langController_1.lang}`] = utils_1.processText(langController_1.t(work, "description"), "/img/work/", work.pics);
     res.locals.bc.push([langController_1.t(work, "title")]);
     res.render("work/item", {
         item: work,

@@ -14,6 +14,7 @@ export type WorkModel = Document & {
     tags: string,
     description: string, description_fr: string, description_en: string,
     pic?: Types.ObjectId | string,
+    pics: Types.Array<Types.ObjectId | string | ImageModel>,
     stat: {
         viewed: number,
         featured: number,
@@ -46,6 +47,7 @@ const workSchema = new Schema({
             return value;
         }
     },
+    pics: [{ type: Schema.Types.ObjectId, ref: "Image" }],
     stat: {
         viewed: { type: Number, default: 0 },
         featured: { type: Number, default: 0 },

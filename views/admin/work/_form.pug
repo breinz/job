@@ -24,6 +24,16 @@ form(method="POST" encType="multipart/form-data")
     label
         |Description
         +textarea("description")=t(data, "description")
+    
+    label Pics
+    .in-pics
+        -let pic_index=0
+        for pic in data.pics
+            .in-pic-item
+                span=pic_index++
+                img(src=getImg(pic, "home"), alt="")
+        label.in-pic-item.ajax-pic(data-model="admin/work" data-id=data.id) +
+            input(type="file" name="in_pic" id="in-pic")
 
     label
         |Tags

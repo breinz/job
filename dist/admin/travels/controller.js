@@ -137,7 +137,7 @@ const populateTravel = (travel, data, req) => {
         travel.parent = data.parent || null;
         if (req.files.pic) {
             let pic = req.files.pic;
-            let pic_id = yield utils_1.mv_pic(`${PIC_PATH}`, pic);
+            let pic_id = (yield utils_1.mv_pic(`${PIC_PATH}`, pic)).id;
             travel.pic = pic_id;
             resolve();
         }

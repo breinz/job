@@ -32,7 +32,7 @@ router.post("/new", (req, res) => __awaiter(this, void 0, void 0, function* () {
     const data = req.body;
     try {
         let pic = req.files.pic;
-        let pic_id = yield utils_1.mv_pic(`${PIC_PATH}`, pic, data.name, data.description);
+        let pic_id = (yield utils_1.mv_pic(`${PIC_PATH}`, pic, data.name, data.description)).id;
     }
     catch (err) {
         return res.render(`admin/images/new`, {
@@ -49,7 +49,7 @@ const populate = (image, data, req) => {
         image.url = PIC_PATH;
         if (req.files.pic) {
             let pic = req.files.pic;
-            let pic_id = yield utils_1.mv_pic(`${PIC_PATH}`, pic);
+            let pic_id = (yield utils_1.mv_pic(`${PIC_PATH}`, pic)).id;
             resolve();
         }
         else {

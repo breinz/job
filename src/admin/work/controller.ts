@@ -31,7 +31,7 @@ router.use(async (req, res, next) => {
 
     next();
 
-})
+});
 
 /**
  * Index
@@ -43,6 +43,28 @@ router.get("/", async (req, res) => {
     const items = await Work.find().sort(sort(`title_${lang}`)).populate('pic') as [WorkModel];
 
     res.render(`${url}/index`, { items: items });
+});
+
+/**
+ * Create a new work
+ */
+router.post("/", async (req, res) => {
+    const data: NewData = req.body;
+
+    let work = new Work() as WorkModel;
+
+    work[`title_${lang}`] = data.title;
+
+    try {
+        await work.save();
+    } catch (err) {
+        return res.render(`${url}/new`, {
+            data: data,
+            error: err,
+        });
+    }
+
+    res.redirect(`/admin/work/${work.id}`);
 });
 
 /**
@@ -82,7 +104,7 @@ router.post("/new", validator.new, async (req, res) => {
 router.get("/:id", async (req, res) => {
     let work: WorkModel;
     try {
-        work = await Work.findById(req.params.id).populate("pic") as WorkModel;
+        work = await Work.findById(req.params.id).populate("pic").populate("pics") as WorkModel;
     } catch (err) {
         return res.redirect("/")
     }
@@ -92,6 +114,39 @@ router.get("/:id", async (req, res) => {
 
     res.render(`${url}/edit`, { item: work, data: work });
 });
+
+/**
+ * Ajax
+ * Add on inline image to use in description
+ */
+router.post("/:id/add_inline_pic", async (req, res, next) => {
+    // Find the Work
+    let work: WorkModel;
+    try {
+        work = await Work.findById(req.params.id) as WorkModel;
+    } catch (err) {
+        return res.send("ERROR!")
+    }
+    if (!work) return res.send("ERROR!!");
+
+
+    console.log("try upload ajax");
+    //console.log(req);
+    let file = req.files.file as UploadedFile;
+    console.log(file.name);
+
+    let pic = await mv_pic(PIC_PATH, file);
+
+    work.pics.push(pic.id);
+
+    try {
+        work.save();
+    } catch (err) {
+        return res.send("ERROR!!!");
+    }
+
+    res.send(`/${PIC_PATH}/${pic.fileName}`);
+})
 
 /**
  * Edit logic
@@ -156,7 +211,7 @@ const populate = (work: WorkModel, data: NewData | EditData, req: express.Reques
         if (req.files.pic) {
             let pic = req.files.pic as UploadedFile;
 
-            let pic_id = await mv_pic(`${PIC_PATH}`, pic);
+            let pic_id = (await mv_pic(`${PIC_PATH}`, pic)).id;
 
             work.pic = pic_id;
 

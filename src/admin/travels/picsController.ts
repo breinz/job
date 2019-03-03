@@ -67,7 +67,7 @@ router.get("/new", async (req, res, next) => {
 router.post("/new", async (req, res, next) => {
     let data: NewPicData = req.body;
 
-    let pic_id = await mv_pic("img/travels", <UploadedFile>req.files.pic, data.name, data.description);
+    let pic_id = (await mv_pic("img/travels", <UploadedFile>req.files.pic, data.name, data.description)).id;
 
     travel.pics.push(pic_id);
 

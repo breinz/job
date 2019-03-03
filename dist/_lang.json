@@ -167,7 +167,7 @@
                     },
                     {
                         "title": "Front End",
-                        "description": "HTML5, CSS3 (sass), Templating engines (erb, pug, jade...), responsive, pixel perfect"
+                        "description": "HTML5, CSS3 (sass), Templating engines (erb, pug, jade...), Layout frameworks (Foundation, Bootstrap...), responsive, pixel perfect"
                     },
                     {
                         "title": "Back end",
@@ -209,7 +209,7 @@
                     },
                     {
                         "title": "Front End",
-                        "description": "HTML5, CSS3 (sass), Templating engines (erb, pug, jade...), responsive, pixel perfect"
+                        "description": "HTML5, CSS3 (sass), Templating engines (erb, pug, jade...), Layout frameworks (Foundation, Bootstrap...), responsive, pixel perfect"
                     },
                     {
                         "title": "Back end",

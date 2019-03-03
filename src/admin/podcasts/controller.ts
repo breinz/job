@@ -148,7 +148,7 @@ const populate = (podcast: PodcastModel, data: NewData | EditData, req: express.
         if (req.files.pic) {
             let pic = req.files.pic as UploadedFile;
 
-            let pic_id = await mv_pic(`${PIC_PATH}`, pic);
+            let pic_id = (await mv_pic(`${PIC_PATH}`, pic)).id;
 
             podcast.pic = pic_id;
 

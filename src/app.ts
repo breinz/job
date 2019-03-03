@@ -9,7 +9,7 @@ import config from "./config";
 import User, { UserModel } from "./user/model";
 import Game from "./games/model";
 import * as fileUpload from "express-fileupload"
-import { getPic, formatText, shuffle, dayOfYear } from "./utils";
+import { getPic, formatText, shuffle, dayOfYear, mv_pic } from "./utils";
 import Citation, { CitationModel } from "./citations/model";
 import Travel, { TravelModel } from "./travels/model";
 import Podcast, { PodcastModel } from "./podcasts/model";

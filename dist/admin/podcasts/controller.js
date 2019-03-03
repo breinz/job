@@ -94,7 +94,7 @@ const populate = (podcast, data, req) => {
         podcast[`description_${langController_1.lang}`] = data.description;
         if (req.files.pic) {
             let pic = req.files.pic;
-            let pic_id = yield utils_1.mv_pic(`${PIC_PATH}`, pic);
+            let pic_id = (yield utils_1.mv_pic(`${PIC_PATH}`, pic)).id;
             podcast.pic = pic_id;
             resolve();
         }

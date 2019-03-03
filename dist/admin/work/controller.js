@@ -29,6 +29,21 @@ router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     const items = yield model_1.default.find().sort(utils_1.sort(`title_${langController_1.lang}`)).populate('pic');
     res.render(`${url}/index`, { items: items });
 }));
+router.post("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
+    const data = req.body;
+    let work = new model_1.default();
+    work[`title_${langController_1.lang}`] = data.title;
+    try {
+        yield work.save();
+    }
+    catch (err) {
+        return res.render(`${url}/new`, {
+            data: data,
+            error: err,
+        });
+    }
+    res.redirect(`/admin/work/${work.id}`);
+}));
 router.get("/new", (req, res) => __awaiter(this, void 0, void 0, function* () {
     res.locals.bc.push([langController_1.t("admin.new")]);
     res.render(`${url}/new`);
@@ -51,7 +66,7 @@ router.post("/new", validator_1.default.new, (req, res) => __awaiter(this, void 
 router.get("/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let work;
     try {
-        work = (yield model_1.default.findById(req.params.id).populate("pic"));
+        work = (yield model_1.default.findById(req.params.id).populate("pic").populate("pics"));
     }
     catch (err) {
         return res.redirect("/");
@@ -60,6 +75,29 @@ router.get("/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
         return res.redirect("/");
     res.locals.bc.push([work[`title_${langController_1.lang}`]]);
     res.render(`${url}/edit`, { item: work, data: work });
+}));
+router.post("/:id/add_inline_pic", (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    let work;
+    try {
+        work = (yield model_1.default.findById(req.params.id));
+    }
+    catch (err) {
+        return res.send("ERROR!");
+    }
+    if (!work)
+        return res.send("ERROR!!");
+    console.log("try upload ajax");
+    let file = req.files.file;
+    console.log(file.name);
+    let pic = yield utils_1.mv_pic(PIC_PATH, file);
+    work.pics.push(pic.id);
+    try {
+        work.save();
+    }
+    catch (err) {
+        return res.send("ERROR!!!");
+    }
+    res.send(`/${PIC_PATH}/${pic.fileName}`);
 }));
 router.post("/:id", validator_1.default.edit, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     let work;
@@ -100,7 +138,7 @@ const populate = (work, data, req) => {
         work[`description_${langController_1.lang}`] = data.description;
         if (req.files.pic) {
             let pic = req.files.pic;
-            let pic_id = yield utils_1.mv_pic(`${PIC_PATH}`, pic);
+            let pic_id = (yield utils_1.mv_pic(`${PIC_PATH}`, pic)).id;
             work.pic = pic_id;
             resolve();
         }

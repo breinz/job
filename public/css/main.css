@@ -5,6 +5,12 @@
  * foundation.zurb.com
  * Licensed under MIT Open Source
  */
+@media print, screen and (min-width: 40em) {
+  .reveal, .reveal.tiny, .reveal.small, .reveal.large {
+    right: auto;
+    left: auto;
+    margin: 0 auto; } }
+
 /*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
 html {
   line-height: 1.15;
@@ -2819,6 +2825,94 @@ a.button:hover, a.button:focus {
   .sticky.is-anchored.is-at-bottom {
     bottom: 0; }
 
+html.is-reveal-open {
+  position: fixed;
+  width: 100%;
+  overflow-y: hidden; }
+  html.is-reveal-open.zf-has-scroll {
+    overflow-y: scroll; }
+  html.is-reveal-open body {
+    overflow-y: hidden; }
+
+.reveal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1005;
+  display: none;
+  background-color: rgba(10, 10, 10, 0.45);
+  overflow-y: auto; }
+
+.reveal {
+  z-index: 1006;
+  backface-visibility: hidden;
+  display: none;
+  padding: 1rem;
+  border: 1px solid #cacaca;
+  border-radius: 0;
+  background-color: #fefefe;
+  position: relative;
+  top: 100px;
+  margin-right: auto;
+  margin-left: auto;
+  overflow-y: auto; }
+  [data-whatinput='mouse'] .reveal {
+    outline: 0; }
+  @media print, screen and (min-width: 40em) {
+    .reveal {
+      min-height: 0; } }
+  .reveal .column {
+    min-width: 0; }
+  .reveal > :last-child {
+    margin-bottom: 0; }
+  @media print, screen and (min-width: 40em) {
+    .reveal {
+      width: 600px;
+      max-width: 56.25rem; } }
+  .reveal.collapse {
+    padding: 0; }
+  @media print, screen and (min-width: 40em) {
+    .reveal.tiny {
+      width: 30%;
+      max-width: 56.25rem; } }
+  @media print, screen and (min-width: 40em) {
+    .reveal.small {
+      width: 50%;
+      max-width: 56.25rem; } }
+  @media print, screen and (min-width: 40em) {
+    .reveal.large {
+      width: 90%;
+      max-width: 56.25rem; } }
+  .reveal.full {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    min-height: 100%;
+    margin-left: 0;
+    border: 0;
+    border-radius: 0; }
+  @media screen and (max-width: 39.99875em) {
+    .reveal {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      max-width: none;
+      height: 100%;
+      min-height: 100%;
+      margin-left: 0;
+      border: 0;
+      border-radius: 0; } }
+  .reveal.without-overlay {
+    position: fixed; }
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -3109,6 +3203,28 @@ fieldset {
   margin-bottom: 1rem; }
   fieldset legend {
     padding: 0 .5rem; }
+
+.in-pics .in-pic-item {
+  max-width: 100px;
+  max-height: 100px;
+  display: inline-block;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  position: relative; }
+  .in-pics .in-pic-item span {
+    background-color: #fff;
+    position: absolute;
+    font-weight: bold;
+    padding: 5px; }
+
+.in-pics .ajax-pic {
+  border: 5px dashed #CCC;
+  width: 100px;
+  height: 100px; }
+  .in-pics .ajax-pic.over {
+    border-style: solid; }
+  .in-pics .ajax-pic input {
+    display: none; }
 
 .site-title {
   padding-bottom: 1rem; }

@@ -29,7 +29,15 @@ block content
                 h1=t("work.page-title")
             .cell.medium-6
                 .admin-right-btn
-                    a.button.success(href="/admin/work/new")=t("admin.new.work")
+                    //a.button.success(href="/admin/work/new")=t("admin.new.work")
+                    button.button.success(data-open="new" onclick="setTimeout(()=>{document.getElementById('title-field').focus();},10)")=t("admin.new.work")
+            
+            .reveal#new(data-reveal)
+                h3=t("admin.new.work")
+                form(method="POST")
+                    label Name
+                        input(type="text", name="title" id="title-field")
+                    input.button(type="submit", value="Save")
 
     table.hover
         for item in items

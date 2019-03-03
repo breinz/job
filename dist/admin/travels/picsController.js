@@ -40,7 +40,7 @@ router.get("/new", (req, res, next) => __awaiter(this, void 0, void 0, function*
 }));
 router.post("/new", (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     let data = req.body;
-    let pic_id = yield utils_1.mv_pic("img/travels", req.files.pic, data.name, data.description);
+    let pic_id = (yield utils_1.mv_pic("img/travels", req.files.pic, data.name, data.description)).id;
     travel.pics.push(pic_id);
     try {
         travel.save();

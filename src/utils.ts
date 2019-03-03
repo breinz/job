@@ -2,8 +2,12 @@ import * as fs from "fs"
 import * as path from "path"
 import { UploadedFile } from "express-fileupload";
 import Image, { ImageModel } from "./images/model";
+import { resolveTxt } from "dns";
 const sharp = require("sharp")
 const uuid = require("uuid/v4");
+
+declare let inline_pic_path: string;
+declare let inline_pics: [string];
 
 /**
  * Const to convert degrees in radians
@@ -90,7 +94,7 @@ export function mv_pic(
     url: string,
     file: UploadedFile,
     name: string = undefined,
-    description: string = ""): Promise<string> {
+    description: string = ""): Promise<{ id: string, fileName: string }> {
 
     return new Promise(async (resolve, reject) => {
 
@@ -108,7 +112,7 @@ export function mv_pic(
 
         await image.save();
 
-        resolve(image.id);
+        resolve({ id: image.id, fileName: fileName });
     });
 }
 
@@ -180,6 +184,21 @@ export function getPic(file: any, size?: string): string {
     }
 }
 
+export function processText(txt: string, imgPath: string, pics: ImageModel[]): string {
+    txt = txt.replace(/\[img>([^\]]+)\]/g, function (str, data) {
+        var [file, size, visionneuse, align] = data.split(">");
+        size = size || "mini";
+        visionneuse = visionneuse || 0;
+        align = align || "left";
+
+        if (file.indexOf(".") > 0) {
+            return `[img>/img/vrac/${file}>${size}>${visionneuse}>${align}]`;
+        }
+        return `[img>${imgPath}${pics[file].file}>${size}>${visionneuse}>${align}]`;
+    });
+    return txt;
+}
+
 export function formatText(txt: string): string {
 
     if (txt === undefined) return "<p>Translation in progress...</p>"
@@ -212,7 +231,19 @@ export function formatText(txt: string): string {
     let index = 0;
     let all: string[] = [];
     txt = txt.replace(/\[img>([^\]]+)\]/g, function (str, data) {
-        var [file, size, visionneuse, align] = data.split(">");
+        var [file, size, visionneuse, align]: string = data.split(">");
+
+        let fileName = file;
+        let filePath = "/img/vrac";
+        if (file.indexOf('/') > -1) {
+            fileName = file.substr(file.lastIndexOf('/') + 1);
+            filePath = file.substr(0, file.lastIndexOf('/') + 1);
+        }
+        file = filePath + fileName;
+
+        //console.log(inline_pics);
+
+        //if (file.substr('.') === -1) file = inline_pics[file];
 
         align = align || "left";
 
@@ -222,15 +253,15 @@ export function formatText(txt: string): string {
         // src
         rpl += "' src='";
         rpl += getPic({
-            url: "/img/vrac/",
-            file: file
+            url: filePath,//"/img/vrac/",
+            file: fileName
         }, size || "mini");
         rpl += "'";
         // data-src
-        rpl += ` data-src="/img/vrac/${file}"`;
+        rpl += ` data-src="${file}"`;///img/vrac/${file}"`;
         if (visionneuse === "1") {
             rpl += ` data-all="txt-pics-all" data-index=${index++}`;
-            all.push(`/img/vrac/${file}`);
+            all.push(file);//`/img/vrac/${file}`);
             //add += `<img class="hidden" src="/img/vrac/${file}" alt=""/>`; // preload
         }
         rpl += "'/>";

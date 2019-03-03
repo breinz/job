@@ -69,7 +69,7 @@ function mv_pic(url, file, name = undefined, description = "") {
         image.file = fileName;
         image.url = `/${url}/`;
         yield image.save();
-        resolve(image.id);
+        resolve({ id: image.id, fileName: fileName });
     }));
 }
 exports.mv_pic = mv_pic;
@@ -133,6 +133,20 @@ function getPic(file, size) {
     }
 }
 exports.getPic = getPic;
+function processText(txt, imgPath, pics) {
+    txt = txt.replace(/\[img>([^\]]+)\]/g, function (str, data) {
+        var [file, size, visionneuse, align] = data.split(">");
+        size = size || "mini";
+        visionneuse = visionneuse || 0;
+        align = align || "left";
+        if (file.indexOf(".") > 0) {
+            return `[img>/img/vrac/${file}>${size}>${visionneuse}>${align}]`;
+        }
+        return `[img>${imgPath}${pics[file].file}>${size}>${visionneuse}>${align}]`;
+    });
+    return txt;
+}
+exports.processText = processText;
 function formatText(txt) {
     if (txt === undefined)
         return "<p>Translation in progress...</p>";
@@ -151,20 +165,27 @@ function formatText(txt) {
     let all = [];
     txt = txt.replace(/\[img>([^\]]+)\]/g, function (str, data) {
         var [file, size, visionneuse, align] = data.split(">");
+        let fileName = file;
+        let filePath = "/img/vrac";
+        if (file.indexOf('/') > -1) {
+            fileName = file.substr(file.lastIndexOf('/') + 1);
+            filePath = file.substr(0, file.lastIndexOf('/') + 1);
+        }
+        file = filePath + fileName;
         align = align || "left";
         let rpl = `<img class='img-in-text-align-${align}`;
         if (visionneuse === "1")
             rpl += " visionneuse-reveal ";
         rpl += "' src='";
         rpl += getPic({
-            url: "/img/vrac/",
-            file: file
+            url: filePath,
+            file: fileName
         }, size || "mini");
         rpl += "'";
-        rpl += ` data-src="/img/vrac/${file}"`;
+        rpl += ` data-src="${file}"`;
         if (visionneuse === "1") {
             rpl += ` data-all="txt-pics-all" data-index=${index++}`;
-            all.push(`/img/vrac/${file}`);
+            all.push(file);
         }
         rpl += "'/>";
         return rpl;

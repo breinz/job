@@ -1,7 +1,8 @@
 import express = require("express");
 import Work, { WorkModel } from "./model";
 import { t, lang } from "../langController";
-import { sort } from "../utils";
+import { sort, processText } from "../utils";
+import { ImageModel } from "../images/model";
 
 const router = express.Router();
 const PER_PAGE = 5;
@@ -67,7 +68,7 @@ router.get("*", async (req, res, next) => {
     // The current work
     let work: WorkModel;
     try {
-        work = await Work.findOne({ url: route[route.length - 1] }).populate("pic") as WorkModel;
+        work = await Work.findOne({ url: route[route.length - 1] }).populate("pic").populate("pics") as WorkModel;
     } catch (err) {
         return res.redirect("/work");
     }
@@ -84,6 +85,8 @@ router.get("*", async (req, res, next) => {
             next(err);
         }
     }
+
+    work[`description_${lang}`] = processText(t(work, "description"), "/img/work/", <ImageModel[]>work.pics);
 
     res.locals.bc.push([t(work, "title")]);
 
