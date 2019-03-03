@@ -14,7 +14,7 @@ block content
     .grid-container.full
         .grid-x
             .cell.medium-6
-                h1=travel.name
+                h1=t(travel, "name")
             .cell.medium-6
                 .admin-right-btn
                     a.button.success(href=`/admin/travels/${travel.id}/pictures/new`) New picture
