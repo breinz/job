@@ -12,6 +12,7 @@ const express = require("express");
 const model_1 = require("./model");
 const model_2 = require("../podcasts/model");
 const langController_1 = require("../langController");
+const utils_1 = require("../utils");
 const router = express.Router();
 router.use((req, res, next) => {
     res.locals.menu = "bazaar";
@@ -36,7 +37,7 @@ router.get("*", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let route = req.path.substr(1).split('/');
     let item;
     try {
-        item = (yield model_1.default.findOne({ url: route[route.length - 1] }));
+        item = (yield model_1.default.findOne({ url: route[route.length - 1] }).populate("pics"));
     }
     catch (err) {
         return res.redirect("/bazaar");
@@ -44,6 +45,7 @@ router.get("*", (req, res) => __awaiter(this, void 0, void 0, function* () {
     if (item === null) {
         return res.redirect("/bazaar");
     }
+    item[`description_${langController_1.lang}`] = utils_1.processText(langController_1.t(item, "description"), "/img/bazaar/", item.pics);
     let tree = yield findParents(item);
     if (tree) {
         let url = "/bazaar";

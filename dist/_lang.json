@@ -305,6 +305,12 @@
             "fr": "mes pérégrination autour du monde"
         }
     },
+    "bazaar": {
+        "title": {
+            "en": "Title",
+            "fr": "Titre"
+        }
+    },
     "footer": {
         "top-menu": {
             "home": {
@@ -332,7 +338,19 @@
             "work": {
                 "en": "New work",
                 "fr": "Nouvel élément"
+            },
+            "bazaar": {
+                "en": "New Item",
+                "fr": "Nouvel élément"
             }
+        },
+        "save": {
+            "en": "Save",
+            "fr": "Enregistrer"
+        },
+        "create": {
+            "en": "Create",
+            "fr": "Créer"
         }
     }
 }

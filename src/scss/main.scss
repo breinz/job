@@ -85,6 +85,15 @@ fieldset {
     }
 }
 
+.stat {
+    text-align: center;
+    margin-bottom: 1rem;
+    .num{
+        font-size: 4rem;
+        font-weight: bold;
+    }
+}
+
 .in-pics{
     
     .in-pic-item {

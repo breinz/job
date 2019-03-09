@@ -1,11 +1,12 @@
 import express = require("express");
 import { NewData, EditData } from ".";
 import validator from "./validator";
-import { sort } from "../../utils";
+import { sort, mv_pic } from "../../utils";
 import * as changeCase from "change-case"
 import Bazaar, { BazaarModel } from "../../bazaar/model";
 import podcastController from "../podcasts/controller"
 import { lang, t } from "../../langController";
+import { UploadedFile } from "express-fileupload";
 
 const PIC_PATH = "img/bazaar"
 
@@ -74,6 +75,25 @@ router.get("/", async (req, res) => {
     res.render("admin/bazaar/index", { items: items });
 });
 
+/**
+ * Create an item
+ */
+router.post("/", async (req, res) => {
+    const data: NewData = req.body;
+
+    let bazaar = new Bazaar() as BazaarModel;
+
+    bazaar[`title_${lang}`] = data.title;
+
+    try {
+        bazaar.save();
+    } catch (error) {
+        return res.sendStatus(500);
+    }
+
+    res.redirect(`/admin/bazaar/${bazaar.id}`);
+})
+
 // --------------------------------------------------
 // NEW
 // --------------------------------------------------
@@ -122,7 +142,7 @@ router.post("/new", validator.new, async (req, res) => {
 router.get("/:id", async (req, res) => {
     let item: BazaarModel;
     try {
-        item = await Bazaar.findById(req.params.id) as BazaarModel;
+        item = await Bazaar.findById(req.params.id).populate("pics") as BazaarModel;
     } catch (err) {
         return res.redirect("/")
     }
@@ -131,6 +151,38 @@ router.get("/:id", async (req, res) => {
     res.locals.bc.push([t(item, "title")]);
 
     res.render("admin/bazaar/edit", { item: item, data: item, parents: await getAvailableParents() });
+});
+
+/**
+ * Ajax
+ * Add on inline image to use in description
+ */
+router.post("/:id/add_inline_pic", async (req, res, next) => {
+    // Find the Bazaar
+    let bazaar: BazaarModel;
+    try {
+        bazaar = await Bazaar.findById(req.params.id) as BazaarModel;
+    } catch (err) {
+        return res.send("ERROR!")
+    }
+    if (!bazaar) return res.send("ERROR!!");
+
+
+    //console.log(req);
+    let file = req.files.file as UploadedFile;
+    console.log(file.name);
+
+    let pic = await mv_pic(PIC_PATH, file);
+
+    bazaar.pics.push(pic.id);
+
+    try {
+        bazaar.save();
+    } catch (err) {
+        return res.send("ERROR!!!");
+    }
+
+    res.send(`/${PIC_PATH}/${pic.fileName}`);
 });
 
 /**
@@ -170,7 +222,9 @@ router.post("/:id", validator.edit, async (req, res, next) => {
  * TODO: Handle children
  */
 router.get("/:id/delete", async (req, res) => {
-    await Bazaar.findByIdAndDelete(req.params.id);
+    let item = await Bazaar.findById(req.params.id);
+    await item.remove();
+
     res.redirect("/admin/bazaar");
 });
 

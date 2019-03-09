@@ -2,9 +2,29 @@ extends ../layout/_admin
 
 block content
     h1 Admin
-    p pom
-    //ul
-    //    li
-    //        a(href="/admin/users") Users
-    //    li
-    //        a(href="/admin/games") Games
+    .grid-container
+        .grid-x
+            .medium-2
+                .stat
+                    .num=users_count
+                    |users
+            .medium-2
+                .stat
+                    .num=work_count
+                    |works
+            .medium-2
+                .stat
+                    .num=travel_count
+                    |travels
+            .medium-2
+                .stat
+                    .num=bazaar_count
+                    |bazaar
+            .medium-2
+                .stat
+                    .num=citation_count
+                    |citations
+            .medium-2
+                .stat
+                    .num=podcast_count
+                    |podcasts

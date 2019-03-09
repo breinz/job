@@ -18,39 +18,48 @@ form(method="POST")
         .grid-x.grid-margin-x
             .cell.medium-6.small-12
                 div
-                    label(for="title") 
-                        span Title
+                    label Title
                         span.error=errors.title
-                    input(type="text" name="title" id="title" value=t(data, "title") autofocus)
+                        input(type="text" name="title" id="title" value=t(data, "title") autofocus)
+                    .help-text Page title
 
             .cell.medium-6.small-12
                 div
-                    label(for="parent") 
-                        span Parent
+                    label Parent
                         span.error=errors.parent
-                    select(name="parent")
-                        option(value="") 
-                        for parent in parents
-                            +line(parent, 0)
+                        select(name="parent")
+                            option(value="") 
+                            for parent in parents
+                                +line(parent, 0)
             
             .cell.medium-6.small-12
                 div
-                    label(for="link") 
-                        span Link
+                    label Link
                         span.error=errors.link
-                    input(type="text" name="link" id="link" value=t(data, "link"))
+                        input(type="text" name="link" id="link" value=t(data, "link"))
+                    .help-text The link on the main page
             
             .cell.medium-6.small-12
                 div
-                    label(for="Url") 
-                        span url
+                    label Url
                         span.error=errors.url
-                    input(type="text" name="url" id="url" value=data.url)
+                        input(type="text" name="url" id="url" value=data.url)
+                    .help-text String to form the url
 
     div
         label(for="description") 
             span Description
         +textarea("description")=t(data, "description")
+    
+    label Pics
+    .in-pics
+        -let pic_index=0
+        for pic in data.pics
+            .in-pic-item
+                span=pic_index++
+                img(src=getImg(pic, "home"), alt="")
+        label.in-pic-item.ajax-pic(data-model="admin/bazaar" data-id=data.id) +
+            input(type="file" name="in_pic" id="in-pic")
 
     div
         input.button(type="submit" value="Save")

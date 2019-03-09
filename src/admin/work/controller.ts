@@ -146,7 +146,7 @@ router.post("/:id/add_inline_pic", async (req, res, next) => {
     }
 
     res.send(`/${PIC_PATH}/${pic.fileName}`);
-})
+});
 
 /**
  * Edit logic

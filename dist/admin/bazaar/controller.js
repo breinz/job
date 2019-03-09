@@ -46,6 +46,18 @@ router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     }
     res.render("admin/bazaar/index", { items: items });
 }));
+router.post("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
+    const data = req.body;
+    let bazaar = new model_1.default();
+    bazaar[`title_${langController_1.lang}`] = data.title;
+    try {
+        bazaar.save();
+    }
+    catch (error) {
+        return res.sendStatus(500);
+    }
+    res.redirect(`/admin/bazaar/${bazaar.id}`);
+}));
 router.get("/new", (req, res) => __awaiter(this, void 0, void 0, function* () {
     res.locals.bc.push(["New"]);
     console.log(yield exports.getAvailableParents());
@@ -69,7 +81,7 @@ router.post("/new", validator_1.default.new, (req, res) => __awaiter(this, void 
 router.get("/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let item;
     try {
-        item = (yield model_1.default.findById(req.params.id));
+        item = (yield model_1.default.findById(req.params.id).populate("pics"));
     }
     catch (err) {
         return res.redirect("/");
@@ -78,6 +90,28 @@ router.get("/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
         return res.redirect("/");
     res.locals.bc.push([langController_1.t(item, "title")]);
     res.render("admin/bazaar/edit", { item: item, data: item, parents: yield exports.getAvailableParents() });
+}));
+router.post("/:id/add_inline_pic", (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    let bazaar;
+    try {
+        bazaar = (yield model_1.default.findById(req.params.id));
+    }
+    catch (err) {
+        return res.send("ERROR!");
+    }
+    if (!bazaar)
+        return res.send("ERROR!!");
+    let file = req.files.file;
+    console.log(file.name);
+    let pic = yield utils_1.mv_pic(PIC_PATH, file);
+    bazaar.pics.push(pic.id);
+    try {
+        bazaar.save();
+    }
+    catch (err) {
+        return res.send("ERROR!!!");
+    }
+    res.send(`/${PIC_PATH}/${pic.fileName}`);
 }));
 router.post("/:id", validator_1.default.edit, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     let item;
@@ -101,7 +135,8 @@ router.post("/:id", validator_1.default.edit, (req, res, next) => __awaiter(this
     res.redirect("/admin/bazaar");
 }));
 router.get("/:id/delete", (req, res) => __awaiter(this, void 0, void 0, function* () {
-    yield model_1.default.findByIdAndDelete(req.params.id);
+    let item = yield model_1.default.findById(req.params.id);
+    yield item.remove();
     res.redirect("/admin/bazaar");
 }));
 const populateModel = (bazaar, data, req) => {

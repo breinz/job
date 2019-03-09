@@ -29,7 +29,16 @@ block content
                 h1 Bazaar
             .cell.medium-6
                 .admin-right-btn
-                    a.button.success(href="/admin/bazaar/new") New item
+                    //a.button.success(href="/admin/bazaar/new") New item
+                    button.button.success(data-open="new" onclick="setTimeout(()=>{document.getElementById('title-field').focus();},10)")=t("admin.new.bazaar")
+            
+                    .reveal#new(data-reveal)
+                        h3=t("admin.new.bazaar")
+                        form(method="POST")
+                            label=t("bazaar.title")
+                                input(type="text", name="title" id="title-field")
+                            input.button(type="submit", value=t("admin.create"))
+
                     ul.dropdown.menu(data-dropdown-menu)
                         li
                             a(href="#") Items

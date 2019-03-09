@@ -132,7 +132,7 @@ $(function () {
                     file = event.dataTransfer.files[0];
                 }
                 if (!file) {
-                    return console.log("ERROR!");
+                    return console.log("ERROR - no file");
                 }
 
                 /*var src = (window.URL || (<any>window).webkitURL).createObjectURL(file);
@@ -157,7 +157,7 @@ $(function () {
                     },
                     error: (err) => {
                         console.log(err);
-                        alert(`error`);
+                        alert(`ERROR - post add_inline_pic`);
                     },
                     async: true,
                     data: formData,

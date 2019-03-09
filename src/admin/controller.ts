@@ -7,6 +7,11 @@ import bazaarController from "./bazaar/controller"
 import citationController from "./citations/controller"
 import imagesController from "./images/controller"
 import workController from "./work/controller";
+import Work from "../work/model";
+import Travel from "../travels/model";
+import Bazaar from "../bazaar/model";
+import Citation from "../citations/model";
+import Podcast from "../podcasts/model";
 
 
 let router = express.Router();
@@ -44,8 +49,22 @@ router.use("/work", workController);
 /**
  * Index
  */
-router.get("/", (req, res) => {
-    res.render("admin/index");
+router.get("/", async (req, res) => {
+    let users_count = await User.estimatedDocumentCount();
+    let work_count = await Work.estimatedDocumentCount();
+    let travel_count = await Travel.estimatedDocumentCount();
+    let bazaar_count = await Bazaar.estimatedDocumentCount();
+    let citation_count = await Citation.estimatedDocumentCount();
+    let podcast_count = await Podcast.estimatedDocumentCount();
+
+    res.render("admin/index", {
+        users_count: users_count,
+        work_count: work_count,
+        travel_count: travel_count,
+        bazaar_count: bazaar_count,
+        citation_count: citation_count,
+        podcast_count: podcast_count,
+    });
 });
 
 export default router;

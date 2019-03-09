@@ -2,6 +2,8 @@ import express = require("express");
 import Bazaar, { BazaarModel } from "./model";
 import Podcast, { PodcastModel } from "../podcasts/model";
 import { t, lang } from "../langController";
+import { processText } from "../utils";
+import { ImageModel } from "../images/model";
 
 const router = express.Router();
 
@@ -50,7 +52,7 @@ router.get("*", async (req, res) => {
     // The current bazaar item
     let item: BazaarModel;
     try {
-        item = await Bazaar.findOne({ url: route[route.length - 1] }) as BazaarModel;
+        item = await Bazaar.findOne({ url: route[route.length - 1] }).populate("pics") as BazaarModel;
     } catch (err) {
         return res.redirect("/bazaar");
     }
@@ -58,6 +60,8 @@ router.get("*", async (req, res) => {
     if (item === null) {
         return res.redirect("/bazaar");
     }
+
+    item[`description_${lang}`] = processText(t(item, "description"), "/img/bazaar/", <ImageModel[]>item.pics);
 
     // Find parents
     let tree = await findParents(item);
