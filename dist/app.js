@@ -26,7 +26,7 @@ const model_5 = require("./podcasts/model");
 const iplocation_1 = require("iplocation");
 const app = express();
 exports.default = app;
-app.set('trust proxy', true);
+app.enable('trust proxy');
 app.locals.basedir = path.join(__dirname, '../views');
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, "../public")));
@@ -84,6 +84,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    console.log(req.ip, req.ips);
     if (req.path.indexOf("/admin") === 0) {
         return next();
     }

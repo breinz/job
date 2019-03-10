@@ -14,11 +14,14 @@ import Citation, { CitationModel } from "./citations/model";
 import Travel, { TravelModel } from "./travels/model";
 import Podcast, { PodcastModel } from "./podcasts/model";
 import iplocation from "iplocation";
+//let expressIp = require("express-ip");
 
 const app = express();
 export default app;
 
-app.set('trust proxy', true);
+//app.set('trust proxy', true);
+app.enable('trust proxy')
+//app.use(expressIp().getIpInfoMiddleware);
 
 // The game
 //export const gameServer = new SApp();
@@ -129,6 +132,8 @@ app.use((req, res, next) => {
  * Stat
  */
 app.use(async (req, res, next) => {
+    console.log(req.ip, req.ips);
+    //console.log(req.ipInfos);
     if (req.path.indexOf("/admin") === 0) {
         return next();
     }
