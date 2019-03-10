@@ -60,7 +60,7 @@ router.get("/", async (req, res) => {
     let citation_count = await Citation.estimatedDocumentCount();
     let podcast_count = await Podcast.estimatedDocumentCount();
 
-    let stats = await Stat.find().sort({ date: 1 });
+    let stats = await Stat.find().sort({ date: -1 }).limit(10);
 
     res.render("admin/index", {
         users_count: users_count,

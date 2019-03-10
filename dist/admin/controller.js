@@ -53,7 +53,7 @@ router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let bazaar_count = yield model_4.default.estimatedDocumentCount();
     let citation_count = yield model_5.default.estimatedDocumentCount();
     let podcast_count = yield model_6.default.estimatedDocumentCount();
-    let stats = yield model_7.default.find().sort({ date: 1 });
+    let stats = yield model_7.default.find().sort({ date: -1 }).limit(10);
     res.render("admin/index", {
         users_count: users_count,
         work_count: work_count,

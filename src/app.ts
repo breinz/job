@@ -18,7 +18,7 @@ import iplocation from "iplocation";
 const app = express();
 export default app;
 
-
+app.set('trust proxy', true);
 
 // The game
 //export const gameServer = new SApp();
@@ -128,7 +128,6 @@ app.use((req, res, next) => {
 /** 
  * Stat
  */
-app.set('trust proxy', true);
 app.use(async (req, res, next) => {
     if (req.path.indexOf("/admin") === 0) {
         return next();
