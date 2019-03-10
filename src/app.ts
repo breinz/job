@@ -19,8 +19,8 @@ import iplocation from "iplocation";
 const app = express();
 export default app;
 
-//app.set('trust proxy', true);
-app.enable('trust proxy')
+app.set('trust proxy', true);
+//app.enable('trust proxy')
 //app.use(expressIp().getIpInfoMiddleware);
 
 // The game
@@ -139,7 +139,7 @@ app.use(async (req, res, next) => {
 
     let stat = new Stat() as StatModel;
     stat.path = req.path;
-    stat.ip = req.ip;//<string>req.headers['x-real-ip'] || req.connection.remoteAddress;
+    stat.ip = req.header('x-forwarded-for') || req.connection.remoteAddress;//req.connection.remoteAddress;//req.ip;//<string>req.headers['x-real-ip'] || req.connection.remoteAddress;
     stat.date = new Date();
     try {
         let ip = await iplocation(stat.ip, ["http://api.db-ip.com/v2/free/*"])
