@@ -41,7 +41,9 @@ block content
                             td=stat.date
                             td=stat.path
                             td=stat.ip
-                            td=stat.country
-                            td=stat.city
+                            td
+                                =`${stat.country} (${stat.countryCode})`
+                            td
+                                =`${stat.region} - ${stat.city}`
                             td
                                 +delete(href=`/admin/stats/${stat.id}/delete`)
