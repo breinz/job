@@ -132,6 +132,7 @@ app.use((req, res, next) => {
  * Stat
  */
 app.use(async (req, res, next) => {
+    res.locals.ips = [req.ip, req.headers['x-real-ip'] || req.connection.remoteAddress];
     console.log(req.ip, req.ips);
     //console.log(req.ipInfos);
     if (req.path.indexOf("/admin") === 0) {

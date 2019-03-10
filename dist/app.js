@@ -84,6 +84,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    res.locals.ips = [req.ip, req.headers['x-real-ip'] || req.connection.remoteAddress];
     console.log(req.ip, req.ips);
     if (req.path.indexOf("/admin") === 0) {
         return next();
