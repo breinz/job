@@ -89,7 +89,7 @@ app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
     }
     let stat = new model_7.default();
     stat.path = req.path;
-    stat.ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+    stat.ip = req.ip;
     stat.date = new Date();
     try {
         let ip = yield iplocation_1.default(stat.ip, ["http://api.db-ip.com/v2/free/*"]);

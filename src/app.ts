@@ -139,7 +139,7 @@ app.use(async (req, res, next) => {
 
     let stat = new Stat() as StatModel;
     stat.path = req.path;
-    stat.ip = <string>req.headers['x-real-ip'] || req.connection.remoteAddress;
+    stat.ip = req.ip;//<string>req.headers['x-real-ip'] || req.connection.remoteAddress;
     stat.date = new Date();
     try {
         let ip = await iplocation(stat.ip, ["http://api.db-ip.com/v2/free/*"])
