@@ -132,6 +132,7 @@ app.use((req, res, next) => {
  * Stat
  */
 app.use(async (req, res, next) => {
+    res.locals.ips = [req.ip, req.header('x-forwarded-for'), req.connection.remoteAddress, req.headers['x-real-ip']];
     // No stat for admin or admins
     if (req.path.indexOf("/admin") === 0 /*|| req.current_user.admin*/) {
         return next();
