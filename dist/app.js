@@ -91,10 +91,10 @@ app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
     }
     let stat = new model_7.default();
     stat.path = req.path;
-    stat.ip = req.ip;
+    stat.ip = req.headers['x-real-ip'][0] || req.connection.remoteAddress;
     stat.date = new Date();
     try {
-        let ip = yield iplocation_1.default(req.ip, []);
+        let ip = yield iplocation_1.default(stat.ip, []);
         stat.city = ip.city;
         stat.country = ip.country;
         stat.countryCode = ip.countryCode;

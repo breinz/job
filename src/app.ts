@@ -140,10 +140,10 @@ app.use(async (req, res, next) => {
     }
     let stat = new Stat() as StatModel;
     stat.path = req.path;
-    stat.ip = req.ip;
+    stat.ip = req.headers['x-real-ip'][0] || req.connection.remoteAddress;
     stat.date = new Date();
     try {
-        let ip = await iplocation(req.ip, [])
+        let ip = await iplocation(stat.ip, [])
         stat.city = ip.city;
         stat.country = ip.country;
         stat.countryCode = ip.countryCode;
