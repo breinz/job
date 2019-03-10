@@ -33,17 +33,14 @@ block content
                     tr
                         th Date
                         th Path
-                        th Ip
                         th Country
                         th City
                     for stat in stats
                         tr
-                            td=stat.date
+                            td
+                                nobr=stat.date.toLocaleDateString("fr-FR", {day:"2-digit", month:"long", /*year:"2-digit",*/ hour:"numeric", hour12:false, minute: "2-digit"})
                             td=stat.path
-                            td=stat.ip
-                            td
-                                =`${stat.country} (${stat.countryCode})`
-                            td
-                                =`${stat.region} - ${stat.city}`
+                            td=stat.country ? `${stat.country} (${stat.countryCode})` : "-"
+                            td=stat.city ? `${stat.region} - ${stat.city}` : '-'
                             td
                                 +delete(href=`/admin/stats/${stat.id}/delete`)
