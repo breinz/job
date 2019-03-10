@@ -82,6 +82,7 @@ app.use((req, res, next) => {
     res.locals.format = utils_1.formatText;
     next();
 });
+app.set('trust proxy', true);
 app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
     if (req.path.indexOf("/admin") === 0) {
         return next();

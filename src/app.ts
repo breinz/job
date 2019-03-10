@@ -128,6 +128,7 @@ app.use((req, res, next) => {
 /** 
  * Stat
  */
+app.set('trust proxy', true);
 app.use(async (req, res, next) => {
     if (req.path.indexOf("/admin") === 0) {
         return next();
