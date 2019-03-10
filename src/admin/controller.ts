@@ -7,11 +7,13 @@ import bazaarController from "./bazaar/controller"
 import citationController from "./citations/controller"
 import imagesController from "./images/controller"
 import workController from "./work/controller";
+import statsController from "./stats/controller";
 import Work from "../work/model";
 import Travel from "../travels/model";
 import Bazaar from "../bazaar/model";
 import Citation from "../citations/model";
 import Podcast from "../podcasts/model";
+import Stat from "../stats/model";
 
 
 let router = express.Router();
@@ -45,6 +47,7 @@ router.use("/bazaar", bazaarController);
 router.use("/citations", citationController);
 router.use("/images", imagesController);
 router.use("/work", workController);
+router.use("/stats", statsController);
 
 /**
  * Index
@@ -57,6 +60,8 @@ router.get("/", async (req, res) => {
     let citation_count = await Citation.estimatedDocumentCount();
     let podcast_count = await Podcast.estimatedDocumentCount();
 
+    let stats = await Stat.find().sort({ date: 1 });
+
     res.render("admin/index", {
         users_count: users_count,
         work_count: work_count,
@@ -64,6 +69,7 @@ router.get("/", async (req, res) => {
         bazaar_count: bazaar_count,
         citation_count: citation_count,
         podcast_count: podcast_count,
+        stats: stats
     });
 });
 

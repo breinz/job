@@ -28,3 +28,14 @@ block content
                 .stat
                     .num=podcast_count
                     |podcasts
+            .medium-12
+                table
+                    for stat in stats
+                        tr
+                            td=stat.date
+                            td=stat.path
+                            td=stat.ip
+                            td=stat.country
+                            td=stat.city
+                            td
+                                +delete(href=`/admin/stats/${stat.id}/delete`)

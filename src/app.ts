@@ -13,6 +13,7 @@ import { getPic, formatText, shuffle, dayOfYear, mv_pic } from "./utils";
 import Citation, { CitationModel } from "./citations/model";
 import Travel, { TravelModel } from "./travels/model";
 import Podcast, { PodcastModel } from "./podcasts/model";
+import iplocation from "iplocation";
 
 const app = express();
 export default app;
@@ -54,6 +55,7 @@ import travelsController from "./travels/controller";
 import bazaarController from "./bazaar/controller";
 import workController from "./work/controller";
 import Work, { WorkModel } from "./work/model";
+import Stat, { StatModel } from "./stats/model";
 
 // express-fileupload
 app.use(fileUpload());
@@ -121,7 +123,33 @@ app.use(async (req, res, next) => {
 app.use((req, res, next) => {
     res.locals.format = formatText;
     next();
-})
+});
+
+/** 
+ * Stat
+ */
+app.use(async (req, res, next) => {
+    if (req.path.indexOf("/admin") === 0) {
+        return next();
+    }
+    let stat = new Stat() as StatModel;
+    stat.path = req.path;
+    stat.ip = req.ip;
+    stat.date = new Date();
+    try {
+        let ip = await iplocation(req.ip, [])
+        stat.city = ip.city;
+        stat.country = ip.country;
+        stat.countryCode = ip.countryCode;
+        stat.region = ip.region;
+        stat.regionName = ip.regionCode;
+    } catch (error) {
+
+    }
+    await stat.save();
+
+    next();
+});
 
 // Sub routes
 app.use("/lang", langController);

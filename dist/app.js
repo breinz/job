@@ -23,6 +23,7 @@ const utils_1 = require("./utils");
 const model_3 = require("./citations/model");
 const model_4 = require("./travels/model");
 const model_5 = require("./podcasts/model");
+const iplocation_1 = require("iplocation");
 const app = express();
 exports.default = app;
 app.locals.basedir = path.join(__dirname, '../views');
@@ -43,6 +44,7 @@ const controller_4 = require("./travels/controller");
 const controller_5 = require("./bazaar/controller");
 const controller_6 = require("./work/controller");
 const model_6 = require("./work/model");
+const model_7 = require("./stats/model");
 app.use(fileUpload());
 app.use((req, res, next) => {
     res.locals.getImg = utils_1.getPic;
@@ -80,6 +82,27 @@ app.use((req, res, next) => {
     res.locals.format = utils_1.formatText;
     next();
 });
+app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    if (req.path.indexOf("/admin") === 0) {
+        return next();
+    }
+    let stat = new model_7.default();
+    stat.path = req.path;
+    stat.ip = req.ip;
+    stat.date = new Date();
+    try {
+        let ip = yield iplocation_1.default(req.ip, []);
+        stat.city = ip.city;
+        stat.country = ip.country;
+        stat.countryCode = ip.countryCode;
+        stat.region = ip.region;
+        stat.regionName = ip.regionCode;
+    }
+    catch (error) {
+    }
+    yield stat.save();
+    next();
+}));
 app.use("/lang", langController_1.default);
 app.use("/users", controller_1.default);
 app.use("/admin", controller_2.default);

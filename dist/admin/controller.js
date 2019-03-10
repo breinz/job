@@ -17,11 +17,13 @@ const controller_4 = require("./bazaar/controller");
 const controller_5 = require("./citations/controller");
 const controller_6 = require("./images/controller");
 const controller_7 = require("./work/controller");
+const controller_8 = require("./stats/controller");
 const model_2 = require("../work/model");
 const model_3 = require("../travels/model");
 const model_4 = require("../bazaar/model");
 const model_5 = require("../citations/model");
 const model_6 = require("../podcasts/model");
+const model_7 = require("../stats/model");
 let router = express.Router();
 router.use((req, res, next) => {
     if (!req.current_user) {
@@ -43,6 +45,7 @@ router.use("/bazaar", controller_4.default);
 router.use("/citations", controller_5.default);
 router.use("/images", controller_6.default);
 router.use("/work", controller_7.default);
+router.use("/stats", controller_8.default);
 router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let users_count = yield model_1.default.estimatedDocumentCount();
     let work_count = yield model_2.default.estimatedDocumentCount();
@@ -50,6 +53,7 @@ router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
     let bazaar_count = yield model_4.default.estimatedDocumentCount();
     let citation_count = yield model_5.default.estimatedDocumentCount();
     let podcast_count = yield model_6.default.estimatedDocumentCount();
+    let stats = yield model_7.default.find().sort({ date: 1 });
     res.render("admin/index", {
         users_count: users_count,
         work_count: work_count,
@@ -57,6 +61,7 @@ router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
         bazaar_count: bazaar_count,
         citation_count: citation_count,
         podcast_count: podcast_count,
+        stats: stats
     });
 }));
 exports.default = router;
