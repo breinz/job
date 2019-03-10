@@ -132,12 +132,11 @@ app.use((req, res, next) => {
  * Stat
  */
 app.use(async (req, res, next) => {
-    res.locals.ips = [req.ip, req.headers['x-real-ip'] || req.connection.remoteAddress];
-    console.log(req.ip, req.ips);
-    //console.log(req.ipInfos);
-    if (req.path.indexOf("/admin") === 0) {
+    // No stat for admin or admins
+    if (req.path.indexOf("/admin") === 0 || req.current_user.admin) {
         return next();
     }
+
     let stat = new Stat() as StatModel;
     stat.path = req.path;
     stat.ip = <string>req.headers['x-real-ip'] || req.connection.remoteAddress;
@@ -153,6 +152,15 @@ app.use(async (req, res, next) => {
 
     }
     await stat.save();
+
+    // No ga for admins or local
+    res.locals.ga = true;
+    if (req.current_user.admin) {
+        res.locals.ga = false;
+    }
+    if (stat.ip === "127.0.0.1" || stat.ip === "localhost" || stat.ip === "::1") {
+        res.locals.ga = false;
+    }
 
     next();
 });
