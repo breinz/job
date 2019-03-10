@@ -39,3 +39,5 @@ block content
                             td=stat.city ? `${stat.city} - ${stat.region}` : '-'
                             td
                                 +delete(href=`/admin/stats/${stat.id}/delete`)
+                        tr
+                            td(colspan=5)=stat.ip
