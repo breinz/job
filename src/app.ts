@@ -133,7 +133,7 @@ app.use((req, res, next) => {
  */
 app.use(async (req, res, next) => {
     // No stat for admin or admins
-    if (req.path.indexOf("/admin") === 0 || req.current_user.admin) {
+    if (req.path.indexOf("/admin") === 0 /*|| req.current_user.admin*/) {
         return next();
     }
 
@@ -142,7 +142,7 @@ app.use(async (req, res, next) => {
     stat.ip = <string>req.headers['x-real-ip'] || req.connection.remoteAddress;
     stat.date = new Date();
     try {
-        let ip = await iplocation(stat.ip, [])
+        let ip = await iplocation(stat.ip, ["http://api.db-ip.com/v2/free/*"])
         stat.city = ip.city;
         stat.country = ip.country;
         stat.countryCode = ip.countryCode;
