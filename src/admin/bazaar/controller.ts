@@ -1,7 +1,7 @@
 import express = require("express");
 import { NewData, EditData } from ".";
 import validator from "./validator";
-import { sort, mv_pic } from "../../utils";
+import { sort, mv_pic, mkdir } from "../../utils";
 import * as changeCase from "change-case"
 import Bazaar, { BazaarModel } from "../../bazaar/model";
 import podcastController from "../podcasts/controller"
@@ -47,7 +47,7 @@ router.use(async (req, res, next) => {
     res.locals.menu = "bazaar";
     res.locals.bc.push(["Bazaar", "/admin/bazaar"]);
 
-    //await mkdir(PIC_PATH);
+    await mkdir(PIC_PATH);
 
     next();
 

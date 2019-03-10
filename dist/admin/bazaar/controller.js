@@ -34,6 +34,7 @@ let router = express.Router();
 router.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
     res.locals.menu = "bazaar";
     res.locals.bc.push(["Bazaar", "/admin/bazaar"]);
+    yield utils_1.mkdir(PIC_PATH);
     next();
 }));
 router.use("/podcasts", controller_1.default);
