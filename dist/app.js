@@ -83,6 +83,9 @@ app.use((req, res, next) => {
     next();
 });
 app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    if (req.path === "/favicon.ico") {
+        return next();
+    }
     if (req.path.indexOf("/admin") === 0) {
         return next();
     }
