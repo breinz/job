@@ -132,7 +132,7 @@ app.use((req, res, next) => {
  * Stat
  */
 app.use(async (req, res, next) => {
-    //res.locals.ips = [req.ip, req.header('x-forwarded-for'), req.connection.remoteAddress, req.headers['x-real-ip']];
+    res.locals.ips = [req.ip, req.header('x-forwarded-for'), req.connection.remoteAddress, req.headers['x-real-ip']];
 
     // No stat for favicon
     if (req.path === "/favicon.ico") {

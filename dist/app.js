@@ -83,6 +83,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    res.locals.ips = [req.ip, req.header('x-forwarded-for'), req.connection.remoteAddress, req.headers['x-real-ip']];
     if (req.path === "/favicon.ico") {
         return next();
     }
