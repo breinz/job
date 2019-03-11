@@ -23,6 +23,7 @@ const utils_1 = require("./utils");
 const model_3 = require("./citations/model");
 const model_4 = require("./travels/model");
 const model_5 = require("./podcasts/model");
+const iplocation_1 = require("iplocation");
 const app = express();
 exports.default = app;
 app.set('trust proxy', true);
@@ -94,6 +95,16 @@ app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
     stat.path = req.path;
     stat.ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
     stat.date = new Date();
+    try {
+        let ip = yield iplocation_1.default(stat.ip, []);
+        stat.city = ip.city;
+        stat.country = ip.country;
+        stat.countryCode = ip.countryCode;
+        stat.region = ip.region;
+        stat.regionName = ip.regionCode;
+    }
+    catch (error) {
+    }
     yield stat.save();
     res.locals.ga = true;
     if (req.current_user && req.current_user.admin) {

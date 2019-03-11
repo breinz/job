@@ -148,8 +148,8 @@ app.use(async (req, res, next) => {
     stat.path = req.path;
     stat.ip = req.header('x-forwarded-for') || req.connection.remoteAddress;//req.connection.remoteAddress;//req.ip;//<string>req.headers['x-real-ip'] || req.connection.remoteAddress;
     stat.date = new Date();
-    /*try {
-        let ip = await iplocation(stat.ip, ["http://api.db-ip.com/v2/free/*"])
+    try {
+        let ip = await iplocation(stat.ip, [])//"http://api.db-ip.com/v2/free/*"
         stat.city = ip.city;
         stat.country = ip.country;
         stat.countryCode = ip.countryCode;
@@ -157,7 +157,7 @@ app.use(async (req, res, next) => {
         stat.regionName = ip.regionCode;
     } catch (error) {
 
-    }*/
+    }
     await stat.save();
 
     // No ga for admins or local
