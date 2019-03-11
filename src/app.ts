@@ -132,7 +132,7 @@ app.use((req, res, next) => {
  * Stat
  */
 app.use(async (req, res, next) => {
-    res.locals.ips = [req.ip, req.header('x-forwarded-for'), req.connection.remoteAddress, req.headers['x-real-ip']];
+    //res.locals.ips = [req.ip, req.header('x-forwarded-for'), req.connection.remoteAddress, req.headers['x-real-ip']];
     // No stat for admin or admins
     if (req.path.indexOf("/admin") === 0 /*|| req.current_user.admin*/) {
         return next();
@@ -142,7 +142,7 @@ app.use(async (req, res, next) => {
     stat.path = req.path;
     stat.ip = req.header('x-forwarded-for') || req.connection.remoteAddress;//req.connection.remoteAddress;//req.ip;//<string>req.headers['x-real-ip'] || req.connection.remoteAddress;
     stat.date = new Date();
-    try {
+    /*try {
         let ip = await iplocation(stat.ip, ["http://api.db-ip.com/v2/free/*"])
         stat.city = ip.city;
         stat.country = ip.country;
@@ -151,12 +151,12 @@ app.use(async (req, res, next) => {
         stat.regionName = ip.regionCode;
     } catch (error) {
 
-    }
+    }*/
     await stat.save();
 
     // No ga for admins or local
     res.locals.ga = true;
-    if (req.current_user.admin) {
+    if (req.current_user && req.current_user.admin) {
         res.locals.ga = false;
     }
     if (stat.ip === "127.0.0.1" || stat.ip === "localhost" || stat.ip === "::1") {

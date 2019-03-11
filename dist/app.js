@@ -23,7 +23,6 @@ const utils_1 = require("./utils");
 const model_3 = require("./citations/model");
 const model_4 = require("./travels/model");
 const model_5 = require("./podcasts/model");
-const iplocation_1 = require("iplocation");
 const app = express();
 exports.default = app;
 app.set('trust proxy', true);
@@ -84,7 +83,6 @@ app.use((req, res, next) => {
     next();
 });
 app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
-    res.locals.ips = [req.ip, req.header('x-forwarded-for'), req.connection.remoteAddress, req.headers['x-real-ip']];
     if (req.path.indexOf("/admin") === 0) {
         return next();
     }
@@ -92,19 +90,9 @@ app.use((req, res, next) => __awaiter(this, void 0, void 0, function* () {
     stat.path = req.path;
     stat.ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
     stat.date = new Date();
-    try {
-        let ip = yield iplocation_1.default(stat.ip, ["http://api.db-ip.com/v2/free/*"]);
-        stat.city = ip.city;
-        stat.country = ip.country;
-        stat.countryCode = ip.countryCode;
-        stat.region = ip.region;
-        stat.regionName = ip.regionCode;
-    }
-    catch (error) {
-    }
     yield stat.save();
     res.locals.ga = true;
-    if (req.current_user.admin) {
+    if (req.current_user && req.current_user.admin) {
         res.locals.ga = false;
     }
     if (stat.ip === "127.0.0.1" || stat.ip === "localhost" || stat.ip === "::1") {
