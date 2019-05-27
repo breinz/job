@@ -1,5 +1,6 @@
 .DS_Store
 node_modules
 dist/config.js
+src/config.ts
 public/img/*/**
 npm-debug.log
